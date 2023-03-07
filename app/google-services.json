@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "519595577091",
+    "firebase_url": "https://tripgenie-d9f5f-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tripgenie-d9f5f",
+    "storage_bucket": "tripgenie-d9f5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519595577091:android:67cb39cc314f26ae9fa336",
+        "android_client_info": {
+          "package_name": "com.example.fcctut"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519595577091-8ip7fnl14lbr5d12f9hhl5osna64tsrd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fcctut",
+            "certificate_hash": "7f7248c3c6c72251ab3feff46bb0bcb89c40da87"
+          }
+        },
+        {
+          "client_id": "519595577091-bms1okkjlrbptjkoim7n6io5ildanla9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmJQMsx4IDq90pjlYnGFw4bm2dMk29gmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519595577091-bms1okkjlrbptjkoim7n6io5ildanla9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
