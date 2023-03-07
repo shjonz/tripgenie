@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
     <TextView
         android:id="@+id/firstname"
         android:layout_width="wrap_content"
@@ -84,12 +86,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lastname" />
 
-    <Button
-        android:id="@+id/button2"
+    <TextView
+        android:id="@+id/textViewdb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="250dp" />
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/editFirstName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
