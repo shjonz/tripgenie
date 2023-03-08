@@ -9,21 +9,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView; //import textview from widget package into java file. to get classes for UI elements
 
 import java.sql.Timestamp;
 
 public class MainActivity extends AppCompatActivity {
-
+    private Button btn_tomaps;
     TextView textViewMsg;
 
     final String node = "current_msg";
     DatabaseReference mRootDatabaseRef; //reference to database
     DatabaseReference mNodeRef; //node reference
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main); //setting to activity main file this java class related to activity main layout file.
         //logcat statement
         Log.d("Pokemon", "I am in onCreate "); //string tat acts as a tag,
+        btn_tomaps = (Button) findViewById(R.id.btn_tomaps);
+        btn_tomaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMapsActivity();
+            }
+        });
 
         textViewMsg = findViewById(R.id.textViewdb); //look up layout of android
         mRootDatabaseRef = FirebaseDatabase.getInstance().getReference(); //get reference to database, root element of db
@@ -67,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
         txtFirstName.setText("First Name: "+edtFirstName.getText().toString() );
         txtLastName.setText("Last Name: "+edtLastName.getText().toString());
         txtEmail.setText("Email: "+editEmail.getText().toString());
+    }
+
+    public void openMapsActivity() {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 
 
