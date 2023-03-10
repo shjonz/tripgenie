@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">fcctut</string>
+    <string name="your_trips">Your Trips</string>
+    <string name="plus">+</string>
+    <string name="addbutton">addbutton</string>
+    <string name="addtrip">addtrip</string>
 </resources>
