@@ -2,14 +2,9 @@ package com.example.fcctut;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView; //import textview from widget package into java file. to get classes for UI elements
 
-public class MainActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 //    String path;
 //    Uri url;
 //    private ImageView captureimage;
