@@ -27,13 +27,10 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}"/>
-            <!--android:value="@string/my_map_api_key" /> -->
-
+            android:value="${MAPS_API_KEY}" /> <!-- android:value="@string/my_map_api_key" /> -->
         <activity
             android:name=".MapsActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".ProfileActivity"
             android:exported="true">
