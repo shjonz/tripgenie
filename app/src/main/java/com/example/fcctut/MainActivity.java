@@ -21,6 +21,7 @@ import java.sql.Timestamp;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn_tomaps;
+    private Button button;
     TextView textViewMsg;
 
     final String node = "current_msg";
@@ -42,6 +43,18 @@ public class MainActivity extends AppCompatActivity {
                 openMapsActivity();
             }
         });
+
+        button = (Button) findViewById(R.id.button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPlanTripActivity();
+            }
+        });
+
+
+
 
         textViewMsg = findViewById(R.id.textViewdb); //look up layout of android
         mRootDatabaseRef = FirebaseDatabase.getInstance().getReference(); //get reference to database, root element of db
@@ -85,5 +98,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openPlanTripActivity() {
+        Intent intent = new Intent(this, PlanTrip.class);
+        startActivity(intent);
+    }
 
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PlanTrip">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75sp"
+        android:gravity="center"
+        android:text="Plan a New Trip"
+        android:textColor="#DF6666"
+        android:textSize="45sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15sp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Location" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15sp"
+        android:paddingLeft="90dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/startdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Date" />
+
+            <Button
+                android:id="@+id/startDateButton"
+                style="?android:dropDownSpinnerStyle"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:onClick="openStartDatePicker" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="15sp">
+
+            <TextView
+                android:id="@+id/enddate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Date" />
+
+            <Button
+                android:id="@+id/endDateButton"
+                style="?android:dropDownSpinnerStyle"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:onClick="openEndDatePicker" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="270sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_corners"
+        android:layout_marginTop="15sp"
+        android:text="Start Planning" />
+
+</LinearLayout>
