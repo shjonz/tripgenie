@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference mNodeRef; //node reference
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         mNodeRef = mRootDatabaseRef.child(node); //child element of root element.
 
         mNodeRef.addValueEventListener(new ValueEventListener() { //when db updates in real time, so happens synchronously, event listener
-            @Override //objects will be registered to mNodeRef, when sth happens, data will be updated or cancelled.
+            @Override
+            //objects will be registered to mNodeRef, when sth happens, data will be updated or cancelled.
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String change = snapshot.getValue(String.class);
                 textViewMsg.setText(change);
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         mNodeRef.setValue(timestamp.toString());
     }
 
-    public void onBtnClick (View view) {
+    public void onBtnClick(View view) {
         //class obj_name
         TextView txtFirstName = findViewById(R.id.firstname); //this is to find diff views/diff UIs elements from yr layout files
         //R stands for resources (our static files in our project) txtMessage is the id in our layout xml file.
@@ -75,15 +75,14 @@ public class MainActivity extends AppCompatActivity {
         EditText edtLastName = findViewById(R.id.editlastname);
         EditText edtFirstName = findViewById(R.id.editFirstName);
 
-        txtFirstName.setText("First Name: "+edtFirstName.getText().toString() );
-        txtLastName.setText("Last Name: "+edtLastName.getText().toString());
-        txtEmail.setText("Email: "+editEmail.getText().toString());
+        txtFirstName.setText("First Name: " + edtFirstName.getText().toString());
+        txtLastName.setText("Last Name: " + edtLastName.getText().toString());
+        txtEmail.setText("Email: " + editEmail.getText().toString());
     }
 
     public void openMapsActivity() {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
-
-
 }
+

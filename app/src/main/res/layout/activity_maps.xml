@@ -41,5 +41,14 @@
             android:background="@color/colorPrimary"
             android:layout_margin="16dp"
             android:textStyle="bold"/-->
+    <Button
+        android:id="@+id/recommendations_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Recommendations"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp" />
 
-    </RelativeLayout>
+
+</RelativeLayout>

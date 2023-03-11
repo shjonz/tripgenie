@@ -45,4 +45,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database' //added
     implementation 'com.google.firebase:firebase-storage:20.1.0' //added
     implementation 'com.google.android.gms:play-services-maps:18.1.0' //added g maps
+    implementation 'com.google.android.libraries.places:places:2.4.0' // added google places API
+    implementation 'com.android.volley:volley:1.2.1' // added volley
+
 }
