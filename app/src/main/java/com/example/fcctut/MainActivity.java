@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference mRootDatabaseRef; //reference to database
     DatabaseReference mNodeRef; //node reference
 
+    private Button btn_tosavedplaces;
 
 
     @Override
@@ -35,11 +36,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main); //setting to activity main file this java class related to activity main layout file.
         //logcat statement
         Log.d("Pokemon", "I am in onCreate "); //string tat acts as a tag,
+
         btn_tomaps = (Button) findViewById(R.id.btn_tomaps);
         btn_tomaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openMapsActivity();
+            }
+        });
+
+        //button to go to saved places list view
+        btn_tosavedplaces = (Button) findViewById(R.id.btn_tosavedplaces);
+        btn_tosavedplaces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSavedPlacesActivity();
             }
         });
 
@@ -82,6 +93,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openMapsActivity() {
         Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openSavedPlacesActivity() {
+        Intent intent = new Intent(this, IternaryActivity.class);
         startActivity(intent);
     }
 
