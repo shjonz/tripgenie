@@ -7,9 +7,13 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+
+import android.location.LocationRequest;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,12 +23,18 @@ import androidx.core.content.ContextCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationServices;
+
+import com.google.android.gms.location.Priority;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -148,6 +158,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             //if not granted, ask for permission from user
             askLocationPermission();
         }
+
     }
 
     public static void getLastLocation() {
@@ -198,6 +209,55 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
+    }
+
+    public static void getLastLocation() {
+        //use FusedLocationProviderClient to get last location, task returns location
+        //How it works: location gotten from .getLastLocation() is cached location by other applications
+        @SuppressLint("MissingPermission") Task<Location> locationTask =fusedLocationProviderClient.getLastLocation();
+
+        //add listeners to task (watch video to learn difference between listeners)
+        locationTask.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null){
+                    //we have a location
+                    Log.d(TAG, "onSuccess: " + location.toString());
+                    Log.d(TAG, "onSuccess: " + location.getLatitude());
+                    Log.d(TAG, "onSuccess: " + location.getLongitude());
+                    Log.d(TAG, "onSuccess: " + location.getTime());
+
+                } else {
+                    Log.d(TAG, "onFailure: Location was null...");
+                }
+            }
+        });
+
+        locationTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+    }
+
+    private void askLocationPermission() {
+        //check again if permission already granted
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            //show dialogue to user explaining purpose of asking permission if granted before
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION)){
+                Log.d(TAG, "AskLocationPermission: ask permission dialogue...");
+                ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        LOCATION_REQUEST_CODE);
+            }
+        } else {
+            //if not granted, ask for permission from user
+            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_REQUEST_CODE);
+        }
+    }
+
     //check if user granted permission, if yes grant last location
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -229,6 +289,5 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
     }
-
 
 }
