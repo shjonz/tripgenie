@@ -28,18 +28,27 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference mNodeRef; //node reference
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); //setting to activity main file this java class related to activity main layout file.
         //logcat statement
-        Log.d("Pokemon", "I am in onCreate "); //string tat acts as a tag,
+        Log.d("Pokemon", "I am in onCreate "); //string that acts as a tag,
         btn_tomaps = (Button) findViewById(R.id.btn_tomaps);
         btn_tomaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openMapsActivity();
+            }
+        });
+
+        //button listener for Permissions (temporary)
+        Button btn_toPermissions; //temporary button to access permissions
+        btn_toPermissions = (Button) findViewById(R.id.btn_toPermissions);
+        btn_toPermissions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPermissionsActivity();
             }
         });
 
@@ -82,6 +91,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openMapsActivity() {
         Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openPermissionsActivity() {
+        Intent intent = new Intent(this, PermissionsActivity.class);
         startActivity(intent);
     }
 

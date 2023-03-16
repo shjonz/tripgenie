@@ -34,8 +34,17 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" /> <!-- android:value="@string/my_map_api_key" /> -->
         <activity
+            android:name=".PermissionsActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity
             android:name=".MapsActivity"
-            android:exported="false" />
+            android:exported="true">
+<!--     changed exported to true for Maps       -->
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -45,6 +54,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
     </application>
 
 </manifest>
