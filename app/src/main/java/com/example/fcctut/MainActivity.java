@@ -27,12 +27,14 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference mRootDatabaseRef; //reference to database
     DatabaseReference mNodeRef; //node reference
 
+    private Button btn_tosavedplaces;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); //setting to activity main file this java class related to activity main layout file.
         //logcat statement
+
         Log.d("Pokemon", "I am in onCreate "); //string that acts as a tag,
         btn_tomaps = (Button) findViewById(R.id.btn_tomaps);
         btn_tomaps.setOnClickListener(new View.OnClickListener() {
@@ -42,15 +44,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //button listener for Permissions (temporary)
-        Button btn_toPermissions; //temporary button to access permissions
-        btn_toPermissions = (Button) findViewById(R.id.btn_toPermissions);
-        btn_toPermissions.setOnClickListener(new View.OnClickListener() {
+
+        //button to go to saved places list view
+        btn_tosavedplaces = (Button) findViewById(R.id.btn_tosavedplaces);
+        btn_tosavedplaces.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openPermissionsActivity();
-            }
-        });
+                openSavedPlacesActivity();
+
 
         textViewMsg = findViewById(R.id.textViewdb); //look up layout of android
         mRootDatabaseRef = FirebaseDatabase.getInstance().getReference(); //get reference to database, root element of db
@@ -94,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openPermissionsActivity() {
-        Intent intent = new Intent(this, PermissionsActivity.class);
-        startActivity(intent);
-    }
+
+    public void openSavedPlacesActivity() {
+        Intent intent = new Intent(this, IternaryActivity.class);
+}
 
 
 }

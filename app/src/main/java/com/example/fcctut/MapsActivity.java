@@ -7,7 +7,9 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+
 import android.location.LocationRequest;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.SearchView;
@@ -21,19 +23,24 @@ import androidx.core.content.ContextCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationServices;
+
 import com.google.android.gms.location.Priority;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.google.android.gms.tasks.OnCompleteListener;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.net.PlacesClient;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -151,6 +158,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             //if not granted, ask for permission from user
             askLocationPermission();
         }
+
     }
 
     public static void getLastLocation() {
@@ -201,6 +209,55 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
+    }
+
+    public static void getLastLocation() {
+        //use FusedLocationProviderClient to get last location, task returns location
+        //How it works: location gotten from .getLastLocation() is cached location by other applications
+        @SuppressLint("MissingPermission") Task<Location> locationTask =fusedLocationProviderClient.getLastLocation();
+
+        //add listeners to task (watch video to learn difference between listeners)
+        locationTask.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null){
+                    //we have a location
+                    Log.d(TAG, "onSuccess: " + location.toString());
+                    Log.d(TAG, "onSuccess: " + location.getLatitude());
+                    Log.d(TAG, "onSuccess: " + location.getLongitude());
+                    Log.d(TAG, "onSuccess: " + location.getTime());
+
+                } else {
+                    Log.d(TAG, "onFailure: Location was null...");
+                }
+            }
+        });
+
+        locationTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+    }
+
+    private void askLocationPermission() {
+        //check again if permission already granted
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            //show dialogue to user explaining purpose of asking permission if granted before
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION)){
+                Log.d(TAG, "AskLocationPermission: ask permission dialogue...");
+                ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        LOCATION_REQUEST_CODE);
+            }
+        } else {
+            //if not granted, ask for permission from user
+            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_REQUEST_CODE);
+        }
+    }
+
     //check if user granted permission, if yes grant last location
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -233,49 +290,4 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
-    //below is code from video but contains deprecated libraries, will delete if deemed useless
-    //tentatively suppress need for user to enable location permissions
-//    @SuppressLint("MissingPermission")
-//    private void getDeviceLocation() {
-//        mFusedLocationProviderClient.getLastLocation()
-//                .addOnCompleteListener(new OnCompleteListener<Location>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Location> task) {
-//                        if (task.isSuccessful()) {
-//                            mLastKnownLocation = task.getResult();
-//                            float DEFAULT_ZOOM = 0;
-//                            if (mLastKnownLocation != null) {
-//                                //pan camera from prev location to current location
-//                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
-//                            } else {
-//                                com.google.android.gms.location.LocationRequest locationRequest = LocationRequest
-//                                        .setInterval(1000)
-//                                        .setFastestInterval(3000)
-//                                        .setPriority(LocationRequest.QUALITY_HIGH_ACCURACY)
-//                                        .build();
-//
-////                                locationRequest.setInterval(10000);
-////                                locationRequest.setFastestInterval(5000);
-////                                locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
-//                                locationCallback = new LocationCallback() {
-//                                    @Override
-//                                    public void onLocationResult(LocationResult locationResult) {
-//                                        super.onLocationResult(locationResult);
-//                                        if (locationResult == null) {
-//                                            return;
-//                                        }
-//                                        mLastKnownLocation = locationResult.getLastLocation();
-//                                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
-//                                        mFusedLocationProviderClient.removeLocationUpdates(locationCallback);
-//                                    }
-//                                };
-//                                mFusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
-//
-//                            }
-//                        } else {
-//                            Toast.makeText(MapsActivity.this, "unable to get last location", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//    }
 }
