@@ -1682,12 +1682,7 @@ public class IternaryActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.placesListView);
         PlacesBaseAdapter customBaseAdapter = new PlacesBaseAdapter(getApplicationContext(), savedPlaceslist);
         listView.setAdapter(customBaseAdapter);
-    } //end of oncreate function
-
-
-
-
-
+    }
 
     //go to search places page
     public void AddPlacesActivity() {
