@@ -21,19 +21,22 @@ import java.sql.Timestamp;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn_tomaps;
+    private Button btn_toPlanTrips;
     TextView textViewMsg;
 
     final String node = "current_msg";
     DatabaseReference mRootDatabaseRef; //reference to database
     DatabaseReference mNodeRef; //node reference
 
+    private Button btn_tosavedplaces;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); //setting to activity main file this java class related to activity main layout file.
         //logcat statement
-        Log.d("Pokemon", "I am in onCreate "); //string tat acts as a tag,
+
+        Log.d("Pokemon", "I am in onCreate "); //string that acts as a tag,
         btn_tomaps = (Button) findViewById(R.id.btn_tomaps);
         btn_tomaps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +44,25 @@ public class MainActivity extends AppCompatActivity {
                 openMapsActivity();
             }
         });
+
+        //button to go to planTrip page (dylans page)
+        btn_toPlanTrips = (Button) findViewById(R.id.btn_toPlanTrip);
+        btn_toPlanTrips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPlanTripActivity();
+            }
+        }); //end of onclicklistener
+
+
+        //button to go to saved places list view
+        btn_tosavedplaces = (Button) findViewById(R.id.btn_tosavedplaces);
+        btn_tosavedplaces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSavedPlacesActivity();
+            }
+        }); //end of setonclick listener
 
         textViewMsg = findViewById(R.id.textViewdb); //look up layout of android
         mRootDatabaseRef = FirebaseDatabase.getInstance().getReference(); //get reference to database, root element of db
@@ -58,31 +80,47 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        }); //end of add value event listener
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         mNodeRef.setValue(timestamp.toString());
-    }
+    } // end of on create function
 
-    public void onBtnClick(View view) {
-        //class obj_name
-        TextView txtFirstName = findViewById(R.id.firstname); //this is to find diff views/diff UIs elements from yr layout files
-        //R stands for resources (our static files in our project) txtMessage is the id in our layout xml file.
-        TextView txtLastName = findViewById(R.id.lastname);
-        TextView txtEmail = findViewById(R.id.email);
 
-        EditText editEmail = findViewById(R.id.editemail);
-        EditText edtLastName = findViewById(R.id.editlastname);
-        EditText edtFirstName = findViewById(R.id.editFirstName);
 
-        txtFirstName.setText("First Name: " + edtFirstName.getText().toString());
-        txtLastName.setText("Last Name: " + edtLastName.getText().toString());
-        txtEmail.setText("Email: " + editEmail.getText().toString());
-    }
 
-    public void openMapsActivity() {
-        Intent intent = new Intent(this, MapsActivity.class);
+        public void onBtnClick(View view) {
+                //class obj_name
+            TextView txtFirstName = findViewById(R.id.firstname); //this is to find diff views/diff UIs elements from yr layout files
+                //R stands for resources (our static files in our project) txtMessage is the id in our layout xml file.
+            TextView txtLastName = findViewById(R.id.lastname);
+            TextView txtEmail = findViewById(R.id.email);
+
+            EditText editEmail = findViewById(R.id.editemail);
+            EditText edtLastName = findViewById(R.id.editlastname);
+            EditText edtFirstName = findViewById(R.id.editFirstName);
+
+            txtFirstName.setText("First Name: " + edtFirstName.getText().toString());
+            txtLastName.setText("Last Name: " + edtLastName.getText().toString());
+            txtEmail.setText("Email: " + editEmail.getText().toString());
+        }
+
+
+        public void openMapsActivity() {
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
+
+        }
+
+
+        public void openSavedPlacesActivity() {
+//                //Intent intent = new Intent(this, IternaryActivity.class);
+        }
+
+    public void openPlanTripActivity() { //opens dylans page PlanTrip page.
+        Intent intent = new Intent(this, PlanTrip.class);
         startActivity(intent);
     }
-}
 
+
+} //end of MainActivity class
