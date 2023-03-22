@@ -114,7 +114,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         public void openSavedPlacesActivity() {
-//                //Intent intent = new Intent(this, IternaryActivity.class);
+                Intent intent = new Intent(this, IternaryActivity.class);
+                startActivity(intent);
         }
 
     public void openPlanTripActivity() { //opens dylans page PlanTrip page.

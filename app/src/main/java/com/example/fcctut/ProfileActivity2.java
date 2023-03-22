@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity2 extends AppCompatActivity {
 //    String path;
 //    Uri url;
 //    private ImageView captureimage;
