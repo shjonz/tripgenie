@@ -13,7 +13,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);//setting to activity main file this java class related to activity main layout file.
-    }
+    } //end of onCreate function
 //        captureimage=findViewById(R.id.setting_profile_image);{
 //            public void onClick(View V){
 //                ImagePicker.Companion.with(imageActivity.this)
@@ -43,4 +43,4 @@ public class ProfileActivity extends AppCompatActivity {
 //    }
 
 
-}
+} //end of ProfileActivity class

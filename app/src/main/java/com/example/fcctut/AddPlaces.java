@@ -75,7 +75,7 @@ public class AddPlaces extends AppCompatActivity {
                     detailPlace(adapter.predictions.get(position).getPlaceId());
                 }
             }
-        });
+        }); //setonitemclicklistener function
         edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -86,9 +86,10 @@ public class AddPlaces extends AppCompatActivity {
                 }
                 return false;
             }
-        });
-    }
+        }); //end of setoneditoractionlistener function
+    } //end of oncreate function
 
+    //start of searchplaces function
     private void searchPlaces() {
         progressBar.setVisibility(View.VISIBLE);
         final LocationBias bias = RectangularBounds.newInstance(
@@ -101,7 +102,7 @@ public class AddPlaces extends AppCompatActivity {
                 //.setTypesFilter(TypeFilter.ESTABLISHMENT)
                 .setQuery(edtSearch.getText().toString())
                 .setLocationBias(bias)
-                .setCountries("ID")
+                .setCountries("SG")
                 .build();
         placesClient.findAutocompletePredictions(newRequest).addOnSuccessListener(new OnSuccessListener<FindAutocompletePredictionsResponse>() {
             @Override
@@ -118,10 +119,12 @@ public class AddPlaces extends AppCompatActivity {
                     Log.e("Places activity", "place not found" + apiException.getStatusCode());
                 }
             }
-        });
+        }); //end of add on failurelistener function
 
-    }
+    } //end of searchPlaces function
 
+
+    //start of detail place function
     private void detailPlace(String placeId) {
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("loading..");
@@ -138,7 +141,7 @@ public class AddPlaces extends AppCompatActivity {
                 if (latLng != null) {
                     Toast.makeText(AddPlaces.this, "Latlng" + latLng, Toast.LENGTH_SHORT).show();
                 }
-            }
+            }  //end of onsuccess function
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -149,8 +152,10 @@ public class AddPlaces extends AppCompatActivity {
                     final int statusCode = apiException.getStatusCode();
                 }
             }
-        });
-    }
+        }); //end of addonfailure function
+    } //end of detail places function
+
+    //start of a private static class
     private static class PlacesAdapter extends BaseAdapter {
         private final List<AutocompletePrediction> predictions = new ArrayList<>();
         private final Context context;
@@ -191,5 +196,6 @@ public class AddPlaces extends AppCompatActivity {
             txtLongAddress.setText(predictions.get(position).getSecondaryText(null));
             return v;
         }
-    }
-}
+    } //end of places adapter class static
+
+} //end of addplaces class

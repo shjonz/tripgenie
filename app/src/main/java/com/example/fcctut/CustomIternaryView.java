@@ -6,9 +6,10 @@ import android.os.Bundle;
 
 public class CustomIternaryView extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_iternary_view);
     }
-}
+} //end of custom_iternary_view class

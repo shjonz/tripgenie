@@ -21,6 +21,7 @@ import java.sql.Timestamp;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn_tomaps;
+    private Button btn_toPlanTrips;
     TextView textViewMsg;
 
     final String node = "current_msg";
@@ -44,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //button to go to planTrip page (dylans page)
+        btn_toPlanTrips = (Button) findViewById(R.id.btn_toPlanTrip);
+        btn_toPlanTrips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPlanTripActivity();
+            }
+        }); //end of onclicklistener
+
 
         //button to go to saved places list view
         btn_tosavedplaces = (Button) findViewById(R.id.btn_tosavedplaces);
@@ -51,14 +61,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openSavedPlacesActivity();
-
+            }
+        }); //end of setonclick listener
 
         textViewMsg = findViewById(R.id.textViewdb); //look up layout of android
         mRootDatabaseRef = FirebaseDatabase.getInstance().getReference(); //get reference to database, root element of db
         mNodeRef = mRootDatabaseRef.child(node); //child element of root element.
 
         mNodeRef.addValueEventListener(new ValueEventListener() { //when db updates in real time, so happens synchronously, event listener
-            @Override //objects will be registered to mNodeRef, when sth happens, data will be updated or cancelled.
+            @Override
+            //objects will be registered to mNodeRef, when sth happens, data will be updated or cancelled.
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String change = snapshot.getValue(String.class);
                 textViewMsg.setText(change);
@@ -68,37 +80,48 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        }); //end of add value event listener
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         mNodeRef.setValue(timestamp.toString());
-    }
+    } // end of on create function
 
-    public void onBtnClick (View view) {
-        //class obj_name
-        TextView txtFirstName = findViewById(R.id.firstname); //this is to find diff views/diff UIs elements from yr layout files
-        //R stands for resources (our static files in our project) txtMessage is the id in our layout xml file.
-        TextView txtLastName = findViewById(R.id.lastname);
-        TextView txtEmail = findViewById(R.id.email);
 
-        EditText editEmail = findViewById(R.id.editemail);
-        EditText edtLastName = findViewById(R.id.editlastname);
-        EditText edtFirstName = findViewById(R.id.editFirstName);
 
-        txtFirstName.setText("First Name: "+edtFirstName.getText().toString() );
-        txtLastName.setText("Last Name: "+edtLastName.getText().toString());
-        txtEmail.setText("Email: "+editEmail.getText().toString());
-    }
 
-    public void openMapsActivity() {
-        Intent intent = new Intent(this, MapsActivity.class);
+        public void onBtnClick(View view) {
+                //class obj_name
+            TextView txtFirstName = findViewById(R.id.firstname); //this is to find diff views/diff UIs elements from yr layout files
+                //R stands for resources (our static files in our project) txtMessage is the id in our layout xml file.
+            TextView txtLastName = findViewById(R.id.lastname);
+            TextView txtEmail = findViewById(R.id.email);
+
+            EditText editEmail = findViewById(R.id.editemail);
+            EditText edtLastName = findViewById(R.id.editlastname);
+            EditText edtFirstName = findViewById(R.id.editFirstName);
+
+            txtFirstName.setText("First Name: " + edtFirstName.getText().toString());
+            txtLastName.setText("Last Name: " + edtLastName.getText().toString());
+            txtEmail.setText("Email: " + editEmail.getText().toString());
+        }
+
+
+        public void openMapsActivity() {
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
+
+        }
+
+
+        public void openSavedPlacesActivity() {
+                Intent intent = new Intent(this, IternaryActivity.class);
+                startActivity(intent);
+        }
+
+    public void openPlanTripActivity() { //opens dylans page PlanTrip page.
+        Intent intent = new Intent(this, PlanTrip.class);
         startActivity(intent);
     }
 
 
-    public void openSavedPlacesActivity() {
-        Intent intent = new Intent(this, IternaryActivity.class);
-}
-
-
-}
+} //end of MainActivity class
