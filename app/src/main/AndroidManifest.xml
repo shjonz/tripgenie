@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fcctut">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -30,17 +33,24 @@
             android:name=".TSPActivity"
             android:exported="false" />
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditUserPage"
+            android:exported="false"
+            android:label="@string/EditProfile"
+            android:parentActivityName=".ProfileActivity2"></activity>
+        <activity
             android:name=".AddPlaces"
             android:exported="false" />
         <activity
             android:name=".CustomIternaryView"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".PlanTrip"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
-
+            android:name=".ProfileActivity2"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -63,10 +73,11 @@
             android:name=".MapsActivity"
             android:exported="true" /> <!-- changed exported to true for Maps -->
         <activity
-            android:name=".ProfileActivity2"
+            android:name=".newLocations"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".newLocations"
+            android:name=".SignUpPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
