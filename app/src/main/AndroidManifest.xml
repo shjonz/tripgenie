@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fcctut">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,17 +16,24 @@
         android:theme="@style/Theme.Fcctut"
         tools:targetApi="31">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditUserPage"
+            android:exported="false"
+            android:label="@string/EditProfile"
+            android:parentActivityName=".ProfileActivity2"></activity>
+        <activity
             android:name=".AddPlaces"
             android:exported="false" />
         <activity
             android:name=".CustomIternaryView"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".PlanTrip"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
-
+            android:name=".ProfileActivity2"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -41,22 +50,16 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" /> <!-- android:value="@string/my_map_api_key" /> -->
         <activity
-
             android:name=".IternaryActivity"
             android:exported="true" />
-
         <activity
             android:name=".MapsActivity"
-            android:exported="true"/>
-
-            <!-- changed exported to true for Maps -->
-
-        <activity android:name=".ProfileActivity2"
-            android:exported="false"/>
-
-       
+            android:exported="true" /> <!-- changed exported to true for Maps -->
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,9 +67,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
     </application>
 
 </manifest>

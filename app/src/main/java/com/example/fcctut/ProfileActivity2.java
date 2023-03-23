@@ -2,17 +2,28 @@ package com.example.fcctut;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 public class ProfileActivity2 extends AppCompatActivity {
-//    String path;
-//    Uri url;
-//    private ImageView captureimage;
+    ImageButton edituserButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);//setting to activity main file this java class related to activity main layout file.
+        edituserButton=findViewById(R.id.edituserButton);
+        edituserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity2.this,
+                        EditUserPage.class);
+                startActivity(intent);
+            }
+        });
     } //end of onCreate function
 //        captureimage=findViewById(R.id.setting_profile_image);{
 //            public void onClick(View V){
