@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fcctut">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -51,8 +52,9 @@
 
             <!-- changed exported to true for Maps -->
 
-        <activity android:name=".ProfileActivity2"
+        <activity android:name=".ProfileActivity"
             android:exported="false"/>
+
 
        
         <activity

@@ -216,3 +216,5 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     } //end of zoom to user location
 
 } //end of map activity class
+
+
