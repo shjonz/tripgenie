@@ -3,6 +3,7 @@ package com.example.fcctut;
 import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -11,6 +12,7 @@ import android.location.LocationRequest;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -54,6 +56,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationCallback locationCallback;
 
     private Location mLastKnownLocation;
+    private double searchedLatitude;
+    private double searchedLongitude;
+    private boolean isSearchLocationSet = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,32 +72,70 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public boolean onQueryTextSubmit(String query) {
                 String location = searchView.getQuery().toString();
-                List<Address> addressList=null;
+                List<Address> addressList = null;
                 if (location != null || !location.equals("")) {
                     Geocoder geocoder = new Geocoder((MapsActivity.this));
                     try {
-                        addressList=geocoder.getFromLocationName(location, 1);
+                        addressList = geocoder.getFromLocationName(location, 1);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Address address = addressList.get(0);
-                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(location));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+
+                    // Add null check for addressList
+                    if (addressList != null && !addressList.isEmpty()) {
+                        Address address = addressList.get(0);
+                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                        // Save the searched location's latitude and longitude
+                        searchedLatitude = address.getLatitude();
+                        searchedLongitude = address.getLongitude();
+                        isSearchLocationSet = true;
+                    } else {
+                        // Handle the case when addressList is null or empty, e.g., show a message to the user
+                        Toast.makeText(MapsActivity.this, "Unable to find the location. Please try a different search.", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 return false;
             } //end of on query text submit function
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
         }); //end of function for listening to search bar input
+
         mapFragment.getMapAsync(this); //this will update the map.
         //initialise FusedLocationProviderClient
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-    } //end of oncreate function
+        // Find the button for getting recommendations from the layout
+        Button getRecommendationsButton = findViewById(R.id.recommendations_button);
 
+        // Set an onClickListener for the button to retrieve the last known location and launch the RecommendationsActivity
+        getRecommendationsButton.setOnClickListener(view -> getLastLocationForButton(location -> {
+            double latitude;
+            double longitude;
+
+            if (isSearchLocationSet) {
+                latitude = searchedLatitude;
+                longitude = searchedLongitude;
+            } else {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
+            // Create an intent for the RecommendationsActivity
+            Intent intent = new Intent(MapsActivity.this, RecommendationsActivity.class);
+
+            // Pass the latitude and longitude values to the RecommendationsActivity
+            intent.putExtra("latitude", latitude);
+            intent.putExtra("longitude", longitude);
+
+            // Start the RecommendationsActivity
+            startActivity(intent);
+        }));
+        //end of OnCreate function
+    }
 
     /**
      * Manipulates the map once available.
@@ -112,7 +156,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
                 //BELOW IS CURRENT LOCATION CODE
-                //check if lcoation permission granted
+                //check if location permission granted
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 //if granted, access user location
             enableUserLocation();
@@ -121,7 +165,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 //if not granted
             askLocationPermission();
         }
-    } //end of onmapready function
+    } //end of OnMapReady function
 
     @Override
     public void onStart () {
@@ -156,14 +200,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Log.d(TAG, "onFailure: Location was null...");
                 }
             }
-        });  //end of addonsuccesslistener function
+        });  //end of AddonSuccessListener function
 
         locationTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
 
             }
-        }); //end of on failure listner function
+        }); //end of on failure listener function
 
     } //end of get last location function
 
@@ -204,16 +248,31 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void enableUserLocation () {
         mMap.setMyLocationEnabled(true);
     }
-    private void zoomToUserLocation () {
+    private void zoomToUserLocation() {
         @SuppressLint("MissingPermission") Task<Location> locationTask = fusedLocationProviderClient.getLastLocation();
         locationTask.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
-                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));
+                // Check if the location object is not null before accessing its properties
+                if (location != null) {
+                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 20));
+                } else {
+                    // Handle the case when the location object is null, e.g., show a message to the user
+                    Toast.makeText(MapsActivity.this, "Unable to get current location. Please try again later.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     } //end of zoom to user location
+
+    private void getLastLocationForButton(LocationHandler locationHandler) {
+        @SuppressLint("MissingPermission") Task<Location> locationTask = fusedLocationProviderClient.getLastLocation();
+        locationTask.addOnSuccessListener(locationHandler::onLocationReceived);
+    }
+
+    private interface LocationHandler {
+        void onLocationReceived(Location location);
+    }
 
 } //end of map activity class
 
