@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/map_layout"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MapsActivity" >
 
-    <fragment
+    <!-- Map fragment container for displaying the Google Map -->
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        tools:context=".MapsActivity" />
 
-
-
+    <!-- SearchView for searching locations on the map -->
     <SearchView
         android:id="@+id/search_view_location"
         android:layout_width="match_parent"
@@ -24,22 +25,26 @@
         android:queryHint="Search..."
         android:iconifiedByDefault="false"
         android:textColor="#FFFFFF"
-
         android:layout_margin="16dp"
         android:textStyle="bold"
-        android:elevation = "5dp"
-        />
-        <!-- searchLocation is the function that we need to define inside the MapsActivity.java -->
+        android:elevation="5dp" />
 
-        <!--Button
-            android:id="@+id/btn_find"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="Find Restaurants"
-            android:textColor="#FFFFFF"
-            android:background="@color/colorPrimary"
-            android:layout_margin="16dp"
-            android:textStyle="bold"/-->
+    <!-- Button to get recommendations -->
+    <Button
+        android:id="@+id/recommendations_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Recommendations"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/recommendations_button_background"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        tools:ignore="VisualLintButtonSize" />
 
-    </RelativeLayout>
+
+</RelativeLayout>
