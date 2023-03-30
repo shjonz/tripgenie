@@ -139,7 +139,7 @@ public class AddPlaces extends AppCompatActivity {
                 Place place = fetchPlaceResponse.getPlace();
                 LatLng latLng = place.getLatLng();
                 if (latLng != null) {
-                    Toast.makeText(AddPlaces.this, "Latlng" + latLng, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddPlaces.this, "Latlng of " + latLng, Toast.LENGTH_SHORT).show();
                 }
             }  //end of onsuccess function
         }).addOnFailureListener(new OnFailureListener() {

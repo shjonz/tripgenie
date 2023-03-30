@@ -15,6 +15,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk { //added for lib dependencies for external library
+            abiFilters "arm64-v8a", "armeabi-v7a", "x86", "x86_64"
+        }
     }
 
     buildTypes {
@@ -30,6 +33,16 @@ android {
     buildFeatures {
         viewBinding true
     }
+    packagingOptions {
+               //exclude 'META-INF/DEPENDENCIES'
+               //exclude 'META-INF/NOTICE'
+               //exclude 'META-INF/LICENSE'
+               //exclude 'META-INF/LICENSE.txt'
+               //exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
+
 }
 
 dependencies {
@@ -53,5 +66,14 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.1.0' //added g maps api
     implementation 'com.google.android.libraries.places:places:3.0.0' //added places api
     implementation 'com.google.firebase:firebase-auth' //added firebase authentication
+    implementation group: 'com.google.ortools', name: 'ortools-java', version: '9.6.2534' //google or tools for optimisation
+
+    // define a BOM and its version
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
+
+    // define any required OkHttp artifacts without version
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+
 
 }

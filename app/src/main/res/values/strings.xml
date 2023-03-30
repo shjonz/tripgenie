@@ -15,4 +15,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="_1_jan_2023">1 Jan 2023</string>
+    <string name="webapikey">WEB_API_KEY</string>
 </resources>
