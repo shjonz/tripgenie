@@ -43,7 +43,7 @@ public class PlacesApiHelper {
     private static final String API_BASE_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
 
     // Method to fetch places based on the user's current location, radius, and API key.
-    public static void fetchPlaces(double latitude, double longitude, int radius, String placetype, String apiKey, PlacesApiCallback callback) {
+    public static void fetchPlaces(double latitude, double longitude, int radius, String placetype,String rankBy, String apiKey, PlacesApiCallback callback) {
         Log.d("PlacesApiHelper", "fetchPlaces called");
         OkHttpClient client = new OkHttpClient();
         Gson gson = new GsonBuilder().create();
@@ -53,6 +53,7 @@ public class PlacesApiHelper {
                 .addQueryParameter("location", String.format("%f,%f", latitude, longitude))
                 .addQueryParameter("radius", String.valueOf(radius))
                 .addQueryParameter("type", placetype)
+                .addQueryParameter("rankby", rankBy) // Add rankBy parameter
                 .addQueryParameter("key", apiKey)
                 .build();
 

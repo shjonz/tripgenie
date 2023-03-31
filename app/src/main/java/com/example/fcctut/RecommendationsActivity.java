@@ -48,7 +48,7 @@ public class RecommendationsActivity extends AppCompatActivity {
         int radius = 10000; // Define the search radius in meters.
 
         // Call the Places API helper method to fetch nearby places.
-        PlacesApiHelper.fetchPlaces(latitude, longitude, radius, placeType, apiKey, new PlacesApiHelper.PlacesApiCallback() {
+        PlacesApiHelper.fetchPlaces(latitude, longitude, radius, placeType, apiKey, "prominence", new PlacesApiHelper.PlacesApiCallback() {
             @Override
             public void onPlacesFetched(List<Place> places) {
                 Log.d("PlacesApiHelper", "onPlacesFetched: " + places.size() + " places found");
