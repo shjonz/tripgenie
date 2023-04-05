@@ -29,6 +29,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
     packagingOptions {
                //exclude 'META-INF/DEPENDENCIES'
@@ -94,6 +95,8 @@ dependencies {
     implementation 'com.google.maps:google-maps-services:2.1.2'
     implementation 'org.slf4j:slf4j-simple:1.7.25'
     implementation 'com.google.appengine:appengine-api-1.0-sdk:2.0.12'
+    implementation 'com.google.android.material:material:1.8.0' //added for bottom navbar
+
 
     //google api client library
     //implementation 'com.google.api-client:google-api-client:1.32.1'

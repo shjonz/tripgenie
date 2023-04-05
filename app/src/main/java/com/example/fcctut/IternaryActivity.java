@@ -102,6 +102,7 @@ public class IternaryActivity extends AppCompatActivity {
     //int savedPlacesimages[] = {R.drawable. , R.drawable. };
     ListView listView;
     private Button btn_toaddplaces;
+    private BottomNavigationView bottomNavigationView;
 
     //for google org tools library
     //Loader loader = new Loader();
@@ -1680,9 +1681,43 @@ public class IternaryActivity extends AppCompatActivity {
 
         //link listview to xml file
         listView = (ListView) findViewById(R.id.placesListView);
-
         PlacesBaseAdapter customBaseAdapter = new PlacesBaseAdapter(getApplicationContext(), savedPlaceslist);
         listView.setAdapter(customBaseAdapter);
+
+        //code to navigate bottom navbar
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.itinerary);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.maps:
+                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+//                    case R.id.addLocation:
+//                        startActivity(new Intent(getApplicationContext(), AddPlaces.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+                    case R.id.itinerary:
+                        return true;
+//                    case R.id.addPlacesWorking:
+//                        startActivity(new Intent(getApplicationContext(), AddPlacesWorking.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+                    case R.id.addLocation:
+                        startActivity(new Intent(getApplicationContext(), newLocations.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+            }
+        });
     } //end of oncreate function
 
     //go to search places page
