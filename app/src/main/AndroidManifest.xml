@@ -20,25 +20,28 @@
         tools:targetApi="31">
         <activity
             android:name=".showItinerary"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".RecommendationsActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".AddPlaces"
-            android:exported="false" />
+            android:exported="true">
+
+
+        </activity>
         <activity
             android:name=".CustomIternaryView"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".PlanTrip"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="true" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -65,12 +68,25 @@
         <activity
             android:name=".newLocations"
             android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".SavedLocations"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".AddPlacesWorking"
+            android:exported="true">
+
+        </activity>
+
+
     </application>
 
 </manifest>
