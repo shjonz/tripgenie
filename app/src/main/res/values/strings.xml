@@ -10,10 +10,35 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="_1_jan_2023">1 Jan 2023</string>
+
+
+    <!-- Strings used for login page -->
+    <string name="Tripgenie">TripGenie</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="Signinwithgoogle">Sign in with google</string>
+    <string name="Donthaveanaccount">Don\'t have an account?</string>
+    <string name="Signup">Sign up</string>
+    <string name="login">Log in </string>
+    <string name="Signintext">SIGN IN </string>
+    <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
+    <!-- Strings used for signup page -->
+    <string name="Signuptext">SIGN UP </string>
+    <string name="Signupemail">Email </string>
+
+    <!-- Strings used for homepage -->
+    <string name="EditProfile">Edit Profile</string>
+    <string name="changeusername">Username</string>
+    <string name="Logout">Logout</string>
+
+    <!-- Strings used for edituserpage -->
+    <string name="empty_edit_text">emptyedittext</string>
+    <string name="changeprofilephoto">Change Profile Photo</string>
+
+
 
 </resources>
