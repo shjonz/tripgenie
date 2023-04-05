@@ -61,7 +61,8 @@
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/red"/>
+        android:backgroundTint="@color/red"
+        android:id="@+id/btnAddToSavedLocations"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -90,5 +91,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="30dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemBackground="@color/white"
+        app:itemIconTint="@color/bnv_tab_item_foreground"
+        app:itemTextColor="@color/bnv_tab_item_foreground">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
