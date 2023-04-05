@@ -4,6 +4,8 @@
     package="com.example.fcctut">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -37,9 +39,12 @@
             android:exported="false" />
         <activity
             android:name=".EditUserPage"
-            android:exported="false"
-            android:label="@string/EditProfile"
-            android:parentActivityName=".ProfileActivity2"></activity>
+            android:label = "@string/EditProfile"
+            android:parentActivityName=".ProfileActivity2"
+            android:exported="true"/>
+        <activity
+            android:name=".GoogleLoginActivity"
+            android:exported="false" />
         <activity
             android:name=".AddPlaces"
             android:exported="false" />
@@ -50,7 +55,7 @@
             android:name=".PlanTrip"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity2"
+            android:name=".MainActivity"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -73,11 +78,12 @@
             android:name=".MapsActivity"
             android:exported="true" /> <!-- changed exported to true for Maps -->
         <activity
+            android:name=".ProfileActivity2"
             android:name=".newLocations"
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUpPage"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -85,9 +91,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
     </application>
 
 </manifest>

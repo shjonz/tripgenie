@@ -72,6 +72,7 @@
         android:drawableStart="@drawable/googleg_standard_color_18"
         android:paddingStart="30dp"
         android:text="@string/Signinwithgoogle"
+        android:textSize="16sp"
         android:textAllCaps="false" />
 
 
@@ -86,7 +87,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:textColor="@color/black"
-                android:text="@string/Donthaveanaccount" />
+                android:text="@string/Donthaveanaccount"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/signuptextview"
@@ -94,7 +96,8 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/quantum_googblue"
-                android:text="@string/Signup"/>
+                android:text="@string/Signup"
+                android:textSize="16sp"/>
 
     </LinearLayout>
 
