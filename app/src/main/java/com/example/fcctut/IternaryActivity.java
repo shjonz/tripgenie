@@ -10,10 +10,17 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -103,6 +110,7 @@ public class IternaryActivity extends AppCompatActivity {
     //int savedPlacesimages[] = {R.drawable. , R.drawable. };
     ListView listView;
     private Button btn_toaddplaces;
+    private BottomNavigationView bottomNavigationView;
     private BottomNavigationView bottomNavigationView;
 
     //for google org tools library
@@ -1686,6 +1694,41 @@ public class IternaryActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.placesListView);
         PlacesBaseAdapter customBaseAdapter = new PlacesBaseAdapter(getApplicationContext(), savedPlaceslist);
         listView.setAdapter(customBaseAdapter);
+
+        //code to navigate bottom navbar
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.itinerary);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.maps:
+                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+//                    case R.id.addLocation:
+//                        startActivity(new Intent(getApplicationContext(), AddPlaces.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+                    case R.id.itinerary:
+                        return true;
+//                    case R.id.addPlacesWorking:
+//                        startActivity(new Intent(getApplicationContext(), AddPlacesWorking.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+                    case R.id.addLocation:
+                        startActivity(new Intent(getApplicationContext(), newLocations.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         //code to navigate bottom navbar
         bottomNavigationView = findViewById(R.id.bottomNavigationView);

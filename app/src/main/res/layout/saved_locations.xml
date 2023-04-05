@@ -6,22 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".newLocations">
 
-    <Button
-        android:id="@+id/logoutbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/white"
-        android:text="@string/Logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/savedLocationsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="Saved Locations"
         android:textColor="@color/red"
         android:textSize="42dp"
@@ -30,48 +20,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu"
+        android:layout_marginBottom="4dp"
         app:itemBackground="@color/white"
         app:itemIconTint="@color/bnv_tab_item_foreground"
         app:itemTextColor="@color/bnv_tab_item_foreground"
-        app:labelVisibilityMode="labeled">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu">
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/bottomNavigationView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="4dp"-->
-<!--        app:itemBackground="@color/white"-->
-<!--        app:itemIconTint="@color/bnv_tab_item_foreground"-->
-<!--        app:itemTextColor="@color/bnv_tab_item_foreground"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:menu="@menu/bottom_nav_menu">-->
-<!--    </com.google.android.material.bottomnavigation.BottomNavigationView>-->
-
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/bottomNavigationView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="4dp"-->
-<!--        app:itemBackground="@color/white"-->
-<!--        app:itemIconTint="@color/bnv_tab_item_foreground"-->
-<!--        app:itemTextColor="@color/bnv_tab_item_foreground"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:menu="@menu/bottom_nav_menu">-->
-<!--    </com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/savedLocationsRecyclerView"
@@ -89,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="20dp"
         android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
  />

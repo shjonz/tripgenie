@@ -3,6 +3,7 @@ package com.example.fcctut;
 import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -10,9 +11,10 @@ import android.location.Location;
 import android.location.LocationRequest;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -34,6 +36,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.IOException;
 import java.util.List;
@@ -53,12 +57,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationCallback locationCallback;
 
     private Location mLastKnownLocation;
+    private double searchedLatitude;
+    private double searchedLongitude;
+    private boolean isSearchLocationSet = false;
 
 //    public MapsActivity(FusedLocationProviderClient mFusedLocationProviderClient, PlacesClient placesClient, List<AutocompletePrediction> predictionList) {
 //        this.mFusedLocationProviderClient = mFusedLocationProviderClient;
 //        this.placesClient = placesClient;
 //        this.predictionList = predictionList;
 //    }
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +113,63 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //initialise FusedLocationProviderClient
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
+        // Find the button for getting recommendations from the layout
+        Button getRecommendationsButton = findViewById(R.id.recommendations_button);
 
+        // Set an onClickListener for the button to retrieve the last known location and launch the RecommendationsActivity
+        getRecommendationsButton.setOnClickListener(view -> getLastLocationForButton(location -> {
+            double latitude;
+            double longitude;
+
+            if (isSearchLocationSet) {
+                latitude = searchedLatitude;
+                longitude = searchedLongitude;
+            } else {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+            }
+            // Create an intent for the RecommendationsActivity
+            Intent intent = new Intent(MapsActivity.this, RecommendationsActivity.class);
+
+            // Pass the latitude and longitude values to the RecommendationsActivity
+            intent.putExtra("latitude", latitude);
+            intent.putExtra("longitude", longitude);
+
+            // Start the RecommendationsActivity
+            startActivity(intent);
+        }));
+
+        //code to navigate bottom navbar
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.maps);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.maps:
+                        return true;
+                    case R.id.addLocation:
+                        startActivity(new Intent(getApplicationContext(), newLocations.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.itinerary:
+                        startActivity(new Intent(getApplicationContext(), showItinerary.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.savedLocations:
+                        startActivity(new Intent(getApplicationContext(), SavedLocations.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                }
+                return false;
+            }
+        });
+        //end of OnCreate function
     }
 
     /**
@@ -173,16 +237,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Log.d(TAG, "onFailure: Location was null...");
                 }
             }
-        });
+        });  //end of AddonSuccessListener function
 
         locationTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
 
             }
-        });
+        }); //end of on failure listener function
 
-    }
+    } //end of get last location function
 
     private void askLocationPermission() {
         //check again if permission already granted

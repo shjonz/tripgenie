@@ -33,37 +33,4 @@
 
     </string-array>
 
-
-    <!-- Strings used for login page -->
-    <string name="Tripgenie">TripGenie</string>
-    <string name="Username">Username</string>
-    <string name="Signinwithgoogle">Sign in with google</string>
-    <string name="Donthaveanaccount">Don\'t have an account?</string>
-    <string name="login">LOGIN </string>
-    <string name="Signintext">SIGN IN </string>
-    <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
-    <!-- Strings used for signup page -->
-    <string name="Signuptext">SIGN UP </string>
-    <string name="Signupemail">Email </string>
-
-    <!-- Strings used for homepage -->
-    <string name="EditProfile">Edit Profile</string>
-    <string name="changeusername">Username</string>
-    <string name="Logout">Logout</string>
-
-    <!-- Strings used for edituserpage -->
-    <string name="empty_edit_text">emptyedittext</string>
-    <string name="changeprofilephoto">Change Profile Photo</string>
-
-    <!-- Strings used for signupage -->
-    <string name="Password">Password</string>
-    <string name="Register">Register</string>
-    <string name="Confirmpassword">Confirm Password</string>
-    <string name="Alreadyamember">Already a member?</string>
-    <string name="Donthaveanaccountt">Don\'t have an account?</string>
-    <string name="Loggin">Log in</string>
-    <string name="SetUsername">Set Username</string>
-
-
-
 </resources>

@@ -38,6 +38,8 @@
         <activity
             android:name=".GoogleLoginActivity"
             android:exported="true" />
+            android:name=".showItinerary"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
@@ -51,7 +53,10 @@
         <activity
             android:name=".TSPActivity"
             android:exported="false" />
+            android:exported="true" />
         <activity
+            android:name=".RecommendationsActivity"
+            android:exported="true" />
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
@@ -65,6 +70,10 @@
         <activity
             android:name=".AddPlaces"
             android:exported="true">
+
+
+        </activity>
+            android:exported="true">
         </activity>
 
         <activity
@@ -74,6 +83,8 @@
             android:name=".PlanTrip"
             android:exported="true" />
         <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
 
             android:name=".SavedLocations"
             android:exported="true" />
@@ -112,6 +123,12 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".SavedLocations"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -124,6 +141,14 @@
         </activity>-->
         <activity
             android:name=".showItinerary"
+            android:exported="true">
+
+        </activity>
+
+
+
+        <activity
+            android:name=".AddPlacesWorking"
             android:exported="true">
 
         </activity>

@@ -1,4 +1,3 @@
-/*
 package com.example.fcctut;
 
 import android.annotation.SuppressLint;
@@ -119,7 +118,7 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
 //        });
 
         //code to navigate bottom navbar
-        //bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.maps);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -173,7 +172,7 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
             @Override
             public void onSuccess(FindAutocompletePredictionsResponse findAutocompletePredictionsResponse) {
                 List<AutocompletePrediction> predictions = findAutocompletePredictionsResponse.getAutocompletePredictions();
-                //adapter.setPredictions(predictions);
+                adapter.setPredictions(predictions);
                 progressBar.setVisibility(View.GONE);
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -342,34 +341,16 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
                 //initialise itinerary list view
                 ListView ItineraryListview = findViewById(R.id.placesListView);
 
-
-/*                //add to itinerary
-                //Button btnAddToItinerary = findViewById(R.id.btnAddToSavedLocations);
+                //add to itinerary
+                Button btnAddToItinerary = findViewById(R.id.btnAddToSavedLocations);
                 btnAddToItinerary.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         addedPlacesList.addItems(weeklyOpeningHoursList);
 
-                    }*//*
-*/
-/*
-
+                    }
                 });
                 //doesnt work
-*//*
-
-
-                //add to itinerary (commented out on 6/4)
-//                Button btnAddToItinerary = findViewById(R.id.btnAddToSavedLocations);
-//                btnAddToItinerary.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        addedPlacesList.addItems(weeklyOpeningHoursList);
-//
-//                    }
-//                });
-//                //doesnt work
-
 
 
 
@@ -462,4 +443,4 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
         }
     } //end of places adapter class static
 
-} //end of addplaces class*/
+} //end of addplaces class

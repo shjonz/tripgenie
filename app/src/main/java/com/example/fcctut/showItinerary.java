@@ -3,9 +3,7 @@ package com.example.fcctut;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,21 +18,10 @@ import java.util.ArrayList;
 public class showItinerary extends AppCompatActivity {
     ListView itineraryList;
     private BottomNavigationView bottomNavigationView;
-
-    private Button homebutton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_itinerary);
-
-        homebutton=findViewById(R.id.HomeButton);
-        homebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(showItinerary.this,ProfileActivity2.class);
-                startActivity(intent);
-            }
-        });
 
         itineraryList = findViewById(R.id.itineraryList);
 
@@ -64,34 +51,31 @@ public class showItinerary extends AppCompatActivity {
 
         //code for bottom NavBar
         bottomNavigationView =findViewById(R.id.bottomNavigationView);
-//        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setSelectedItemId(R.id.home);
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                //get id of item in navbar to switch to
-//                int itemId = item.getItemId();
-////                System.out.println("Id of item clicked: "+itemId);
-////                System.out.println(R.id.maps+" is the maps R.id");
-//                if (itemId==0){
-//                    Toast.makeText(showItinerary.this, "Please add inputs", Toast.LENGTH_LONG).show();
-//                }
+                //get id of item in navbar to switch to
+                int itemId = item.getItemId();
+//                System.out.println("Id of item clicked: "+itemId);
+//                System.out.println(R.id.maps+" is the maps R.id");
+                if (itemId==0){
+                    Toast.makeText(showItinerary.this, "Please add inputs", Toast.LENGTH_LONG).show();
+                }
                 switch (item.getItemId()) {
-//                    case R.id.home:
-//                        startActivity(new Intent(getApplicationContext(), ProfileActivity2.class));
-//                        overridePendingTransition(0, 0);
-//                        return true;
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
                     case R.id.maps:
 //                        Toast.makeText(MainActivity.this,"Loading Maps",Toast.LENGTH_LONG).show();
                         startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
+
                     case R.id.addLocation:
-                        startActivity(new Intent(getApplicationContext(), newLocations.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.savedLocations:
-                        startActivity(new Intent(getApplicationContext(), SavedLocations.class));
+                        startActivity(new Intent(getApplicationContext(), AddPlaces.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.itinerary:
