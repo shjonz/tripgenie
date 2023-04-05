@@ -5,6 +5,16 @@
     <string name="addbutton">addbutton</string>
     <string name="addtrip">addtrip</string>
     <string name="title_activity_main">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="_1_jan_2023">1 Jan 2023</string>
+
     <!-- Strings used for login page -->
     <string name="Tripgenie">TripGenie</string>
     <string name="Username">Username</string>
@@ -23,16 +33,10 @@
     <string name="EditProfile">Edit Profile</string>
     <string name="changeusername">Username</string>
     <string name="Logout">Logout</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_maps">MapsActivity</string>
-    <string name="_1_jan_2023">1 Jan 2023</string>
+    <!-- Strings used for edituserpage -->
     <string name="empty_edit_text">emptyedittext</string>
+    <string name="changeprofilephoto">Change Profile Photo</string>
+
 
 </resources>
