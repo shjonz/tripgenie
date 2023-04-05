@@ -14,24 +14,91 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
         android:baselineAligned="false"
-        android:text="TripGenie"
+        android:text="@string/Tripgenie"
         android:textAlignment="center"
         android:textColor="#Df6666"
         android:textSize="70sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="197dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/Signintext"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="@string/Username"
+        android:inputType="textEmailAddress"  />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="@string/Password"
+        android:ems="10"
+        android:inputType="textPassword"  />
 
     <Button
-        android:layout_width="300dp"
+        android:id="@+id/loginbutton"
+        android:layout_width="350dp"
         android:layout_height="40dp"
-        android:layout_marginStart="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/addbutton"
+        android:text="@string/login"
+        android:textSize="20sp"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/signingooglebutton"
+        android:layout_width="270dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center"
         android:background="@drawable/signupbutton"
-        android:drawableLeft="@drawable/emailimage"
-        android:paddingLeft="30dp"
-        android:text="Sign up with email"
-        android:textAlignment="center"
+        android:drawableStart="@drawable/googleg_standard_color_18"
+        android:paddingStart="30dp"
+        android:text="@string/Signinwithgoogle"
+        android:textSize="16sp"
         android:textAllCaps="false" />
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textColor="@color/black"
+                android:text="@string/Donthaveanaccount"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/signuptextview"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/quantum_googblue"
+                android:text="@string/Signup"
+                android:textSize="16sp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

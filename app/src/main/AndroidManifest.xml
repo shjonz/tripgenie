@@ -5,8 +5,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -19,6 +23,14 @@
         android:theme="@style/Theme.Fcctut"
         tools:targetApi="31">
         <activity
+
+            android:name=".EditUserPage"
+            android:label = "@string/EditProfile"
+            android:parentActivityName=".ProfileActivity2"
+            android:exported="true"/>
+        <activity
+            android:name=".GoogleLoginActivity"
+
             android:name=".showItinerary"
             android:exported="true" />
         <activity
@@ -26,7 +38,12 @@
             android:exported="true" />
         <activity
             android:name=".RecommendationsActivity"
+
             android:exported="true" />
+
+
+            android:exported="false" />
+
         <activity
             android:name=".AddPlaces"
             android:exported="true">
@@ -40,8 +57,16 @@
             android:name=".PlanTrip"
             android:exported="true" />
         <activity
+
+            android:name=".MainActivity"
+
             android:name=".LoginActivity"
+
             android:exported="true" />
+
+
+            android:exported="false" />
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -66,7 +91,11 @@
             android:name=".ProfileActivity2"
             android:exported="false" />
         <activity
+
+            android:name=".LoginActivity"
+
             android:name=".newLocations"
+
             android:exported="true">
 
         </activity>

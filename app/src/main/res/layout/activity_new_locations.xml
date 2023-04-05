@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".newLocations">
 
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -43,6 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             android:hint="Search by name or address"
             android:textSize="16dp"
             android:background="@null"/>
@@ -50,6 +53,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add"
@@ -60,7 +64,23 @@
         android:backgroundTint="@color/red"
         android:id="@+id/btnAddToSavedLocations"/>
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@+id/addButton"
+        app:layout_constraintBottom_toTopOf="@+id/getSuggestionsButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+
+
     <Button
+        android:id="@+id/getSuggestionsButton"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

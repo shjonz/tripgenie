@@ -35,7 +35,7 @@ public class RecommendationsActivity extends AppCompatActivity {
         Log.d("RecommendationsActivity", "Longitude: " + currentLongitude);
 
         // Get the API key from the resources.
-        String apiKey = BuildConfig.MAPS_API_KEY;
+        String apiKey = BuildConfig.WEB_API_KEY;
         Log.d("RecommendationsActivity", apiKey);
 
         // Fetch and display recommendations based on the user's location.
@@ -48,7 +48,7 @@ public class RecommendationsActivity extends AppCompatActivity {
         int radius = 10000; // Define the search radius in meters.
 
         // Call the Places API helper method to fetch nearby places.
-        PlacesApiHelper.fetchPlaces(latitude, longitude, radius, placeType, apiKey, new PlacesApiHelper.PlacesApiCallback() {
+        PlacesApiHelper.fetchPlaces(latitude, longitude, radius, placeType, apiKey, "prominence", new PlacesApiHelper.PlacesApiCallback() {
             @Override
             public void onPlacesFetched(List<Place> places) {
                 Log.d("PlacesApiHelper", "onPlacesFetched: " + places.size() + " places found");
