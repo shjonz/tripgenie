@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -47,6 +48,12 @@ public class ProfileActivity2 extends AppCompatActivity {
     TextView name;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+
+public class ProfileActivity2 extends AppCompatActivity {
+//    String path;
+//    Uri url;
+//    private ImageView captureimage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
