@@ -43,18 +43,12 @@
             android:id="@+id/edtSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search for a place"
-            android:completionThreshold="1"
-            android:inputType="text"
-            android:maxLines="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
+            android:layout_marginStart="18dp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:hint="Search by name or address"
+            android:textSize="16dp"
+            android:background="@null"/>
 
     </LinearLayout>
 
@@ -81,6 +75,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
+
+
     <Button
         android:id="@+id/getSuggestionsButton"
         style="?attr/materialButtonOutlinedStyle"
@@ -93,7 +89,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="30dp" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
