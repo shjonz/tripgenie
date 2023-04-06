@@ -1,20 +1,17 @@
 package com.example.fcctut;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -31,9 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.jar.Attributes;
 
 public class ProfileActivity2 extends AppCompatActivity {
     SharedPreferences sharedPreferences;
@@ -121,6 +116,8 @@ public class ProfileActivity2 extends AppCompatActivity {
 //        sharedPreferences=getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
         profilephoto = findViewById(R.id.profilephoto);
         logoutbutton = findViewById(R.id.logoutbutton);
+        profilephoto = findViewById(R.id.profilephoto);
+        logoutbutton = findViewById(R.id.logoutbutton);
         //getting username from google
         name=findViewById(R.id.name);
         profilephoto=findViewById(R.id.profilephoto);
@@ -131,6 +128,11 @@ public class ProfileActivity2 extends AppCompatActivity {
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
+            name.setText(account.getDisplayName());
+            profilephoto.setImageURI(account.getPhotoUrl());
+        }
         GoogleSignInAccount account=GoogleSignIn.getLastSignedInAccount(this);
 //        if (account!=null){
 //            name.setText(account.getDisplayName());
@@ -184,6 +186,7 @@ public class ProfileActivity2 extends AppCompatActivity {
         });
     }
 
+
     //            String username = name.getText().toString();
 //
 //            User user = new User(username);
@@ -196,6 +199,8 @@ public class ProfileActivity2 extends AppCompatActivity {
 //                            }
 //                        }
 //                    });
+
+
 
 
 } //end of ProfileActivity class
@@ -239,31 +244,4 @@ public class ProfileActivity2 extends AppCompatActivity {
 //        txtFirstName.setText("First Name: "+edtFirstName.getText().toString() );
 //        txtLastName.setText("Last Name: "+edtLastName.getText().toString());
 //        txtEmail.setText("Email: "+editEmail.getText().toString());
-//    }
-
-//            String username = name.getText().toString();
-//
-//            User user = new User(username);
-//            FirebaseDatabase.getInstance().getReference("Users")
-//                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            if (task.isSuccessful()) {
-//                                finish();
-//                            }
-//                        }
-//                    });
-
-//    private void addDatatoFirebase(String name){
-//        user.setName(name);
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                databaseReference.setValue(user);
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
 //    }
