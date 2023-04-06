@@ -1,15 +1,23 @@
 package com.example.fcctut;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
 public class showItinerary extends AppCompatActivity {
     ListView itineraryList;
+    private BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,5 +48,42 @@ public class showItinerary extends AppCompatActivity {
         );
 
         itineraryList.setAdapter(itineraryAdapter);
-    }
-}
+
+        //code for bottom NavBar
+        bottomNavigationView =findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.home);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                //get id of item in navbar to switch to
+                int itemId = item.getItemId();
+//                System.out.println("Id of item clicked: "+itemId);
+//                System.out.println(R.id.maps+" is the maps R.id");
+                if (itemId==0){
+                    Toast.makeText(showItinerary.this, "Please add inputs", Toast.LENGTH_LONG).show();
+                }
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.maps:
+//                        Toast.makeText(MainActivity.this,"Loading Maps",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                    case R.id.addLocation:
+                        startActivity(new Intent(getApplicationContext(), AddPlaces.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.itinerary:
+                        return true;
+
+                }
+                return false;
+            }
+        }); // end of code for bottom NavBar
+    } // end of OnCreate
+} // end of showItinerary Class

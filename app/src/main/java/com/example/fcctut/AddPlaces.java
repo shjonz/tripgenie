@@ -1,8 +1,5 @@
 package com.example.fcctut;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -20,6 +17,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,12 +30,12 @@ import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.model.LocationBias;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.RectangularBounds;
-import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.FetchPlaceResponse;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +47,7 @@ public class AddPlaces extends AppCompatActivity {
     private PlacesAdapter adapter;
     private EditText edtSearch;
     private ProgressBar progressBar;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,42 @@ public class AddPlaces extends AppCompatActivity {
                 }
                 return false;
             }
-        }); //end of setoneditoractionlistener function
+        }); //end of setoneditoractionlistener
+
+
+//        bottomNavigationView =findViewById(R.id.bottomNavigationView);
+//        bottomNavigationView.setSelectedItemId(R.id.addLocation);
+//
+//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                //get id of item in navbar to switch to
+//                int itemId = item.getItemId();
+//                if (itemId==0){
+//                    Toast.makeText(AddPlaces.this, "Please add inputs", Toast.LENGTH_LONG).show();
+//                }
+//                switch (item.getItemId()) {
+//                    case R.id.home:
+//                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                    case R.id.maps:
+//                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//
+//                    case R.id.addLocation:
+//                        return true;
+//
+//                    case R.id.itinerary:
+//                        startActivity(new Intent(getApplicationContext(), showItinerary.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//
+//                }
+//                return false;
+//            }
+//        });
     } //end of oncreate function
 
     //start of searchplaces function
@@ -156,7 +192,7 @@ public class AddPlaces extends AppCompatActivity {
     } //end of detail places function
 
     //start of a private static class
-    private static class PlacesAdapter extends BaseAdapter {
+    static class PlacesAdapter extends BaseAdapter {
         private final List<AutocompletePrediction> predictions = new ArrayList<>();
         private final Context context;
 
