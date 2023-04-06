@@ -45,6 +45,7 @@
             android:exported="true" />
         <activity
             android:name=".RecommendationsActivity"
+
             android:exported="true" />
 
 
@@ -117,11 +118,12 @@
         <activity
             android:name=".ProfileActivity2"
             android:exported="false" />
-
-
-
         <activity
+
             android:name=".LoginActivity"
+
+            android:name=".newLocations"
+
             android:exported="true">
 
         </activity>
@@ -149,6 +151,12 @@
 
         <activity
             android:name=".AddPlacesWorking"
+            android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".showItinerary"
             android:exported="true">
 
         </activity>

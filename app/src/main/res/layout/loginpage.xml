@@ -7,51 +7,43 @@
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/imageView3"
+    <TextView
+        android:id="@+id/Tripgenie"
         android:layout_width="350dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:baselineAligned="false"
+        android:text="@string/Tripgenie"
+        android:textAlignment="center"
+        android:textColor="#Df6666"
+        android:textSize="70sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="197dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="60dp"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/tripgenie" />
-
-<!--    -->
-<!--    <TextView-->
-<!--        android:id="@+id/Tripgenie"-->
-<!--        android:layout_width="350dp"-->
-<!--        android:layout_height="90dp"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:baselineAligned="false"-->
-<!--        android:text="@string/Tripgenie"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="#Df6666"-->
-<!--        android:textSize="70sp"-->
-<!--        android:textStyle="bold" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textView3"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_marginTop="60dp"-->
-<!--        android:textColor="@android:color/black"-->
-<!--        android:textSize="30sp"-->
-<!--        android:textStyle="bold" />-->
+        android:text="@string/Signintext"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 
     <EditText
-        android:id="@+id/inputEmail"
+        android:id="@+id/editTextTextEmailAddress"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="@string/Signupemail"
+        android:hint="@string/Username"
         android:inputType="textEmailAddress"  />
 
     <EditText
-        android:id="@+id/inputPassword"
+        android:id="@+id/editTextTextPassword"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -67,7 +59,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/addbutton"
         android:text="@string/login"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textAllCaps="false"/>
 
     <Button
@@ -104,26 +96,22 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/quantum_googblue"
-                android:text="@string/Register"
-                android:clickable="true"
-                android:textSize="16sp"
-                android:focusable="true" />
+                android:text="@string/Signup"
+                android:textSize="16sp"/>
 
     </LinearLayout>
 
-    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/bottomNavigationView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:menu="@menu/bottom_nav_menu"-->
-<!--        app:itemBackground="@color/white"-->
-<!--        app:itemIconTint="@color/bnv_tab_item_foreground"-->
-<!--        app:itemTextColor="@color/bnv_tab_item_foreground">-->
-<!--    </com.google.android.material.bottomnavigation.BottomNavigationView>-->
-
-
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemBackground="@color/white"
+        app:itemIconTint="@color/bnv_tab_item_foreground"
+        app:itemTextColor="@color/bnv_tab_item_foreground">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </LinearLayout>
