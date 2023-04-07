@@ -157,7 +157,7 @@ public class PlacesApiHelper {
         Gson gson = new GsonBuilder().create();
 
         // Build the URL for the API request.
-        HttpUrl url = HttpUrl.parse("https://maps.googleapis.com/maps/api/place/details/json").newBuilder()
+        HttpUrl url = HttpUrl.parse(API_BASE_URL).newBuilder()
                 .addQueryParameter("placeid", placeId)
                 .addQueryParameter("key", apiKey)
                 .build();

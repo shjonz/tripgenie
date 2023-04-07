@@ -1,11 +1,6 @@
 package com.example.fcctut;
 
-import androidx.annotation.NonNull;
-
 import com.google.gson.annotations.SerializedName;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 // Class to represent a place fetched from the Places API
 public class Place implements Comparable<Place> {
@@ -57,7 +52,6 @@ public class Place implements Comparable<Place> {
 
     // Method to compare two Place objects based on distance and popularity
     // Implements the compareTo method from the Comparable interface
-    // This method is used in the Recommendations Button to rank the recommendations based on distance
     @Override
     public int compareTo(Place other) {
         // Sort the places by distance first, then by popularity
@@ -70,17 +64,11 @@ public class Place implements Comparable<Place> {
         }
     }
 
-
-
     // Nested class to represent the geometry of a place
     public static class Geometry {
         // Serialized field for the location data (latitude and longitude)
         @SerializedName("location")
         private Location location;
-
-        public Geometry(Location location) {
-            this.location = location;
-        }
 
         // Getter method for the location data
         public Location getLocation() {
@@ -98,11 +86,6 @@ public class Place implements Comparable<Place> {
         @SerializedName("lng")
         private double longitude;
 
-        public Location(double latitude, double longitude) {
-            this.latitude = latitude;
-            this.longitude = longitude;
-        }
-
         // Getter method for the latitude value
         public double getLatitude() {
             return latitude;
@@ -113,61 +96,14 @@ public class Place implements Comparable<Place> {
             return longitude;
         }
     }
-
-    // Used for the autocompletion  of the location in the New Locations page
     public Place(String placeId, String name, String address) {
         this.placeId = placeId;
         this.name = name;
         this.address = address;
     }
-
-    // Used to initialise from saved Trip
-    public Place(String placeId, String name, String address, Double popularity) {
-        this.placeId = placeId;
-        this.name = name;
-        this.address = address;
-        this.popularity = popularity;
-    }
-
-    // Used to initialise from saved Trip
-    public Place(String placeId, String name, String address, Double popularity, Double latitude, Double longitude) {
-        this.placeId = placeId;
-        this.name = name;
-        this.address = address;
-        this.popularity = popularity;
-        this.geometry = new Geometry(new Location(latitude, longitude));
-    }
-
     private String address;
-
     public String getAddress() {
         return address;
     }
 
-    // returns all attributes in Place object as a JSONObject
-    // currently used to store all information in Trip.java
-    public JSONObject getAllAttributes() {
-        JSONObject json = new JSONObject();
-        try {
-            json.put("placeId", getPlaceId());
-            json.put("name", getName());
-            json.put("address", getAddress());
-            json.put("popularity", getPopularity());
-            json.put("latitude", getGeometry().getLocation().getLatitude());
-            json.put("longitude", getGeometry().getLocation().getLongitude());
-            return json;
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        if (getGeometry() == null) {
-            return "placeId: " + placeId + ", name: " + name + ", address: " + address + ", popularity: " + popularity;
-        } else {
-            return "placeId: " + placeId + ", name: " + name + ", address: " + address + ", popularity: " + popularity + ", (lat,long): (" + getGeometry().getLocation().getLatitude() + "," + getGeometry().getLocation().getLongitude() +")";
-        }
-    }
 }

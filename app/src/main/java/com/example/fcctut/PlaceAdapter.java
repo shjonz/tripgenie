@@ -60,4 +60,8 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.PlaceViewHol
             placeName = itemView.findViewById(R.id.placeName);
         }
     }
+    public void updatePlaces(List<Place> places) {
+        this.places = places;
+        notifyDataSetChanged();
+    }
 }
