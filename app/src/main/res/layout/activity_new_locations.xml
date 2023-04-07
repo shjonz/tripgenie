@@ -43,6 +43,7 @@
             android:id="@+id/edtSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:hint="Search for a place"
             android:completionThreshold="1"
             android:inputType="text"
@@ -54,6 +55,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+
+            android:layout_marginStart="18dp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:hint="Search by name or address"
+            android:textSize="16dp"
+            android:background="@null"/>
 
 
     </LinearLayout>
@@ -93,7 +102,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="30dp" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
@@ -107,4 +115,8 @@
         app:itemTextColor="@color/bnv_tab_item_foreground">
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -7,14 +7,21 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
@@ -30,18 +37,34 @@ import java.util.List;
 public class newLocations extends AppCompatActivity {
 
     // Declare variables
+
+import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
+
+public class newLocations extends AppCompatActivity {
+
     private RecyclerView recyclerView;
     private PlaceAdapter placeAdapter;
     private PlacesClient placesClient;
     private AutocompleteSessionToken sessionToken;
+
     private AutoCompleteTextView edtSearch;
     private BottomNavigationView bottomNavigationView;
     private SearchSuggestionAdapter searchSuggestionAdapter;
+
+    private EditText edtSearch;
+    private ProgressBar progressBar;
+    private BottomNavigationView bottomNavigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_locations);
+
 
         // Initialize Places API client
         if (!Places.isInitialized()) {
@@ -84,6 +107,10 @@ public class newLocations extends AppCompatActivity {
         });
 
         // Initialize bottom navigation view and set item selected listener
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.addLocation);
+
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -113,26 +140,37 @@ public class newLocations extends AppCompatActivity {
             }
         });
 
+
         // Initialize RecyclerView and set adapter
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, R.drawable.simple_divider));
 
         // Initialize button and set click listener to fetch places
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, R.drawable.simple_divider));
+
         Button getSuggestionsButton = findViewById(R.id.getSuggestionsButton);
         getSuggestionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //TODO Get coordinates of city from Plan Trip Page and override this hardcoded coordinates
 
                 // Set city coordinates and fetch places using Places API helper class
+
+
                 double cityLatitude = 40.7128;
                 double cityLongitude = -74.0060;
 
                 PlacesApiHelper.fetchPlaces(cityLatitude, cityLongitude, 50000, "tourist_attraction", "prominence", BuildConfig.WEB_API_KEY, new PlacesApiHelper.PlacesApiCallback() {
                     @Override
                     public void onPlacesFetched(List<Place> places) {
+
                         // Update UI with fetched places
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -151,6 +189,7 @@ public class newLocations extends AppCompatActivity {
             }
         });
     }
+
 
     // Method to get autocomplete predictions for a query
     private void getAutocompletePredictions(String query) {
@@ -192,4 +231,7 @@ public class newLocations extends AppCompatActivity {
     }
 }
 
+
+
+}
 

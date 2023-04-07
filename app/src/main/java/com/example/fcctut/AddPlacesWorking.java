@@ -4,19 +4,16 @@ import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -42,7 +39,6 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -118,6 +114,7 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
 //        });
 
         //code to navigate bottom navbar
+
         //bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.maps);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -135,22 +132,41 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
                     case R.id.addLocation:
                         startActivity(new Intent(getApplicationContext(), AddPlaces.class));
                         overridePendingTransition(0, 0);
-//                        return true;
-                    case R.id.itinerary:
-                        startActivity(new Intent(getApplicationContext(), showItinerary.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.savedLocations:
-                        startActivity(new Intent(getApplicationContext(), SavedLocations.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-//                    case R.id.addPlacesWorking:
-//                        return true;
 
-                }
-                return false;
-            }
-        });
+//        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+//        bottomNavigationView.setSelectedItemId(R.id.maps);
+//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.home:
+//                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                        overridePendingTransition(0, 0);
+
+//                        return true;
+//                    case R.id.maps:
+//                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                    case R.id.addLocation:
+//                        startActivity(new Intent(getApplicationContext(), AddPlaces.class));
+//                        overridePendingTransition(0, 0);
+////                        return true;
+//                    case R.id.itinerary:
+//                        startActivity(new Intent(getApplicationContext(), showItinerary.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                    case R.id.savedLocations:
+//                        startActivity(new Intent(getApplicationContext(), SavedLocations.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+////                    case R.id.addPlacesWorking:
+////                        return true;
+//
+//                }
+//                return false;
+//            }
+//        });
     } //end of oncreate function
 
     //start of searchplaces function
@@ -341,6 +357,7 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
                 //initialise itinerary list view
                 ListView ItineraryListview = findViewById(R.id.placesListView);
 
+
 /*                //add to itinerary
                 //Button btnAddToItinerary = findViewById(R.id.btnAddToSavedLocations);
                 btnAddToItinerary.setOnClickListener(new View.OnClickListener() {
@@ -353,6 +370,18 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
                 });
                 //doesnt work
 */
+
+                //add to itinerary (commented out on 6/4)
+//                Button btnAddToItinerary = findViewById(R.id.btnAddToSavedLocations);
+//                btnAddToItinerary.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        addedPlacesList.addItems(weeklyOpeningHoursList);
+//
+//                    }
+//                });
+//                //doesnt work
+
 
 
 
