@@ -96,4 +96,14 @@ public class Place implements Comparable<Place> {
             return longitude;
         }
     }
+    public Place(String placeId, String name, String address) {
+        this.placeId = placeId;
+        this.name = name;
+        this.address = address;
+    }
+    private String address;
+    public String getAddress() {
+        return address;
+    }
+
 }

@@ -41,6 +41,7 @@ public class ProfileActivity2 extends AppCompatActivity {
     ImageButton androidImageButton;
     ImageView profilephoto;
     Button logoutbutton;
+
     Uri url;
     GoogleSignInOptions googleSignInOptions;
     GoogleSignInClient googleSignInClient;
@@ -97,25 +98,29 @@ public class ProfileActivity2 extends AppCompatActivity {
 //        user= new User();
 
         //to access plan trip page
-        addtripbutton=findViewById(R.id.addtripbutton);
+        addtripbutton = findViewById(R.id.addtripbutton);
         addtripbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(ProfileActivity2.this,PlanTrip.class);
+                Intent intent = new Intent(ProfileActivity2.this, PlanTrip.class);
                 startActivity(intent);
             }
         });//end of access plan trip page
 
         //to access edit user page
-        androidImageButton= (ImageButton) findViewById(R.id.edituserButton);
+        androidImageButton = (ImageButton) findViewById(R.id.edituserButton);
         androidImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity2.this,EditUserPage.class);
+                Intent intent = new Intent(ProfileActivity2.this, EditUserPage.class);
                 startActivity(intent);
             }
         });//end of edit user icon
 
+        name = findViewById(R.id.name);
+//        sharedPreferences=getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        profilephoto = findViewById(R.id.profilephoto);
+        logoutbutton = findViewById(R.id.logoutbutton);
         //getting username from google
         name=findViewById(R.id.name);
         profilephoto=findViewById(R.id.profilephoto);
@@ -146,26 +151,51 @@ public class ProfileActivity2 extends AppCompatActivity {
 
     } //end of onCreate function
 
-    public void showUserData(){
+    public void showUserData() {
         Intent intent = getIntent();
 
-        String nameUser=intent.getStringExtra("name");
+        String nameUser = intent.getStringExtra("name");
 
         name.setText(nameUser);
     }
 
+//    private void addDatatoFirebase(String name){
+//        user.setName(name);
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                databaseReference.setValue(user);
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 
     private void Signout() {
         googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
-
 
             }
         });
     }
+
+    //            String username = name.getText().toString();
+//
+//            User user = new User(username);
+//            FirebaseDatabase.getInstance().getReference("Users")
+//                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            if (task.isSuccessful()) {
+//                                finish();
+//                            }
+//                        }
+//                    });
 
 
 } //end of ProfileActivity class
