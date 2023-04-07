@@ -118,7 +118,7 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
 //        });
 
         //code to navigate bottom navbar
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        //bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.maps);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -341,16 +341,18 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
                 //initialise itinerary list view
                 ListView ItineraryListview = findViewById(R.id.placesListView);
 
-                //add to itinerary
-                Button btnAddToItinerary = findViewById(R.id.btnAddToSavedLocations);
+/*                //add to itinerary
+                //Button btnAddToItinerary = findViewById(R.id.btnAddToSavedLocations);
                 btnAddToItinerary.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         addedPlacesList.addItems(weeklyOpeningHoursList);
 
-                    }
+                    }*//*
+
                 });
                 //doesnt work
+*/
 
 
 

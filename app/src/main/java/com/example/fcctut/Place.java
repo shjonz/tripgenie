@@ -52,7 +52,6 @@ public class Place implements Comparable<Place> {
 
     // Method to compare two Place objects based on distance and popularity
     // Implements the compareTo method from the Comparable interface
-    // This method is used in the Recommendations Button to rank the recommendations based on distance
     @Override
     public int compareTo(Place other) {
         // Sort the places by distance first, then by popularity
@@ -97,7 +96,6 @@ public class Place implements Comparable<Place> {
             return longitude;
         }
     }
-    // Used for the autocompletion  of the location in the New Locations page
     public Place(String placeId, String name, String address) {
         this.placeId = placeId;
         this.name = name;
