@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.jar.Attributes;
 
+
 public class ProfileActivity2 extends AppCompatActivity {
     ImageButton androidImageButton;
     ImageView profilephoto;
@@ -49,11 +50,6 @@ public class ProfileActivity2 extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
-public class ProfileActivity2 extends AppCompatActivity {
-//    String path;
-//    Uri url;
-//    private ImageView captureimage;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,29 +64,29 @@ public class ProfileActivity2 extends AppCompatActivity {
 //        user= new User();
 
         //to access plan trip page
-        addtripbutton=findViewById(R.id.addtripbutton);
+        addtripbutton = findViewById(R.id.addtripbutton);
         addtripbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(ProfileActivity2.this,PlanTrip.class);
+                Intent intent = new Intent(ProfileActivity2.this, PlanTrip.class);
                 startActivity(intent);
             }
         });//end of access plan trip page
 
         //to access edit user page
-        androidImageButton= (ImageButton) findViewById(R.id.edituserButton);
+        androidImageButton = (ImageButton) findViewById(R.id.edituserButton);
         androidImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity2.this,EditUserPage.class);
+                Intent intent = new Intent(ProfileActivity2.this, EditUserPage.class);
                 startActivity(intent);
             }
         });//end of edit user icon
 
-        name=findViewById(R.id.name);
+        name = findViewById(R.id.name);
 //        sharedPreferences=getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-        profilephoto=findViewById(R.id.profilephoto);
-        logoutbutton=findViewById(R.id.logoutbutton);
+        profilephoto = findViewById(R.id.profilephoto);
+        logoutbutton = findViewById(R.id.logoutbutton);
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -98,8 +94,8 @@ public class ProfileActivity2 extends AppCompatActivity {
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
-        GoogleSignInAccount account=GoogleSignIn.getLastSignedInAccount(this);
-        if (account!=null){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account != null) {
             name.setText(account.getDisplayName());
             profilephoto.setImageURI(account.getPhotoUrl());
         }
@@ -111,10 +107,10 @@ public class ProfileActivity2 extends AppCompatActivity {
         });
     } //end of onCreate function
 
-    public void showUserData(){
+    public void showUserData() {
         Intent intent = getIntent();
 
-        String nameUser=intent.getStringExtra("name");
+        String nameUser = intent.getStringExtra("name");
 
         name.setText(nameUser);
     }
@@ -137,7 +133,7 @@ public class ProfileActivity2 extends AppCompatActivity {
         googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
 
             }
@@ -156,8 +152,6 @@ public class ProfileActivity2 extends AppCompatActivity {
 //                            }
 //                        }
 //                    });
-
-
 
 
 } //end of ProfileActivity class
