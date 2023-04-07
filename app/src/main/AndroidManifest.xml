@@ -31,7 +31,7 @@
         <activity
             android:name=".GoogleLoginActivity"
 
-            android:name=".showItinerary"
+
             android:exported="true" />
         <activity
             android:name=".MainActivity"
@@ -42,7 +42,7 @@
             android:exported="true" />
 
 
-            android:exported="false" />
+
 
         <activity
             android:name=".AddPlaces"
@@ -58,14 +58,11 @@
             android:exported="true" />
         <activity
 
-            android:name=".MainActivity"
-
             android:name=".LoginActivity"
 
             android:exported="true" />
 
 
-            android:exported="false" />
 
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -90,10 +87,8 @@
         <activity
             android:name=".ProfileActivity2"
             android:exported="false" />
+
         <activity
-
-            android:name=".LoginActivity"
-
             android:name=".newLocations"
 
             android:exported="true">
@@ -111,6 +106,12 @@
 
         <activity
             android:name=".AddPlacesWorking"
+            android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".showItinerary"
             android:exported="true">
 
         </activity>

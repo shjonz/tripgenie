@@ -75,10 +75,11 @@ public class showItinerary extends AppCompatActivity {
                         return true;
 
                     case R.id.addLocation:
-                        startActivity(new Intent(getApplicationContext(), AddPlaces.class));
+                        startActivity(new Intent(getApplicationContext(), newLocations.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.itinerary:
+
                         return true;
 
                 }
