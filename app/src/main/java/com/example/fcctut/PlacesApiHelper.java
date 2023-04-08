@@ -39,7 +39,7 @@ public class PlacesApiHelper {
         void onFailure();
     }
 
-
+    // Standard URL retrieved  from the Google Places API
     private static final String API_BASE_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
 
     // Method to fetch places based on the user's current location, radius, and API key.
@@ -148,7 +148,6 @@ public class PlacesApiHelper {
             }
         });
     }
-
 
     // Method to fetch place details based on the place ID and API key.
     public static void fetchPlaceDetails(String placeId, String apiKey, PlacesApiCallback callback) {

@@ -182,7 +182,7 @@ public class ProfileActivity2 extends AppCompatActivity {
 //                    }
 //                });
 //
-    }
+
 
 
 //    public void onBtnClick (View view) {
