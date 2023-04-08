@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
+
 public class ProfileActivity2 extends AppCompatActivity {
 //    String path;
 //    Uri url;
@@ -151,8 +152,12 @@ public class ProfileActivity2 extends AppCompatActivity {
 
 
 
+} //end of ProfileActivity class
+
+
 
  //end of ProfileActivity class
+
 
 //    private void uploadData(String username){
 //        FirebaseAuth auth = FirebaseAuth.getInstance();
