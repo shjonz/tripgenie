@@ -131,12 +131,6 @@
 
         </activity>
 
-        <activity
-            android:name=".showItinerary"
-            android:exported="true">
-
-        </activity>
-
 
     </application>
 
