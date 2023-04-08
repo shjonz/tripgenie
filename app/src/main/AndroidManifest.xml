@@ -49,7 +49,7 @@
             android:exported="true" />
 
 
-
+            android:exported="false" />
 
         <activity
             android:name=".TSPActivity"
@@ -84,6 +84,9 @@
             android:name=".PlanTrip"
             android:exported="true" />
         <activity
+
+            android:name=".MainActivity"
+
             android:name=".LoginActivity"
             android:exported="true" />
 
@@ -118,6 +121,7 @@
         <activity
             android:name=".ProfileActivity2"
             android:exported="false" />
+
         <activity
 
             android:name=".LoginActivity"
