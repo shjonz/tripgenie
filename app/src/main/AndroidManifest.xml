@@ -96,6 +96,7 @@
         <activity
             android:name=".ProfileActivity2"
             android:exported="true" />
+            android:exported="true" />
             android:name=".newLocations"
             android:name=".MainActivity"
             android:exported="false" />
