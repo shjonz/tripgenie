@@ -74,9 +74,6 @@
 
 
         </activity>
-            android:exported="true">
-        </activity>
-
         <activity
             android:name=".CustomIternaryView"
             android:exported="true" />
@@ -121,7 +118,6 @@
         <activity
             android:name=".ProfileActivity2"
             android:exported="false" />
-
         <activity
 
             android:name=".LoginActivity"
@@ -155,6 +151,12 @@
 
         <activity
             android:name=".AddPlacesWorking"
+            android:exported="false">
+
+        </activity>-->
+
+        <activity
+            android:name=".showItinerary"
             android:exported="true">
 
         </activity>
