@@ -202,6 +202,11 @@ public class ProfileActivity2 extends AppCompatActivity {
 
 } //end of ProfileActivity class
 
+
+
+ //end of ProfileActivity class
+
+
 //    private void uploadData(String username){
 //        FirebaseAuth auth = FirebaseAuth.getInstance();
 //        User user = new User(username);

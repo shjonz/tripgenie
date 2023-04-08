@@ -45,7 +45,7 @@ public class RecommendationsActivity extends AppCompatActivity {
 
     // Fetch nearby places and update the RecyclerView with the fetched places
     private void fetchPlacesAndDisplay(int index, double latitude, double longitude, String placeType, int count, String apiKey, String rankBy, Runnable onCompleted) {
-        int radius = 10000; // Define the search radius in meters.
+        int radius = 10000; // Define the search radius in meters.Set to 10km
 
         // Call the Places API helper method to fetch nearby places.
         PlacesApiHelper.fetchPlaces(latitude, longitude, radius, placeType, rankBy,apiKey, new PlacesApiHelper.PlacesApiCallback() {
