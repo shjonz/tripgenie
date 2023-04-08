@@ -131,11 +131,11 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 //            if (sharedPreferences.getString("googleDisplayName","true").equals("true")){
-//                Intent intent=new Intent(LoginActivity.this,ProfileActivity2.class);
+//                Intent intent=new Intent(L oginActivity.this,ProfileActivity2.class);
 //                startActivity(intent);
 
 
-//        progressDialog=new ProgressDialog(this);
+        progressDialog=new ProgressDialog(this);
 //        mAuth=FirebaseAuth.getInstance();
 //        mUser=mAuth.getCurrentUser();
 

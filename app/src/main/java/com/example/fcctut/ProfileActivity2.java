@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,13 +47,42 @@ public class ProfileActivity2 extends AppCompatActivity {
 
     //for storing into database
     TextView name;
-    FirebaseDatabase firebaseDatabase;
+
     DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);//setting to activity main file this java class related to activity main layout file.
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userUID = user.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(userUID).child("name");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String data = snapshot.getValue().toString();
+                    name.setText(data);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                String name = snapshot.getValue(String.class);
+//                TextView username=findViewById(R.id.name);
+//                username.setText(name);
+//            }
+
+
 
         sharedPreferences=getSharedPreferences("MyPreferences",MODE_PRIVATE);
         editor=sharedPreferences.edit();
@@ -96,10 +126,10 @@ public class ProfileActivity2 extends AppCompatActivity {
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
         GoogleSignInAccount account=GoogleSignIn.getLastSignedInAccount(this);
-        if (account!=null){
-            name.setText(account.getDisplayName());
-            profilephoto.setImageURI(account.getPhotoUrl());
-        }//end of getting username from google
+//        if (account!=null){
+//            name.setText(account.getDisplayName());
+//            profilephoto.setImageURI(account.getPhotoUrl());
+//        }//end of getting username from google
 
         //to logout to login activity
         logoutbutton=findViewById(R.id.logoutbutton);
@@ -123,19 +153,6 @@ public class ProfileActivity2 extends AppCompatActivity {
         name.setText(nameUser);
     }
 
-//    private void addDatatoFirebase(String name){
-//        user.setName(name);
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                databaseReference.setValue(user);
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
 
     private void Signout() {
         googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -144,12 +161,10 @@ public class ProfileActivity2 extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),LoginActivity.class));
                 finish();
 
+
             }
         });
     }
-
-
-
 
 
 } //end of ProfileActivity class
@@ -207,3 +222,17 @@ public class ProfileActivity2 extends AppCompatActivity {
 //                            }
 //                        }
 //                    });
+
+//    private void addDatatoFirebase(String name){
+//        user.setName(name);
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                databaseReference.setValue(user);
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }

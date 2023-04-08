@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+
     <application
         android:name=".FirebaseOffline"
         android:allowBackup="true"
@@ -26,6 +27,13 @@
         <activity
             android:name=".AutoLoginLogoPage"
             android:exported="false" />
+            android:name=".EditUserPage"
+            android:exported="true"
+            android:label="@string/EditProfile"
+            android:parentActivityName=".ProfileActivity2" />
+        <activity
+            android:name=".GoogleLoginActivity"
+            android:exported="true"/>
         <activity
             android:name=".showItinerary"
             android:exported="false" />
@@ -59,7 +67,8 @@
             android:name=".PlanTrip"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".newLocations"
+
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -86,6 +95,7 @@
             android:exported="false" />
         <activity
             android:name=".ProfileActivity2"
+            android:exported="true" />
             android:name=".newLocations"
             android:name=".MainActivity"
             android:exported="false" />

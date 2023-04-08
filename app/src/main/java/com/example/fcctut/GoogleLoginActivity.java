@@ -98,7 +98,7 @@ public class GoogleLoginActivity extends LoginActivity {
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference usersRef = database.getReference("users");
                             DatabaseReference newUserRef = usersRef.child(user.getUid());
-                            newUserRef.child("name").setValue(name);
+                            newUserRef.child("name");
                             sharedPreferences= getSharedPreferences("MyPreferences",MODE_PRIVATE);
                             editor=sharedPreferences.edit();
                             editor.putBoolean("is_logged_in",true);
