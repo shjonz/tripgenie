@@ -92,7 +92,7 @@ public class newLocations extends AppCompatActivity {
                 Place place = (Place) parent.getItemAtPosition(position);
                 edtSearch.setText(place.getName());
             }
-            // TODO Retrive the place in this search bar and listen for cicker of the add places button and send Place Name to Saved Places Page
+            // TODO Retrieve the place in this search bar and listen for clicker of the add places button and send Place Name to Saved Places Page
         });
 
         // Initialize bottom navigation view and set item selected listener

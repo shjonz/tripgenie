@@ -31,6 +31,9 @@
             android:name=".GoogleLoginActivity"
             android:exported="true"/>
         <activity
+            android:name=".GoogleLoginActivity"
+
+
             android:name=".showItinerary"
             android:exported="true" />
         <activity
@@ -39,6 +42,10 @@
         <activity
             android:name=".RecommendationsActivity"
             android:exported="true" />
+
+
+
+
         <activity
             android:name=".AddPlaces"
             android:exported="true">
@@ -52,9 +59,11 @@
             android:name=".PlanTrip"
             android:exported="true" />
         <activity
+
             android:name=".LoginActivity"
             android:exported="true" />
             android:name=".newLocations"
+
 
 
             android:exported="false" />
@@ -85,6 +94,7 @@
             android:name=".ProfileActivity2"
             android:exported="false" />
 
+
             android:exported="true" />
         <activity
             android:name=".newLocations"
@@ -103,8 +113,14 @@
             </intent-filter>
         </activity>
 
-        <activity
+<!--        <activity
             android:name=".AddPlacesWorking"
+            android:exported="false">
+
+        </activity>-->
+
+        <activity
+            android:name=".showItinerary"
             android:exported="true">
 
         </activity>
