@@ -22,28 +22,27 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="197dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_gravity="center"
         android:layout_marginTop="60dp"
-        android:text="@string/Signintext"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/inputEmail"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="@string/Username"
+        android:hint="@string/Signupemail"
         android:inputType="textEmailAddress"  />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/inputPassword"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -59,7 +58,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/addbutton"
         android:text="@string/login"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textAllCaps="false"/>
 
     <Button
@@ -96,8 +95,10 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/quantum_googblue"
-                android:text="@string/Signup"
-                android:textSize="16sp"/>
+                android:text="@string/Register"
+                android:clickable="true"
+                android:textSize="16sp"
+                android:focusable="true" />
 
     </LinearLayout>
 
