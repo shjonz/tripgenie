@@ -7,8 +7,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
@@ -31,6 +29,7 @@
             android:parentActivityName=".ProfileActivity2" />
         <activity
             android:name=".GoogleLoginActivity"
+            android:exported="true"/>
         <activity
             android:name=".showItinerary"
             android:exported="false" />
@@ -50,7 +49,7 @@
             android:name=".PlanTrip"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".newLocations"
 
             android:exported="false" />
         <!--
@@ -78,9 +77,9 @@
             android:exported="false" />
         <activity
             android:name=".ProfileActivity2"
-            android:exported="false" />
+            android:exported="true" />
         <activity
-            android:name=".newLocations"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
