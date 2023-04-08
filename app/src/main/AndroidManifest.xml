@@ -104,11 +104,11 @@
             </intent-filter>
         </activity>
 
-        <activity
+<!--        <activity
             android:name=".AddPlacesWorking"
-            android:exported="true">
+            android:exported="false">
 
-        </activity>
+        </activity>-->
 
         <activity
             android:name=".showItinerary"

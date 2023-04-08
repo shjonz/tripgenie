@@ -44,11 +44,11 @@ public class RecommendationsActivity extends AppCompatActivity {
     }
 
     // Fetch nearby places and update the RecyclerView with the fetched places
-    private void fetchPlacesAndDisplay(int index, double latitude, double longitude, String placeType, int count, String apiKey, Runnable onCompleted) {
-        int radius = 10000; // Define the search radius in meters.
+    private void fetchPlacesAndDisplay(int index, double latitude, double longitude, String placeType, int count, String apiKey, String rankBy, Runnable onCompleted) {
+        int radius = 10000; // Define the search radius in meters.Set to 10km
 
         // Call the Places API helper method to fetch nearby places.
-        PlacesApiHelper.fetchPlaces(latitude, longitude, radius, placeType, apiKey, "prominence", new PlacesApiHelper.PlacesApiCallback() {
+        PlacesApiHelper.fetchPlaces(latitude, longitude, radius, placeType, rankBy,apiKey, new PlacesApiHelper.PlacesApiCallback() {
             @Override
             public void onPlacesFetched(List<Place> places) {
                 Log.d("PlacesApiHelper", "onPlacesFetched: " + places.size() + " places found");
@@ -93,14 +93,13 @@ public class RecommendationsActivity extends AppCompatActivity {
         // Add headers for the two categories of recommendations
         recommendations.add("Places of Interest");
         // Fetch and display 10 nearest tourist attractions
-        fetchPlacesAndDisplay(recommendations.size(), latitude, longitude, "tourist_attraction", 10, apiKey, new Runnable() {
+        fetchPlacesAndDisplay(recommendations.size(), latitude, longitude, "tourist_attraction", 10, apiKey, "prominence", new Runnable() {
             @Override
             public void run() {
                 recommendations.add("Places to Eat");
                 // Fetch and display 5 nearest food-related places
-                fetchPlacesAndDisplay(recommendations.size(), latitude, longitude, "restaurant|cafe|bakery|bar", 5, apiKey, null);
+                fetchPlacesAndDisplay(recommendations.size(), latitude, longitude, "restaurant|cafe|bakery|bar", 5, apiKey, "prominence", null);
             }
         });
     }
 }
-
