@@ -21,7 +21,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,16 +34,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.jar.Attributes;
 
 public class ProfileActivity2 extends AppCompatActivity {
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     ImageButton androidImageButton;
     ImageView profilephoto;
     Button logoutbutton;
-
     Uri url;
     GoogleSignInOptions googleSignInOptions;
     GoogleSignInClient googleSignInClient;
-
-    SharedPreferences sharedPreferences;
-
     Button addtripbutton;
 
     //for storing into database
@@ -52,6 +53,10 @@ public class ProfileActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);//setting to activity main file this java class related to activity main layout file.
+
+        sharedPreferences=getSharedPreferences("MyPreferences",MODE_PRIVATE);
+        editor=sharedPreferences.edit();
+
 
         //storing username into database
 //        name=findViewById(R.id.name);
@@ -80,10 +85,9 @@ public class ProfileActivity2 extends AppCompatActivity {
             }
         });//end of edit user icon
 
+        //getting username from google
         name=findViewById(R.id.name);
-//        sharedPreferences=getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
         profilephoto=findViewById(R.id.profilephoto);
-        logoutbutton=findViewById(R.id.logoutbutton);
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -95,13 +99,20 @@ public class ProfileActivity2 extends AppCompatActivity {
         if (account!=null){
             name.setText(account.getDisplayName());
             profilephoto.setImageURI(account.getPhotoUrl());
-        }
+        }//end of getting username from google
+
+        //to logout to login activity
+        logoutbutton=findViewById(R.id.logoutbutton);
         logoutbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editor.clear();
+                editor.commit();
                 Signout();
             }
-        });
+        });//end of logout button
+
+
     } //end of onCreate function
 
     public void showUserData(){
@@ -137,18 +148,6 @@ public class ProfileActivity2 extends AppCompatActivity {
         });
     }
 
-    //            String username = name.getText().toString();
-//
-//            User user = new User(username);
-//            FirebaseDatabase.getInstance().getReference("Users")
-//                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            if (task.isSuccessful()) {
-//                                finish();
-//                            }
-//                        }
-//                    });
 
 
 
@@ -195,3 +194,16 @@ public class ProfileActivity2 extends AppCompatActivity {
 //        txtLastName.setText("Last Name: "+edtLastName.getText().toString());
 //        txtEmail.setText("Email: "+editEmail.getText().toString());
 //    }
+
+//            String username = name.getText().toString();
+//
+//            User user = new User(username);
+//            FirebaseDatabase.getInstance().getReference("Users")
+//                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            if (task.isSuccessful()) {
+//                                finish();
+//                            }
+//                        }
+//                    });

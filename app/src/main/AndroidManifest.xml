@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
+        android:name=".FirebaseOffline"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -22,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fcctut"
         tools:targetApi="31">
+        <activity
+            android:name=".AutoLoginLogoPage"
+            android:exported="false" />
         <activity
             android:name=".showItinerary"
             android:exported="false" />
@@ -39,9 +43,9 @@
             android:exported="false" />
         <activity
             android:name=".EditUserPage"
-            android:label = "@string/EditProfile"
-            android:parentActivityName=".ProfileActivity2"
-            android:exported="true"/>
+            android:exported="true"
+            android:label="@string/EditProfile"
+            android:parentActivityName=".ProfileActivity2" />
         <activity
             android:name=".GoogleLoginActivity"
             android:exported="false" />
@@ -77,6 +81,9 @@
         <activity
             android:name=".MapsActivity"
             android:exported="true" /> <!-- changed exported to true for Maps -->
+        <activity
+            android:name=".SignUpPage"
+            android:exported="false" />
         <activity
             android:name=".ProfileActivity2"
             android:name=".newLocations"

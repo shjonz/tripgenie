@@ -44,6 +44,7 @@ public class EditUserPage extends AppCompatActivity {
     EditText editTextChangeUsername;
     Button saveButton;
     String imageURL;
+
     Bitmap bitmap;
     Uri uri;
     public final static String USERNAME = "USERNAME";
