@@ -30,18 +30,20 @@ public class Trip {
     public ArrayList<ArrayList<Place>> days;
     @SerializedName("savedPlaces")
     ArrayList<Place> savedPlaces;
+    @SerializedName("numberOfDays")
+    int numberOfDays;
 
     // to be called when Trips are first made
-    public Trip(String cityName, String startDate, String endDate) {
-        this.cityName = cityName;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.savedPlaces = new ArrayList<>();
-        this.days = new ArrayList<ArrayList<Place>>();
-        for (int i=0; i<4; i++) { //TODO: fix hardcoded days
-            this.days.add(new ArrayList<Place>());
-        }
-    }
+//    public Trip(String cityName, String startDate, String endDate) {
+//        this.cityName = cityName;
+//        this.startDate = startDate;
+//        this.endDate = endDate;
+//        this.savedPlaces = new ArrayList<>();
+//        this.days = new ArrayList<ArrayList<Place>>();
+//        for (int i=0; i<4; i++) { //TODO: fix hardcoded days
+//            this.days.add(new ArrayList<Place>());
+//        }
+//    }
 
     // to be called when Trips are first made
     public Trip(int k, String cityName, String startDate, String endDate) {
@@ -49,6 +51,7 @@ public class Trip {
         this.startDate = startDate;
         this.endDate = endDate;
         this.savedPlaces = new ArrayList<>();
+        this.numberOfDays = k;
         this.days = new ArrayList<ArrayList<Place>>();
         for (int i=0; i<k; i++) {
             this.days.add(new ArrayList<Place>());

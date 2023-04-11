@@ -3,7 +3,10 @@ package com.example.fcctut;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +17,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -56,8 +62,28 @@ public class  PlanTrip extends AppCompatActivity {
                 String cityName = txtInputField.getEditText().getText().toString();
                 String startDate = startDateButton.getText().toString();
                 String endDate = endDateButton.getText().toString();
-                Trip trip = new Trip(cityName, startDate, endDate);
-                FileManager.saveTrip(PlanTrip.this, "final.json", trip);
+                long k = 0; // difference in number of days
+
+                DateTimeFormatter formatter = null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+                    LocalDate endDateObj = null;
+                    endDateObj = LocalDate.parse(endDate, formatter);
+
+                    LocalDate startDateObj = null;
+                    startDateObj = LocalDate.parse(startDate, formatter);
+                    k = ChronoUnit.DAYS.between(startDateObj, endDateObj);
+                }
+
+                String filename = cityName + ".json";
+                Trip trip = new Trip((int) k, cityName, startDate, endDate);
+                FileManager.saveTrip(PlanTrip.this, filename, trip);
+
+                SharedPreferences sharedPref = getSharedPreferences("fileNameSaver", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("currentFile", filename);
+                editor.apply();
+
                 Intent intent = new Intent(PlanTrip.this, newLocations.class);
                 startActivity(intent);
             }

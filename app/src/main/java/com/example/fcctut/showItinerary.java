@@ -1,6 +1,8 @@
 package com.example.fcctut;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -51,14 +53,14 @@ public class showItinerary extends AppCompatActivity {
        recyclerViewDates = findViewById(R.id.recyclerViewDates);
 
        // TODO: dynamically update filename
-       Trip t = FileManager.getTrip(showItinerary.this, "testtest.json");
+       SharedPreferences sharedPref = getSharedPreferences("fileNameSaver", Context.MODE_PRIVATE);
+       String filename = sharedPref.getString("currentFile", "");
+       Trip t = FileManager.getTrip(showItinerary.this, filename);
 //        t.saveToTripFile(showItinerary.this, "testing.json");
 //        FileManager.saveTrip();
 
        txtViewStartDate.setText(t.startDate);
        txtViewEndDate.setText(t.endDate);
-
-       Log.d("testing Trip", t.days.get(0).get(0).toString());
 
        // Lookup the recyclerview in activity layout
        RecyclerView rvPlaces = (RecyclerView) findViewById(R.id.itineraryList);
