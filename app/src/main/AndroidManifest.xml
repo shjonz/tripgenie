@@ -5,10 +5,14 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".FirebaseOffline"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -19,25 +23,40 @@
         android:theme="@style/Theme.Fcctut"
         tools:targetApi="31">
         <activity
-            android:name=".showItinerary"
-            android:exported="false" />
+            android:name=".EditUserPage"
+            android:exported="true"
+            android:label="@string/EditProfile"
+            android:parentActivityName=".ProfileActivity2" />
+        <activity
+            android:name=".GoogleLoginActivity"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".RecommendationsActivity"
-            android:exported="false" />
+            android:exported="true" />
+
+
+
+
         <activity
             android:name=".AddPlaces"
-            android:exported="false" />
+            android:exported="true">
+        </activity>
+
         <activity
             android:name=".CustomIternaryView"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".PlanTrip"
-            android:exported="false" />
+            android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+
+            android:name=".SavedLocations"
+            android:exported="true" />
+        <activity
+            android:name=".newLocations"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -60,17 +79,32 @@
             android:name=".MapsActivity"
             android:exported="true" /> <!-- changed exported to true for Maps -->
         <activity
-            android:name=".ProfileActivity2"
+            android:name=".SignUpPage"
             android:exported="false" />
         <activity
-            android:name=".newLocations"
+            android:name=".ProfileActivity2"
+            android:exported="false" />
+
+        <activity
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--        <activity
+            android:name=".AddPlacesWorking"
+            android:exported="false">
+
+        </activity>-->
+        <activity
+            android:name=".showItinerary"
+            android:exported="true">
+
+        </activity>
+
+
     </application>
 
 </manifest>

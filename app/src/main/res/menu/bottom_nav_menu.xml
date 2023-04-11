@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <item-->
+<!--        android:id="@+id/home"-->
+<!--        android:icon="@drawable/baseline_home_24"-->
+<!--        android:title="Home"/>-->
+    <item
+        android:id="@+id/maps"
+        android:icon="@drawable/baseline_map_24"
+        android:title="Maps"/>
+    <item
+        android:id="@+id/addLocation"
+        android:icon="@drawable/baseline_add_location_24"
+        android:title="Add Location"/>
+    <item
+        android:id="@+id/itinerary"
+        android:icon="@drawable/baseline_format_list_bulleted_24"
+        android:title="Itinerary"/>
+    <item
+        android:id="@+id/savedLocations"
+        android:icon="@drawable/baseline_playlist_add_check_24"
+        android:title="Saved"/>
+<!--    <item-->
+<!--        android:id="@+id/addPlacesWorking"-->
+<!--        android:icon="@drawable/addbutton"-->
+<!--        android:title="addPlacesWorking"/>-->
+</menu>

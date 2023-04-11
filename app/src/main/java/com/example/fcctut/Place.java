@@ -1,17 +1,22 @@
 package com.example.fcctut;
 
-import androidx.annotation.NonNull;
-
 import com.google.gson.annotations.SerializedName;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 // Class to represent a place fetched from the Places API
 public class Place implements Comparable<Place> {
     // Serialized field for the place ID
     @SerializedName("place_id")
     private String placeId;
+
+   private String locationName;
+
+   public Place(String locationName){
+       this.locationName=locationName;
+   }
 
     // Getter method for place_id
     public String getPlaceId() {
@@ -76,10 +81,6 @@ public class Place implements Comparable<Place> {
         @SerializedName("location")
         private Location location;
 
-        public Geometry(Location location) {
-            this.location = location;
-        }
-
         // Getter method for the location data
         public Location getLocation() {
             return location;
@@ -96,11 +97,6 @@ public class Place implements Comparable<Place> {
         @SerializedName("lng")
         private double longitude;
 
-        public Location(double latitude, double longitude) {
-            this.latitude = latitude;
-            this.longitude = longitude;
-        }
-
         // Getter method for the latitude value
         public double getLatitude() {
             return latitude;
@@ -111,61 +107,61 @@ public class Place implements Comparable<Place> {
             return longitude;
         }
     }
-
     // Used for the autocompletion  of the location in the New Locations page
     public Place(String placeId, String name, String address) {
         this.placeId = placeId;
         this.name = name;
         this.address = address;
     }
-
-    // Used to initialise from saved Trip
-    public Place(String placeId, String name, String address, Double popularity) {
-        this.placeId = placeId;
-        this.name = name;
-        this.address = address;
-        this.popularity = popularity;
-    }
-
-    // Used to initialise from saved Trip
-    public Place(String placeId, String name, String address, Double popularity, Double latitude, Double longitude) {
-        this.placeId = placeId;
-        this.name = name;
-        this.address = address;
-        this.popularity = popularity;
-        this.geometry = new Geometry(new Location(latitude, longitude));
-    }
-
     private String address;
-
     public String getAddress() {
         return address;
     }
 
-    // returns all attributes in Place object as a JSONObject
-    // currently used to store all information in Trip.java
-    public JSONObject getAllAttributes() {
-        JSONObject json = new JSONObject();
-        try {
-            json.put("placeId", getPlaceId());
-            json.put("name", getName());
-            json.put("address", getAddress());
-            json.put("popularity", getPopularity());
-            json.put("latitude", getGeometry().getLocation().getLatitude());
-            json.put("longitude", getGeometry().getLocation().getLongitude());
-            return json;
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
+    // Serialized field for the place opening hours
+    @SerializedName("opening_hours")
+    private OpeningHours openingHours;
+
+    // Getter method for opening_hours
+    public OpeningHours getOpeningHours() {
+        return openingHours;
+    }
+
+    // Nested class to represent the opening and closing hours of a place
+    public static class OpeningHours {
+        @SerializedName("weekday_text")
+        private List<String> weekdayText;
+
+        public List<String> getWeekdayText() {
+            return weekdayText;
+        }
+
+        public Map<String, String> getOpeningHours() {
+            return extractHours(0);
+        }
+
+        public Map<String, String> getClosingHours() {
+            return extractHours(1);
+        }
+
+        private Map<String, String> extractHours(int index) {
+            Map<String, String> hoursMap = new HashMap<>();
+
+            for (String dayHours : weekdayText) {
+                String[] parts = dayHours.split(": ", 2);
+                String dayOfWeek = parts[0];
+                String hours = parts[1];
+
+                if (hours.equalsIgnoreCase("Closed")) {
+                    hoursMap.put(dayOfWeek, "Closed");
+                } else {
+                    String[] timeRange = hours.split(" – ");
+                    hoursMap.put(dayOfWeek, timeRange[index]);
+                }
+            }
+
+            return hoursMap;
         }
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        if (getGeometry() == null) {
-            return "placeId: " + placeId + ", name: " + name + ", address: " + address + ", popularity: " + popularity;
-        } else {
-            return "placeId: " + placeId + ", name: " + name + ", address: " + address + ", popularity: " + popularity + ", (lat,long): (" + getGeometry().getLocation().getLatitude() + "," + getGeometry().getLocation().getLongitude() +")";
-        }
-    }
 }
