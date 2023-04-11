@@ -63,6 +63,9 @@ public class  PlanTrip extends AppCompatActivity {
             }
         });
 
+
+
+
         // Initialize the Places API client
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), BuildConfig.WEB_API_KEY);
