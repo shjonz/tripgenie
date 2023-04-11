@@ -168,7 +168,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/itineraryList"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="0dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"

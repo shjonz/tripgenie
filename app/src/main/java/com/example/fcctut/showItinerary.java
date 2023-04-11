@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -42,6 +43,8 @@ public class showItinerary extends AppCompatActivity {
 
         dropdown = findViewById(R.id.datedropdown);
 
+        //TODO update filemanager filename
+
         // Create an ArrayAdapter using a string array resource and a default spinner layout
         ArrayAdapter<CharSequence> Adapter = ArrayAdapter.createFromResource(this, R.array.day_array, android.R.layout.simple_spinner_item);
 
@@ -50,6 +53,8 @@ public class showItinerary extends AppCompatActivity {
 
         // Apply the adapter to the spinner
         dropdown.setAdapter(Adapter);
+
+
 
 
         homebutton=findViewById(R.id.homeButton);
@@ -64,23 +69,33 @@ public class showItinerary extends AppCompatActivity {
         itineraryList = findViewById(R.id.itineraryList);
         txtViewStartDate = findViewById(R.id.txtViewStartDate);
         txtViewEndDate = findViewById(R.id.txtViewEndDate);
-        recyclerViewDates = findViewById(R.id.recyclerViewDates);
 
         // TODO: dynamically update filename
-        Trip t = FileManager.getTrip(showItinerary.this, "testtest.json");
+        Trip t = FileManager.getTrip(showItinerary.this, "final.json");
 //        t.saveToTripFile(showItinerary.this, "testing.json");
 //        FileManager.saveTrip();
 
         txtViewStartDate.setText(t.startDate);
         txtViewEndDate.setText(t.endDate);
 
-        Log.d("testing Trip", t.days.get(0).get(0).toString());
+        Log.d("testing Trip", t.days.get(0).toString());
 
         // Lookup the recyclerview in activity layout
         RecyclerView rvPlaces = (RecyclerView) findViewById(R.id.itineraryList);
 
         // Display on recycler view
-        ArrayList<Place> places = t.days.get(0);
+        //ArrayList<Place> places = t.days.get(0);
+
+        // Create adapter passing in the sample user data
+        RecyclerViewDatesItemAdapter adapterDate = new RecyclerViewDatesItemAdapter(t.days);
+        // Attach the adapter to the recyclerview to populate items
+//        rvDates.setAdapter(adapterDate);
+//        // Set layout manager to position the items
+//        rvDates.setLayoutManager(new LinearLayoutManager(this));
+        String state=dropdown.getSelectedItem().toString();
+        String numericString =state.replaceAll("[^0-9]", ""); // Remove non-numeric characters
+        int number = Integer.parseInt(numericString);
+        ArrayList<Place> places = t.days.get( number - 1 );
 
 //        places.add(new Place("id", "name", "address", 0.0)); //TODO: change this to take dynamic data
 //        places.add(new Place("id1", "name1", "address1", 1.0));
@@ -91,15 +106,57 @@ public class showItinerary extends AppCompatActivity {
         // Set layout manager to position the items
         rvPlaces.setLayoutManager(new LinearLayoutManager(this));
 
-        // Lookup the recyclerview in activity layout
-        RecyclerView rvDates = (RecyclerView) findViewById(R.id.recyclerViewDates);
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = parent.getItemAtPosition(position).toString();
 
-        // Create adapter passing in the sample user data
-        RecyclerViewDatesItemAdapter adapterDate = new RecyclerViewDatesItemAdapter(t.days);
-        // Attach the adapter to the recyclerview to populate items
-        rvDates.setAdapter(adapterDate);
-        // Set layout manager to position the items
-        rvDates.setLayoutManager(new LinearLayoutManager(this));
+                // Extract the day number from the selected item's text
+                String numericString = selectedItem.replaceAll("[^0-9]", "");
+                int dayNumber = Integer.parseInt(numericString);
+
+                // Get the ArrayList of places for the selected day
+                ArrayList<Place> placesForSelectedDay = t.days.get(dayNumber - 1);
+
+                // Create adapter passing in the places for the selected day
+                ItineraryListViewAdapter adapter = new ItineraryListViewAdapter(placesForSelectedDay);
+
+                // Attach the adapter to the RecyclerView to populate items
+                rvPlaces.setAdapter(adapter);
+
+                // Set layout manager to position the items
+               rvPlaces.setLayoutManager(new LinearLayoutManager(showItinerary.this));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
+
+        //RecyclerView rvPlaces = (RecyclerView) findViewById(R.id.itineraryList);
+        //RecyclerViewDatesItemAdapter adapterDate = new RecyclerViewDatesItemAdapter(t.days);
+
+//        String state = dropdown.getSelectedItem().toString();
+//        String numericString = state.replaceAll("[^0-9]", ""); // Remove non-numeric characters
+//        int number = Integer.parseInt(numericString);
+//        ArrayList<Place> places = t.days.get(number - 1);
+
+        //ItineraryListViewAdapter adapter = new ItineraryListViewAdapter(places);
+        //rvPlaces.setAdapter(adapter);
+
+        //rvPlaces.setLayoutManager(new LinearLayoutManager(this));
+
+        //Adapter.updateData(selectedItem);
+
+
+
+
+//        // Lookup the recyclerview in activity layout
+//        RecyclerView rvDates = (RecyclerView) findViewById(R.id.recyclerViewDates);
+
+
+
 
         //code for bottom NavBar
         bottomNavigationView = findViewById(R.id.bottomNavigationView);

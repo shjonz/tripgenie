@@ -67,4 +67,12 @@
         app:labelVisibilityMode="labeled">
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
+    <Button
+        android:id="@+id/optimisebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Optimise"
+        tools:layout_editor_absoluteX="167dp"
+        tools:layout_editor_absoluteY="749dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
