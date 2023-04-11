@@ -12,6 +12,12 @@ public class Place implements Comparable<Place> {
     @SerializedName("place_id")
     private String placeId;
 
+   private String locationName;
+
+   public Place(String locationName){
+       this.locationName=locationName;
+   }
+
     // Getter method for place_id
     public String getPlaceId() {
         return placeId;

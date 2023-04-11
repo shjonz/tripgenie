@@ -57,6 +57,7 @@ public class SearchSuggestionAdapter extends ArrayAdapter<Place> implements Filt
         // Return the view to be displayed.
         return convertView;
     }
+
     public List<Place> getPlaces() {
         return placesFiltered;
     }
