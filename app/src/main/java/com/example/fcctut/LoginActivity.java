@@ -126,7 +126,69 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
             }
         });//end of google sign in
-    }//end of OnCreate
+
+
+        if (sharedPreferences.contains("saved_Email")) {
+            Intent intent = new Intent(LoginActivity.this, ProfileActivity2.class);
+            startActivity(intent);
+
+        } else {
+            inputEmail = findViewById(R.id.inputEmail);
+            inputPassword = findViewById(R.id.inputPassword);
+            loginbutton = findViewById(R.id.loginbutton);
+            loginbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    perforLogin();
+                }
+            });
+        }
+
+//            if (sharedPreferences.getString("googleDisplayName","true").equals("true")){
+//                Intent intent=new Intent(L oginActivity.this,ProfileActivity2.class);
+//                startActivity(intent);
+
+
+        progressDialog=new ProgressDialog(this);
+//        mAuth=FirebaseAuth.getInstance();
+//        mUser=mAuth.getCurrentUser();
+
+
+
+
+        signuptextview=findViewById(R.id.signuptextview);
+        signuptextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(LoginActivity.this,SignUpPage.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+//    private void googlelogin() {
+//
+//        if (isLoggedIn) {
+//            googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+//
+//            GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+//            if (account != null) {
+//                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+//                auth.signInWithCredential(credential)
+//                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<AuthResult> task) {
+//                                if (task.isSuccessful()) {
+//                                    Intent intent = new Intent(LoginActivity.this,ProfileActivity2.class);
+//                                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+//                                }else {
+//                                    Toast.makeText(LoginActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+//                        });
+//            }
+//        }
+//    }
 
     private void perforLogin() {
         String email=inputEmail.getText().toString();

@@ -26,6 +26,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -53,6 +54,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.IOException;
 import java.util.List;
@@ -163,6 +166,37 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                        startActivity(new Intent(getApplicationContext(), ProfileActivity2.class));
 //                        overridePendingTransition(0, 0);
 //                        return true;
+                    case R.id.maps:
+                        return true;
+                    case R.id.addLocation:
+                        startActivity(new Intent(getApplicationContext(), newLocations.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.itinerary:
+                        startActivity(new Intent(getApplicationContext(), showItinerary.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.savedLocations:
+                        startActivity(new Intent(getApplicationContext(), SavedLocations.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                }
+                return false;
+            }
+        });
+
+        //code to navigate bottom navbar
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.maps);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
                     case R.id.maps:
                         return true;
                     case R.id.addLocation:

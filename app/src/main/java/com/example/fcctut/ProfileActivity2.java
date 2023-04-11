@@ -36,6 +36,7 @@ import com.example.fcctut.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
+
 public class ProfileActivity2 extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -56,56 +57,11 @@ public class ProfileActivity2 extends AppCompatActivity {
     private ActivityMainBinding binding; //for bottom navar, to interact with views
     private BottomNavigationView bottomNavigationView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);//setting to activity main file this java class related to activity main layout file.
-
-        //code for bottom NavBar
-//        bottomNavigationView =findViewById(R.id.bottomNavigationView);
-//        bottomNavigationView.setSelectedItemId(R.id.home);
-//
-//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                //get id of item in navbar to switch to
-//                int itemId = item.getItemId();
-////                System.out.println("Id of item clicked: "+itemId);
-////                System.out.println(R.id.maps+" is the maps R.id");
-//                if (itemId==0){
-//                    Toast.makeText(ProfileActivity2.this, "Please add inputs", Toast.LENGTH_LONG).show();
-//                }
-//                switch (item.getItemId()) {
-//                    case R.id.home:
-//                        return true;
-//                    case R.id.maps:
-////                        Toast.makeText(MainActivity.this,"Loading Maps",Toast.LENGTH_LONG).show();
-//                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
-//                        overridePendingTransition(0, 0);
-//                        return true;
-//
-//                    case R.id.addLocation:
-//                        startActivity(new Intent(getApplicationContext(), newLocations.class));
-//                        overridePendingTransition(0, 0);
-//                        return true;
-//                    case R.id.itinerary:
-//                        startActivity(new Intent(getApplicationContext(), showItinerary.class));
-//                        overridePendingTransition(0, 0);
-//                        return true;
-//                    case R.id.savedLocations:
-//                        startActivity(new Intent(getApplicationContext(), SavedLocations.class));
-//                        overridePendingTransition(0, 0);
-//                        return true;
-////                    case R.id.addPlacesWorking:
-////                        startActivity(new Intent(getApplicationContext(), AddPlacesWorking.class));
-////                        overridePendingTransition(0, 0);
-////                        return true;
-//
-//
-//                }
-//                return false;
-//            }
-//        }); // end of code for bottom NavBar
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userUID = user.getUid();
@@ -147,6 +103,8 @@ public class ProfileActivity2 extends AppCompatActivity {
 
         name = findViewById(R.id.name);
 //        sharedPreferences=getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        profilephoto = findViewById(R.id.profilephoto);
+        logoutbutton = findViewById(R.id.logoutbutton);
         profilephoto = findViewById(R.id.profilephoto);
         logoutbutton = findViewById(R.id.logoutbutton);
         profilephoto = findViewById(R.id.profilephoto);
@@ -223,7 +181,6 @@ public class ProfileActivity2 extends AppCompatActivity {
 
 
 
-
 } //end of ProfileActivity class
 
 
@@ -254,7 +211,8 @@ public class ProfileActivity2 extends AppCompatActivity {
 //                    }
 //                });
 //
-//    }
+
+
 
 //    public void onBtnClick (View view) {
 //        //class obj_name

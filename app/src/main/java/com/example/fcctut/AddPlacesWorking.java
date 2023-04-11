@@ -119,6 +119,7 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
 //        });
 
         //code to navigate bottom navbar
+
         //bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.maps);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -136,22 +137,41 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
                     case R.id.addLocation:
                         startActivity(new Intent(getApplicationContext(), AddPlaces.class));
                         overridePendingTransition(0, 0);
-//                        return true;
-                    case R.id.itinerary:
-                        startActivity(new Intent(getApplicationContext(), showItinerary.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.savedLocations:
-                        startActivity(new Intent(getApplicationContext(), SavedLocations.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-//                    case R.id.addPlacesWorking:
-//                        return true;
 
-                }
-                return false;
-            }
-        });
+//        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+//        bottomNavigationView.setSelectedItemId(R.id.maps);
+//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.home:
+//                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                        overridePendingTransition(0, 0);
+
+//                        return true;
+//                    case R.id.maps:
+//                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                    case R.id.addLocation:
+//                        startActivity(new Intent(getApplicationContext(), AddPlaces.class));
+//                        overridePendingTransition(0, 0);
+////                        return true;
+//                    case R.id.itinerary:
+//                        startActivity(new Intent(getApplicationContext(), showItinerary.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                    case R.id.savedLocations:
+//                        startActivity(new Intent(getApplicationContext(), SavedLocations.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+////                    case R.id.addPlacesWorking:
+////                        return true;
+//
+//                }
+//                return false;
+//            }
+//        });
     } //end of oncreate function
 
     //start of searchplaces function
@@ -343,6 +363,7 @@ public class AddPlacesWorking extends AppCompatActivity implements View.OnClickL
                 ListView ItineraryListview = findViewById(R.id.placesListView);
 
 
+*/
 /*                //add to itinerary
                 //Button btnAddToItinerary = findViewById(R.id.btnAddToSavedLocations);
                 btnAddToItinerary.setOnClickListener(new View.OnClickListener() {
