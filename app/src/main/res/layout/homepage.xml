@@ -48,8 +48,8 @@
                 <ImageView
                     android:id="@+id/profilephoto"
                     android:layout_width="150dp"
-                    android:layout_height="170dp"
-                    android:background="@drawable/alas"
+                    android:layout_height="150dp"
+                    android:background="@drawable/profilepic"
                     android:shape="ring" />
 
             </androidx.cardview.widget.CardView>
@@ -128,6 +128,8 @@
                         android:layout_height="match_parent"
                         android:src="@drawable/koreacircle" />
 
+
+
                 </FrameLayout>
 
             </LinearLayout>
@@ -150,8 +152,7 @@
 
 
 
-
-    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
 <!--        android:id="@+id/bottomNavigationView"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->

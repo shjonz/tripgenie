@@ -26,14 +26,30 @@ public class Trip {
     Double latitude;
     @SerializedName("longitude")
     Double longitude;
+
     @SerializedName("days")
     public ArrayList<ArrayList<Place>> days;
+    @SerializedName("savedPlaces")
+    ArrayList<Place> savedPlaces;
+
+    // to be called when Trips are first made
+    public Trip(String cityName, String startDate, String endDate) {
+        this.cityName = cityName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.savedPlaces = new ArrayList<>();
+        this.days = new ArrayList<ArrayList<Place>>();
+        for (int i=0; i<4; i++) { //TODO: fix hardcoded days
+            this.days.add(new ArrayList<Place>());
+        }
+    }
 
     // to be called when Trips are first made
     public Trip(int k, String cityName, String startDate, String endDate) {
         this.cityName = cityName;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.savedPlaces = new ArrayList<>();
         this.days = new ArrayList<ArrayList<Place>>();
         for (int i=0; i<k; i++) {
             this.days.add(new ArrayList<Place>());

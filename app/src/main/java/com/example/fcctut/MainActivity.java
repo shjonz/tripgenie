@@ -25,26 +25,26 @@ import com.google.firebase.database.ValueEventListener;
 import java.sql.Timestamp;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btn_tomaps;
-    private Button btn_toPlanTrips;
-    TextView textViewMsg;
+   private Button btn_tomaps;
+   private Button btn_toPlanTrips;
+   TextView textViewMsg;
 
-    final String node = "current_msg";
-    DatabaseReference mRootDatabaseRef; //reference to database
-    DatabaseReference mNodeRef; //node reference
+   final String node = "current_msg";
+   DatabaseReference mRootDatabaseRef; //reference to database
+   DatabaseReference mNodeRef; //node reference
 
-    private ActivityMainBinding binding; //for bottom navar, to interact with views
-    private BottomNavigationView bottomNavigationView;
+   private ActivityMainBinding binding; //for bottom navar, to interact with views
+   private BottomNavigationView bottomNavigationView;
 
 
 
-    private Button btn_tosavedplaces;
+   private Button btn_tosavedplaces;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); //setting to activity main file this java class related to activity main layout file.
-        //logcat statement
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_main); //setting to activity main file this java class related to activity main layout file.
+       //logcat statement
 
 //        Log.d("Pokemon", "I am in onCreate "); //string that acts as a tag,
 //        btn_tomaps = (Button) findViewById(R.id.btn_tomaps);
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 //        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 //        mNodeRef.setValue(timestamp.toString());
 
-        //code for bottom NavBar
+       //code for bottom NavBar
 //        bottomNavigationView =findViewById(R.id.bottomNavigationView);
 //        bottomNavigationView.setSelectedItemId(R.id.home);
 //
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    } // end of on create function
+   } // end of on create function
 
 //
 //    public void onBtnClick(View view) {
@@ -186,3 +186,4 @@ public class MainActivity extends AppCompatActivity {
 
 
 } //end of MainActivity class
+
