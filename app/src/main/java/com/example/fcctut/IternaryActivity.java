@@ -19,6 +19,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -29,13 +30,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
-
-import com.google.maps.PlacesApi;
-import com.google.maps.errors.ApiException;
-import com.google.maps.model.DirectionsLeg;
-import com.google.maps.model.DirectionsStep;
-import com.google.maps.model.EncodedPolyline;
-import com.google.maps.model.LatLng;
 
 
 
@@ -48,27 +42,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.gson.JsonParser;
 import com.google.gson.annotations.SerializedName;
-
-import com.google.maps.DirectionsApi;
-import com.google.maps.DirectionsApiRequest;
-import com.google.maps.GaeRequestHandler;
 import com.google.maps.GeoApiContext;
-import com.google.maps.GeocodingApi;
-import com.google.maps.PendingResult;
-import com.google.maps.internal.ApiConfig;
-import com.google.maps.model.DirectionsResult;
-import com.google.maps.model.DirectionsRoute;
-import com.google.maps.model.GeocodingResult;
-import com.google.maps.model.PlaceDetails;
-import com.google.maps.model.TravelMode;
-import com.google.maps.model.Unit;
-import com.google.ortools.Loader;
-import com.google.ortools.constraintsolver.Assignment;
-import com.google.ortools.constraintsolver.FirstSolutionStrategy;
-import com.google.ortools.constraintsolver.RoutingIndexManager;
-import com.google.ortools.constraintsolver.RoutingModel;
-import com.google.ortools.constraintsolver.RoutingSearchParameters;
-import com.google.ortools.constraintsolver.main;
+//import com.google.maps.GeoApiContext;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -111,7 +86,7 @@ public class IternaryActivity extends AppCompatActivity {
     ListView listView;
     private Button btn_toaddplaces;
     private BottomNavigationView bottomNavigationView;
-    private BottomNavigationView bottomNavigationView;
+
 
     //for google org tools library
     //Loader loader = new Loader();
@@ -1802,7 +1777,7 @@ public class IternaryActivity extends AppCompatActivity {
 
 
 
-}
+} //end of iternary activity class
 
 
 
@@ -2034,5 +2009,4 @@ public class IternaryActivity extends AppCompatActivity {
 
 
 
-//} //end of iternrary activity class
-} //end of iternrary activity class
+

@@ -100,7 +100,7 @@ public class GoogleLoginActivity extends LoginActivity {
                             DatabaseReference newUserRef = usersRef.child(user.getUid());
                             newUserRef.child("name");
                             sharedPreferences= getSharedPreferences("MyPreferences",MODE_PRIVATE);
-                            editor=sharedPreferences.edit();
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putBoolean("is_logged_in",true);
 //                            editor.putString("googleUserId",user.getUid());
 //                            editor.putString("googleDisplayName",name);

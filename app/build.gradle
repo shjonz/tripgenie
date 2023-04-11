@@ -46,8 +46,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
 
-    implementation 'com.google.android.gms:play-services-location:21.0.1'
-    implementation 'com.google.android.libraries.places:places:2.5.0' //added for current location access
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -64,14 +62,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.1.0' //added g maps api
     implementation 'com.google.android.libraries.places:places:3.0.0' //added places api
     implementation 'com.google.firebase:firebase-auth' //added firebase authentication
-    implementation group: 'com.google.ortools', name: 'ortools-java', version: '9.6.2534' //google or tools for optimisation
 
-    // define a BOM and its version
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
-
-    // define any required OkHttp artifacts without version
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
 
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
     implementation 'com.google.code.gson:gson:2.8.9'
@@ -83,28 +75,12 @@ dependencies {
     // Add this line to use the AndroidX RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.3.0'
 
+    implementation 'com.google.android.material:material:1.5.0' //added for bottom navbar
+
     //to use google developers tools such as directionsapi
     implementation 'com.google.maps:google-maps-services:2.1.2'
     implementation 'org.slf4j:slf4j-simple:1.7.25'
     implementation 'com.google.appengine:appengine-api-1.0-sdk:2.0.12'
-    implementation 'com.google.android.material:material:1.8.0' //added for bottom navbar
-    implementation 'com.google.android.material:material:1.5.0' //added for bottom navbar
-
-    implementation 'com.google.android.material:material:1.8.0' //added for bottom navbar
-    implementation 'com.google.android.material:material:1.5.0' //added for bottom navbar
 
 
-    //google api client library
-    //implementation 'com.google.api-client:google-api-client:1.32.1'
-
-    implementation platform('com.google.firebase:firebase-bom:31.2.3') //added for linking firebase real time db
-    implementation 'com.google.firebase:firebase-database' //added to link firebase real time database
-    implementation 'com.google.firebase:firebase-storage:20.1.0' //added for firebase real time storage
-    implementation 'com.google.android.gms:play-services-maps:18.1.0' //added g maps api
-    implementation 'com.google.android.libraries.places:places:3.0.0' //added places api
-    implementation 'com.google.firebase:firebase-auth' //added firebase authentication
-    implementation 'com.google.android.gms:play-services-auth:20.4.1'
-
-    implementation 'com.karumi:dexter:5.0.0' //added for permissions
-    implementation 'com.google.android.gms:play-services-location:21.0.1' //added
 }
