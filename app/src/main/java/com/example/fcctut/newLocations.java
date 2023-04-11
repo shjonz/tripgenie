@@ -1,5 +1,7 @@
 package com.example.fcctut;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -224,19 +226,49 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
             });
         }
 
+
+//        if (!locationName.isEmpty()) {
+//            // Find the place object matching the locationName in the search suggestions
+//            Place selectedPlace = new Place(locationName);
+//            for (Place place : searchSuggestionAdapter.getPlaces()) {
+//                if (place.getName().equalsIgnoreCase(locationName)) {
+//                    selectedPlace = place;
+//                    break;
+//                }
+//            }
+//            if (!locationName.isEmpty()) {
+//                // Save the selected place to shared preferences
+//                Place selectedPlace = new Place(locationName);
+//                List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
+//                savedPlaces.add(selectedPlace);
+//                SharedPreferenceUtil.savePlaces(this, savedPlaces);
+//
+//                // Clear the text in the edtSearch field
+//                edtSearch.getText().clear();
+//
+//            } else {
+//                // Show a message to the user if the input is not in the search suggestions
+//                Toast.makeText(newLocations.this, "Please select a valid location from the suggestions", Toast.LENGTH_SHORT).show();
+//            }
+//        } else {
+//            // Show a message to the user if the input is empty
+//            Toast.makeText(newLocations.this, "Please enter a location", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+
+
         private void addLocation() {
             String locationName = edtSearch.getText().toString().trim();
 
             if (!locationName.isEmpty()) {
                 // Find the place object matching the locationName in the search suggestions
-                Place selectedPlace = null;
+                Place selectedPlace = new Place(locationName);
                 for (Place place : searchSuggestionAdapter.getPlaces()) {
                     if (place.getName().equalsIgnoreCase(locationName)) {
                         selectedPlace = place;
                         break;
                     }
                 }
-
                 if (selectedPlace != null) {
                     // Save the selected place to shared preferences
                     List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);

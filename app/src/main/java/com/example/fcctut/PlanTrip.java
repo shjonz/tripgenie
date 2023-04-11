@@ -179,7 +179,6 @@ public class PlanTrip extends AppCompatActivity {
             for (AutocompletePrediction prediction : response.getAutocompletePredictions()) {
                 cityNames.add(prediction.getPrimaryText(null).toString());
             }
-
             updateCitySearchAdapter(cityNames);
         }).addOnFailureListener((exception) -> {
             Log.e("PlanTrip", "Autocomplete prediction fetch failed", exception);
