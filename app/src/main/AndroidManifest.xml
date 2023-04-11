@@ -37,9 +37,6 @@ package="com.example.fcctut">
         android:name=".RecommendationsActivity"
         android:exported="true" />
 
-
-
-
     <activity
         android:name=".AddPlaces"
         android:exported="true">

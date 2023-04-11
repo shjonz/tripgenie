@@ -3,6 +3,7 @@ package com.example.fcctut;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,10 +34,21 @@ public class PlanTrip extends AppCompatActivity {
     private AutocompleteSessionToken sessionToken; // A session token to be used when making requests to the Places API
     private AutoCompleteTextView edtCitySearch; // An AutoCompleteTextView for searching cities
 
+    private Button startplanningbutton; //button to go to add new locations page
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_trip);
+        startplanningbutton=findViewById(R.id.startplanningbutton); //Get a reference to the button for
+
+        startplanningbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PlanTrip.this, newLocations.class);
+                startActivity(intent);
+            }
+        });
 
         initDatePicker(); // Initialize the DatePickerDialog objects
         startDateButton = findViewById(R.id.startDateButton); // Get a reference to the button for selecting the start date
@@ -72,6 +84,9 @@ public class PlanTrip extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+
+
+
 
     }
 
