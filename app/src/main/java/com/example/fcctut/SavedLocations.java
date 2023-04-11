@@ -52,13 +52,29 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 
         // Fetch saved places from SharedPreferences
         savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
-
         // save savedPlaces to local storage
         SharedPreferences sharedPref = getSharedPreferences("fileNameSaver", Context.MODE_PRIVATE);
         String filename = sharedPref.getString("currentFile", "");
         Trip trip = FileManager.getTrip(SavedLocations.this, filename);
+//        if (savedPlaces.size() == 0){
+//            if (trip.savedPlaces.size() != 0) {
+//                // set local storage to shared preferences
+//                SharedPreferenceUtil.savePlaces(SavedLocations.this ,trip.savedPlaces);
+//                savedPlaces = trip.savedPlaces;
+//            } else {
+//                // save savedPlaces from shared pref to local storage
+//                trip.savedPlaces = new ArrayList<>(savedPlaces);
+//                FileManager.saveTrip(SavedLocations.this, filename, trip);
+//            }
+//        } else {
+//            // save savedPlaces from shared pref to local storage
+//            trip.savedPlaces = new ArrayList<>(savedPlaces);
+//            FileManager.saveTrip(SavedLocations.this, filename, trip);
+//        }
         trip.savedPlaces = new ArrayList<>(savedPlaces);
         FileManager.saveTrip(SavedLocations.this, filename, trip);
+
+
 
         testOpeningHours();
 

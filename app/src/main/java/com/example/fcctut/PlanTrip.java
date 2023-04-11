@@ -22,7 +22,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
@@ -81,15 +83,25 @@ public class  PlanTrip extends AppCompatActivity {
 
                 SharedPreferences sharedPref = getSharedPreferences("fileNameSaver", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
+                // set current file we are looking at
                 editor.putString("currentFile", filename);
+
+                // save filename to a set of existing filename
+                Set<String> set = sharedPref.getStringSet("key", null);
+                if (set == null) {
+                    set = new HashSet<String>();
+                }
+                set.add(filename);
+                editor.putStringSet("existingFileSet", set);
+                editor.commit();
                 editor.apply();
+
+//                SharedPreferenceUtil.savePlaces(PlanTrip.this, new ArrayList<>());
 
                 Intent intent = new Intent(PlanTrip.this, newLocations.class);
                 startActivity(intent);
             }
         });
-
-
 
 
         // Initialize the Places API client
