@@ -1,8 +1,10 @@
 package com.example.fcctut;
 
+import android.content.Context;
 import static java.util.stream.Collectors.toSet;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -357,7 +359,8 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
         savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
 
         // save savedPlaces to local storage
-        String filename = "testtest.json";
+        SharedPreferences sharedPref = getSharedPreferences("fileNameSaver", Context.MODE_PRIVATE);
+        String filename = sharedPref.getString("currentFile", "");
         Trip trip = FileManager.getTrip(SavedLocations.this, filename);
         trip.savedPlaces = new ArrayList<>(savedPlaces);
         FileManager.saveTrip(SavedLocations.this, filename, trip);

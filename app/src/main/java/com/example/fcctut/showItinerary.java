@@ -1,6 +1,8 @@
 package com.example.fcctut;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -23,7 +25,6 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 import java.util.ArrayList;
 
@@ -72,6 +73,10 @@ public class showItinerary extends AppCompatActivity {
 
         // TODO: dynamically update filename
         Trip t = FileManager.getTrip(showItinerary.this, "final.json");
+       // TODO: dynamically update filename
+       SharedPreferences sharedPref = getSharedPreferences("fileNameSaver", Context.MODE_PRIVATE);
+       String filename = sharedPref.getString("currentFile", "");
+       Trip t = FileManager.getTrip(showItinerary.this, filename);
 //        t.saveToTripFile(showItinerary.this, "testing.json");
 //        FileManager.saveTrip();
 
@@ -190,3 +195,4 @@ public class showItinerary extends AppCompatActivity {
         }); // end of code for bottom NavBar
     } // end of OnCreate
 } // end of showItinerary Class
+
