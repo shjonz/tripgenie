@@ -199,11 +199,4 @@ public class PlacesSchedule {
         }
     }
 
-
-
-
-
-
-
-
 }
