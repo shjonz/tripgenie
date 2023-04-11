@@ -28,7 +28,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAddPlaceClickListener{
+public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAddPlaceClickListener {
 
     // Declare variables
     private RecyclerView recyclerView;
@@ -58,7 +58,7 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
             }
         });
 
-    // Initialize Places API client
+        // Initialize Places API client
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), BuildConfig.WEB_API_KEY);
         }
@@ -102,10 +102,6 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
                     case R.id.maps:
                         startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                         overridePendingTransition(0, 0);
@@ -119,8 +115,8 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.addLocation:
-                        startActivity(new Intent(getApplicationContext(), newLocations.class));
-                        overridePendingTransition(0, 0);
+//                        startActivity(new Intent(getApplicationContext(), newLocations.class));
+//                        overridePendingTransition(0, 0);
                         return true;
                 }
                 return false;
@@ -166,6 +162,7 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
             }
         });
     }
+
     private void addLocation() {
         String locationName = edtSearch.getText().toString().trim();
 
@@ -215,7 +212,6 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
         savedPlaces.add(place);
         SharedPreferenceUtil.savePlaces(this, savedPlaces);
     }
-
 
 
     // Method to get autocomplete predictions for a query

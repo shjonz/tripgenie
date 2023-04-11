@@ -1,6 +1,11 @@
 package com.example.fcctut;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,31 +17,48 @@ public class Place implements Comparable<Place> {
     @SerializedName("place_id")
     private String placeId;
 
-   private String locationName;
-
-   public Place(String locationName){
-       this.locationName=locationName;
-   }
-
-    // Getter method for place_id
-    public String getPlaceId() {
-        return placeId;
-    }
-
     // Serialized field for the place name
     @SerializedName("name")
     private String name;
 
-    // Serialized field for the place geometry (contains location data)
-    @SerializedName("geometry")
-    private Geometry geometry;
+    @SerializedName("address")
+    private String address;
 
     // Serialized field for the place popularity (rating)
     @SerializedName("rating")
     private double popularity;
 
     // Non-serialized field for the distance from the user's location
+    @SerializedName("distance")
     private double distance;
+
+    @SerializedName("placeOpeningHour")
+    private HashMap<String, String> placeOpeningHour;
+
+    @SerializedName("latitude")
+    private Double latitude;
+
+    @SerializedName("longitude")
+    private Double longitude;
+
+    @SerializedName("distanceFromPoint")
+    private int distanceFromPoint;
+
+    @SerializedName("durationFromPoint")
+    private int durationFromPoint;
+
+    @SerializedName("eatingPlace")
+    private boolean eatingPlace;
+
+    // Serialized field for the place geometry (contains location data)
+    @SerializedName("geometry")
+    private Geometry geometry;
+
+
+    // Getter method for place_id
+    public String getPlaceId() {
+        return placeId;
+    }
 
     // Getter methods
     public String getName() {
@@ -81,6 +103,10 @@ public class Place implements Comparable<Place> {
         @SerializedName("location")
         private Location location;
 
+        public Geometry(Location location) {
+            this.location = location;
+        }
+
         // Getter method for the location data
         public Location getLocation() {
             return location;
@@ -97,6 +123,11 @@ public class Place implements Comparable<Place> {
         @SerializedName("lng")
         private double longitude;
 
+        public Location(double latitude, double longitude) {
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
+
         // Getter method for the latitude value
         public double getLatitude() {
             return latitude;
@@ -107,18 +138,64 @@ public class Place implements Comparable<Place> {
             return longitude;
         }
     }
+
     // Used for the autocompletion  of the location in the New Locations page
     public Place(String placeId, String name, String address) {
         this.placeId = placeId;
         this.name = name;
         this.address = address;
     }
-    private String address;
+
+
+
     public String getAddress() {
         return address;
     }
 
-    // Serialized field for the place opening hours
+
+
+
+
+    // Used to initialise from saved Trip
+    public Place(String placeId, String name, String address, Double popularity) {
+        this.placeId = placeId;
+        this.name = name;
+        this.address = address;
+        this.popularity = popularity;
+    }
+
+    // Used for testing
+    public Place(String placeId, String name, String address, Double popularity, Double latitude, Double longitude, int distanceFromPoint, int durationFromPoint) {
+        this.placeId = placeId;
+        this.name = name;
+        this.address = address;
+        this.popularity = popularity;
+        this.geometry = new Geometry(new Location(latitude, longitude));
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.distanceFromPoint = 20;
+        this.durationFromPoint = 10;
+        this.placeOpeningHour = new HashMap<String, String>();
+        this.eatingPlace = false;
+    }
+
+    // returns all attributes in Place object as a JSONObject
+    // currently used to store all information in Trip.java
+    public JSONObject getAllAttributes() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("placeId", getPlaceId());
+            json.put("name", getName());
+            json.put("address", getAddress());
+            json.put("popularity", getPopularity());
+            json.put("latitude", getGeometry().getLocation().getLatitude());
+            json.put("longitude", getGeometry().getLocation().getLongitude());
+            return json;
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @SerializedName("opening_hours")
     private OpeningHours openingHours;
 
@@ -164,4 +241,13 @@ public class Place implements Comparable<Place> {
         }
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        if (getGeometry() == null) {
+            return "placeId: " + placeId + ", name: " + name + ", address: " + address + ", popularity: " + popularity;
+        } else {
+            return "placeId: " + placeId + ", name: " + name + ", address: " + address + ", popularity: " + popularity + ", (lat,long): (" + getGeometry().getLocation().getLatitude() + "," + getGeometry().getLocation().getLongitude() + ")";
+        }
+    }
 }
