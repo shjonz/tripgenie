@@ -24,6 +24,7 @@ import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class  PlanTrip extends AppCompatActivity {
     private DatePickerDialog startDatePickerDialog; // A DatePickerDialog object for selecting the start date of the trip
@@ -34,6 +35,7 @@ public class  PlanTrip extends AppCompatActivity {
     private AutocompleteSessionToken sessionToken; // A session token to be used when making requests to the Places API
     private AutoCompleteTextView edtCitySearch; // An AutoCompleteTextView for searching cities
     private Button startplanningbutton; //button to go to add new locations page
+    private TextInputLayout txtInputField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +48,16 @@ public class  PlanTrip extends AppCompatActivity {
         startDateButton.setText(getTodaysDate()); // Set the text of the start date button to today's date
         endDateButton.setText(getTodaysDate()); // Set the text of the end date button to today's date
         startplanningbutton=findViewById(R.id.startplanningbutton); //Get a reference to the button for
+        txtInputField = findViewById(R.id.txtInputField);
 
         startplanningbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String cityName = txtInputField.getEditText().getText().toString();
+                String startDate = startDateButton.getText().toString();
+                String endDate = endDateButton.getText().toString();
+                Trip trip = new Trip(cityName, startDate, endDate);
+                FileManager.saveTrip(PlanTrip.this, "final.json", trip);
                 Intent intent = new Intent(PlanTrip.this, newLocations.class);
                 startActivity(intent);
             }

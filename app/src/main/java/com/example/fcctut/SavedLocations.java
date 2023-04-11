@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import android.util.Log;
@@ -49,6 +50,13 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 
         // Fetch saved places from SharedPreferences
         savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
+
+        // save savedPlaces to local storage
+        String filename = "testtest.json";
+        Trip trip = FileManager.getTrip(SavedLocations.this, filename);
+        trip.savedPlaces = new ArrayList<>(savedPlaces);
+        FileManager.saveTrip(SavedLocations.this, filename, trip);
+
         testOpeningHours();
 
         // Initialize the RecyclerView
