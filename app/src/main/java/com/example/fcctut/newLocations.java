@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +38,7 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
     private AutoCompleteTextView edtSearch;
     private BottomNavigationView bottomNavigationView;
     private SearchSuggestionAdapter searchSuggestionAdapter;
+    private Place selectedPlace;
 
     Button addButton;
 
@@ -92,10 +92,9 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
             // When an item in the dropdown list is clicked, set the text in the AutoCompleteTextView to the place name
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Place place = (Place) parent.getItemAtPosition(position);
-                edtSearch.setText(place.getName());
+                selectedPlace = (Place) parent.getItemAtPosition(position);
+                edtSearch.setText(selectedPlace.getName());
             }
-            // TODO Retrieve the place in this search bar and listen for clicker of the add places button and send Place Name to Saved Places Page
         });
 
         // Initialize bottom navigation view and set item selected listener
@@ -142,8 +141,8 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
 
 
                 // Set city coordinates and fetch places using Places API helper class
-                double cityLatitude = 40.7128;
-                double cityLongitude = -74.0060;
+                double cityLatitude = 37.5519;
+                double cityLongitude = 126.9918;
 
                 PlacesApiHelper.fetchPlaces(cityLatitude, cityLongitude, 50000, "tourist_attraction", "prominence", BuildConfig.WEB_API_KEY, new PlacesApiHelper.PlacesApiCallback() {
                     @Override
@@ -171,23 +170,31 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
         String locationName = edtSearch.getText().toString().trim();
 
         if (!locationName.isEmpty()) {
-            // Find the place object matching the locationName in the search suggestions
-            Place selectedPlace = null;
-            for (Place place : searchSuggestionAdapter.getPlaces()) {
-                if (place.getName().equalsIgnoreCase(locationName)) {
-                    selectedPlace = place;
-                    break;
-                }
-            }
-
             if (selectedPlace != null) {
-                // Save the selected place to shared preferences
+                // Get the current saved places from shared preferences
                 List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
-                savedPlaces.add(selectedPlace);
-                SharedPreferenceUtil.savePlaces(this, savedPlaces);
 
-                // Clear the text in the edtSearch field
-                edtSearch.getText().clear();
+                // Check if the place is already saved
+                boolean placeAlreadySaved = false;
+                for (Place savedPlace : savedPlaces) {
+                    if (savedPlace.getPlaceId().equals(selectedPlace.getPlaceId())) {
+                        placeAlreadySaved = true;
+                        break;
+                    }
+                }
+
+                if (!placeAlreadySaved) {
+                    // Save the selected place to shared preferences
+                    savedPlaces.add(selectedPlace);
+                    SharedPreferenceUtil.savePlaces(this, savedPlaces);
+
+                    // Clear the text in the edtSearch field and reset the selectedPlace
+                    edtSearch.getText().clear();
+                    selectedPlace = null;
+                } else {
+                    // Show a message to the user if the place is already saved
+                    Toast.makeText(newLocations.this, "This location has already been saved", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 // Show a message to the user if the input is not in the search suggestions
                 Toast.makeText(newLocations.this, "Please select a valid location from the suggestions", Toast.LENGTH_SHORT).show();
@@ -197,6 +204,8 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
             Toast.makeText(newLocations.this, "Please enter a location", Toast.LENGTH_SHORT).show();
         }
     }
+
+
     @Override
     public void onAddPlaceClick(int position) {
         // Get the current place
