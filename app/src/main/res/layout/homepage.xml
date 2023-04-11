@@ -115,12 +115,14 @@
                     <TextView
                         android:id="@+id/countries"
                         android:layout_width="197dp"
+                        android:layout_marginTop="7dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="90dp"
                         android:text="Hokkaido"
                         android:textColor="@android:color/black"
                         android:textSize="40dp"
                         android:textStyle="bold" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -300,6 +302,12 @@
                         android:layout_width="49dp"
                         android:layout_height="164dp"
                         android:src="@drawable/profileimage" />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/koreacircle"/>
+
 
 
                 </FrameLayout>

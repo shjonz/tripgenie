@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -77,6 +78,7 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
     private AutoCompleteTextView edtSearch;
     private BottomNavigationView bottomNavigationView;
     private SearchSuggestionAdapter searchSuggestionAdapter;
+    private Place selectedPlace;
 
     Button addButton;
 
@@ -139,6 +141,7 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                 }
 
+
                 // Call getAutocompletePredictions method after text changed
                 @Override
                 public void afterTextChanged(Editable s) {
@@ -181,6 +184,83 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
 //                            startActivity(new Intent(getApplicationContext(), newLocations.class));
 //                            overridePendingTransition(0, 0);
                             return true;
+
+            // Call getAutocompletePredictions method after text changed
+            @Override
+            public void afterTextChanged(Editable s) {
+                getAutocompletePredictions(s.toString());
+            }
+        });
+
+        edtSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            // When an item in the dropdown list is clicked, set the text in the AutoCompleteTextView to the place name
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedPlace = (Place) parent.getItemAtPosition(position);
+                edtSearch.setText(selectedPlace.getName());
+            }
+        });
+
+        // Initialize bottom navigation view and set item selected listener
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.maps:
+                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.itinerary:
+                        startActivity(new Intent(getApplicationContext(), showItinerary.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.savedLocations:
+                        startActivity(new Intent(getApplicationContext(), SavedLocations.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.addLocation:
+                        startActivity(new Intent(getApplicationContext(), newLocations.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        // Initialize RecyclerView and set adapter
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, R.drawable.simple_divider));
+
+        // Initialize button and set click listener to fetch places
+        Button getSuggestionsButton = findViewById(R.id.getSuggestionsButton);
+        getSuggestionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Get coordinates of city from Plan Trip Page and override this hardcoded coordinates
+
+
+                // Set city coordinates and fetch places using Places API helper class
+                double cityLatitude = 37.5519;
+                double cityLongitude = 126.9918;
+
+                PlacesApiHelper.fetchPlaces(cityLatitude, cityLongitude, 50000, "tourist_attraction", "prominence", BuildConfig.WEB_API_KEY, new PlacesApiHelper.PlacesApiCallback() {
+                    @Override
+                    public void onPlacesFetched(List<Place> places) {
+                        // Update UI with fetched places
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                placeAdapter = new PlaceAdapter(newLocations.this, places, newLocations.this);
+                                recyclerView.setAdapter(placeAdapter);
+                                Log.d("newLocations", "Places fetched: " + places.size());
+                            }
+                        });
+
                     }
                     return false;
                 }
@@ -268,6 +348,7 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
                         selectedPlace = place;
                         break;
                     }
+
                 }
                 if (selectedPlace != null) {
                     // Save the selected place to shared preferences
@@ -329,6 +410,41 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
                 // If adapter is null, create new adapter and set it to AutoCompleteTextView
                 searchSuggestionAdapter = new SearchSuggestionAdapter(newLocations.this, places);
                 edtSearch.setAdapter(searchSuggestionAdapter);
+
+                });
+            }
+        });
+    }
+    private void addLocation() {
+        String locationName = edtSearch.getText().toString().trim();
+
+        if (!locationName.isEmpty()) {
+            if (selectedPlace != null) {
+                // Get the current saved places from shared preferences
+                List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
+
+                // Check if the place is already saved
+                boolean placeAlreadySaved = false;
+                for (Place savedPlace : savedPlaces) {
+                    if (savedPlace.getPlaceId().equals(selectedPlace.getPlaceId())) {
+                        placeAlreadySaved = true;
+                        break;
+                    }
+                }
+
+                if (!placeAlreadySaved) {
+                    // Save the selected place to shared preferences
+                    savedPlaces.add(selectedPlace);
+                    SharedPreferenceUtil.savePlaces(this, savedPlaces);
+
+                    // Clear the text in the edtSearch field and reset the selectedPlace
+                    edtSearch.getText().clear();
+                    selectedPlace = null;
+                } else {
+                    // Show a message to the user if the place is already saved
+                    Toast.makeText(newLocations.this, "This location has already been saved", Toast.LENGTH_SHORT).show();
+                }
+
             } else {
                 // If adapter exists, clear old data and add new data, then notify adapter
                 searchSuggestionAdapter.clear();
@@ -337,6 +453,20 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
             }
         }
     }
+
+
+
+    @Override
+    public void onAddPlaceClick(int position) {
+        // Get the current place
+        Place place = placeAdapter.places.get(position);
+        // Save the place to shared preferences
+        List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
+        savedPlaces.add(place);
+        SharedPreferenceUtil.savePlaces(this, savedPlaces);
+    }
+
+
 
 
 
