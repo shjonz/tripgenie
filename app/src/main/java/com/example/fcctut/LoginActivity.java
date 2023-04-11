@@ -50,6 +50,9 @@ public class LoginActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView;
 
 
+        BottomNavigationView bottomNavigationView;
+
+
         // storing email in shared preferences
         sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -99,6 +102,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
+    }//end of OnCreate
 
     }//end of OnCreate
         });//end of google sign in
@@ -225,6 +231,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+
+
+//end of login activity class
+
+
+ //end of login activity class
 
  //end of login activity class
 //end of login activity class

@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
+
 public class ProfileActivity2 extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -46,6 +47,7 @@ public class ProfileActivity2 extends AppCompatActivity {
     TextView name;
 
     DatabaseReference databaseReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +116,8 @@ public class ProfileActivity2 extends AppCompatActivity {
 
         name = findViewById(R.id.name);
 //        sharedPreferences=getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        profilephoto = findViewById(R.id.profilephoto);
+        logoutbutton = findViewById(R.id.logoutbutton);
         profilephoto = findViewById(R.id.profilephoto);
         logoutbutton = findViewById(R.id.logoutbutton);
         profilephoto = findViewById(R.id.profilephoto);
@@ -202,7 +206,6 @@ public class ProfileActivity2 extends AppCompatActivity {
 
 
 
-
 } //end of ProfileActivity class
 
 
@@ -233,7 +236,8 @@ public class ProfileActivity2 extends AppCompatActivity {
 //                    }
 //                });
 //
-//    }
+
+
 
 //    public void onBtnClick (View view) {
 //        //class obj_name

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".newLocations">
 
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -43,12 +44,18 @@
             android:id="@+id/edtSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            android:hint="Search by name or address"
-            android:textSize="16dp"
-            android:background="@null"/>
+            android:hint="Search for a place"
+            android:completionThreshold="1"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
 
     </LinearLayout>
 
@@ -62,6 +69,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/red" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -89,6 +97,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="30dp" />
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"

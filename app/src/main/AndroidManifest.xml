@@ -36,11 +36,18 @@
 
             android:name=".showItinerary"
             android:exported="true" />
+
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
         <activity
             android:name=".RecommendationsActivity"
+            android:exported="true" />
+
+
+
+
             android:exported="true" />
 
 
@@ -66,7 +73,10 @@
 
 
 
-            android:exported="false" />
+            android:exported="true" />
+
+
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -96,10 +106,18 @@
 
 
             android:exported="true" />
+
         <activity
             android:name=".newLocations"
 
             android:name=".LoginActivity"
+            android:exported="true">
+
+        </activity>
+            android:name=".newLocations"
+
+        <activity
+            android:name=".SavedLocations"
             android:exported="true">
 
         </activity>
