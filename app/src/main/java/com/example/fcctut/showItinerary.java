@@ -25,111 +25,96 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class showItinerary extends AppCompatActivity {
-    RecyclerView itineraryList;
-    TextView txtViewStartDate;
-    TextView txtViewEndDate;
-    RecyclerView recyclerViewDates;
-    private BottomNavigationView bottomNavigationView;
-    private Button homebutton;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_itinerary);
+   RecyclerView itineraryList;
+   TextView txtViewStartDate;
+   TextView txtViewEndDate;
+   RecyclerView recyclerViewDates;
+   private BottomNavigationView bottomNavigationView;
+   private Button homebutton;
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_show_itinerary);
 
-        Trip tt = new Trip(5, "Hokkaido", "26 Mar", "30 Mar");
-        tt.days.get(0).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
-        tt.days.get(0).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
+       homebutton=findViewById(R.id.homeButton);
+       homebutton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent intent = new Intent(showItinerary.this,ProfileActivity2.class);
+               startActivity(intent);
+           }
+       });
 
-        tt.days.get(1).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
-        tt.days.get(1).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
-        tt.days.get(1).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
+       itineraryList = findViewById(R.id.itineraryList);
+       txtViewStartDate = findViewById(R.id.txtViewStartDate);
+       txtViewEndDate = findViewById(R.id.txtViewEndDate);
+       recyclerViewDates = findViewById(R.id.recyclerViewDates);
 
-        tt.days.get(2).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
-
-        tt.days.get(3).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
-
-        tt.days.get(4).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
-
-        FileManager.saveTrip(showItinerary.this, "testtest.json", tt);
-
-        homebutton=findViewById(R.id.homeButton);
-        homebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(showItinerary.this,ProfileActivity2.class);
-                startActivity(intent);
-            }
-        });
-
-        itineraryList = findViewById(R.id.itineraryList);
-        txtViewStartDate = findViewById(R.id.txtViewStartDate);
-        txtViewEndDate = findViewById(R.id.txtViewEndDate);
-        recyclerViewDates = findViewById(R.id.recyclerViewDates);
-
-        // TODO: dynamically update filename
-        Trip t = FileManager.getTrip(showItinerary.this, "testtest.json");
+       // TODO: dynamically update filename
+       Trip t = FileManager.getTrip(showItinerary.this, "testtest.json");
 //        t.saveToTripFile(showItinerary.this, "testing.json");
 //        FileManager.saveTrip();
 
-        txtViewStartDate.setText(t.startDate);
-        txtViewEndDate.setText(t.endDate);
+       txtViewStartDate.setText(t.startDate);
+       txtViewEndDate.setText(t.endDate);
 
-        Log.d("testing Trip", t.days.get(0).get(0).toString());
+       Log.d("testing Trip", t.days.get(0).get(0).toString());
 
-        // Lookup the recyclerview in activity layout
-        RecyclerView rvPlaces = (RecyclerView) findViewById(R.id.itineraryList);
+       // Lookup the recyclerview in activity layout
+       RecyclerView rvPlaces = (RecyclerView) findViewById(R.id.itineraryList);
 
-        // Display on recycler view
-        ArrayList<Place> places = t.days.get(0);
+       // Display on recycler view
+       ArrayList<Place> places = t.days.get(0);
 
 //        places.add(new Place("id", "name", "address", 0.0)); //TODO: change this to take dynamic data
 //        places.add(new Place("id1", "name1", "address1", 1.0));
-        // Create adapter passing in the sample user data
-        ItineraryListViewAdapter adapter = new ItineraryListViewAdapter(places);
-        // Attach the adapter to the recyclerview to populate items
-        rvPlaces.setAdapter(adapter);
-        // Set layout manager to position the items
-        rvPlaces.setLayoutManager(new LinearLayoutManager(this));
+       // Create adapter passing in the sample user data
+       ItineraryListViewAdapter adapter = new ItineraryListViewAdapter(places);
+       // Attach the adapter to the recyclerview to populate items
+       rvPlaces.setAdapter(adapter);
+       // Set layout manager to position the items
+       rvPlaces.setLayoutManager(new LinearLayoutManager(this));
 
-        // Lookup the recyclerview in activity layout
-        RecyclerView rvDates = (RecyclerView) findViewById(R.id.recyclerViewDates);
+       // Lookup the recyclerview in activity layout
+       RecyclerView rvDates = (RecyclerView) findViewById(R.id.recyclerViewDates);
 
-        // Create adapter passing in the sample user data
-        RecyclerViewDatesItemAdapter adapterDate = new RecyclerViewDatesItemAdapter(t.days);
-        // Attach the adapter to the recyclerview to populate items
-        rvDates.setAdapter(adapterDate);
-        // Set layout manager to position the items
-        rvDates.setLayoutManager(new LinearLayoutManager(this));
+       // Create adapter passing in the sample user data
+       RecyclerViewDatesItemAdapter adapterDate = new RecyclerViewDatesItemAdapter(t.days);
+       // Attach the adapter to the recyclerview to populate items
+       rvDates.setAdapter(adapterDate);
+       // Set layout manager to position the items
+       rvDates.setLayoutManager(new LinearLayoutManager(this));
 
-        //code for bottom NavBar
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+       //code for bottom NavBar
+       bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                //get id of item in navbar to switch to
-                switch (item.getItemId()) {
-                    case R.id.maps:
+       bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+           @Override
+           public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+               //get id of item in navbar to switch to
+               switch (item.getItemId()) {
+                   case R.id.maps:
 //                        Toast.makeText(MainActivity.this,"Loading Maps",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
+                       startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                       overridePendingTransition(0, 0);
+                       return true;
 
-                    case R.id.addLocation:
-                        startActivity(new Intent(getApplicationContext(), newLocations.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.itinerary:
+                   case R.id.addLocation:
+                       startActivity(new Intent(getApplicationContext(), newLocations.class));
+                       overridePendingTransition(0, 0);
+                       return true;
+                   case R.id.itinerary:
 
-                        return true;
-                    case R.id.savedLocations:
-                        startActivity(new Intent(getApplicationContext(), SavedLocations.class));
-                        overridePendingTransition(0, 0);
-                        return true;
+                       return true;
+                   case R.id.savedLocations:
+                       startActivity(new Intent(getApplicationContext(), SavedLocations.class));
+                       overridePendingTransition(0, 0);
+                       return true;
 
-                }
-                return false;
-            }
-        }); // end of code for bottom NavBar
-    } // end of OnCreate
+               }
+               return false;
+           }
+       }); // end of code for bottom NavBar
+   } // end of OnCreate
 } // end of showItinerary Class
+

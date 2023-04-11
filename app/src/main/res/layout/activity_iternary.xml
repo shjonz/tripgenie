@@ -1,47 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:context=".IternaryActivity"
-    android:orientation="horizontal"
-    >
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   tools:context=".IternaryActivity"
+   android:orientation="horizontal"
+   >
+   <Button
+       android:id="@+id/btn_to_searchforplaces"
+       android:layout_width="wrap_content"
+       android:layout_height="67dp"
+       android:text = "add places"
+       />
 
-    <Button
-        android:id="@+id/btn_to_searchforplaces"
-        android:layout_width="wrap_content"
-        android:layout_height="67dp"
-        android:text = "add places"
+   <ListView
+       android:id="@+id/placesListView"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="1dp"
+       android:layout_marginEnd="1dp"
+       android:layout_marginBottom="1dp"
+       android:layout_below = "@id/btn_to_searchforplaces"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.0"
+       app:layout_constraintStart_toStartOf="@id/btn_to_searchforplaces"
+       app:layout_constraintTop_toBottomOf="@+id/btn_to_searchforplaces"
         />
 
-    <ListView
-        android:id="@+id/placesListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:layout_below = "@id/btn_to_searchforplaces"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/btn_to_searchforplaces"
-        app:layout_constraintTop_toBottomOf="@+id/btn_to_searchforplaces"
-         />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemBackground="@color/white"
-        app:itemIconTint="@color/bnv_tab_item_foreground"
-        app:itemTextColor="@color/bnv_tab_item_foreground"
-        app:labelVisibilityMode="labeled">
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+   <com.google.android.material.bottomnavigation.BottomNavigationView
+       android:id="@+id/bottomNavigationView"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:menu="@menu/bottom_nav_menu"
+       app:itemBackground="@color/white"
+       app:itemIconTint="@color/bnv_tab_item_foreground"
+       app:itemTextColor="@color/bnv_tab_item_foreground"
+       app:labelVisibilityMode="labeled">
+   </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
 <!--        android:id="@+id/bottomNavigationView"-->
@@ -58,5 +57,5 @@
 
 
 
-
 </LinearLayout>
+
