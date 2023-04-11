@@ -957,15 +957,18 @@ public class IternaryActivity extends AppCompatActivity {
 
 
                             context.shutdown();
-                            return_array_of_clusers.add(iternarySchedule);
+                            //return_array_of_clusers.add(iternarySchedule);
 
 
                         }
 
+                        return_array_of_clusers.add(iternarySchedule);
+
                     }
 
                     for (int i = 0; i < return_array_of_clusers.size(); i++) {
-                        System.out.println(return_array_of_clusers.get(i).toString());
+
+                        System.out.println(return_array_of_clusers.get(i).toString() + "iteration: " + i);
                         //for (int j = 0; j < return_array_of_clusers.get(i).size(); j++) {
                         //System.out.println(return_array_of_clusers.get(i).get(j).address);
                         //}
@@ -1029,10 +1032,10 @@ public class IternaryActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
 
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
+//                    case R.id.home:
+//                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
                     case R.id.maps:
                         startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                         overridePendingTransition(0, 0);
