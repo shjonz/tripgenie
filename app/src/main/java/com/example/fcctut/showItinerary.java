@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import java.util.ArrayList;
 
 public class showItinerary extends AppCompatActivity {
@@ -31,10 +33,24 @@ public class showItinerary extends AppCompatActivity {
     RecyclerView recyclerViewDates;
     private BottomNavigationView bottomNavigationView;
     private Button homebutton;
+    private Spinner dropdown;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_itinerary);
+
+
+        dropdown = findViewById(R.id.datedropdown);
+
+        // Create an ArrayAdapter using a string array resource and a default spinner layout
+        ArrayAdapter<CharSequence> Adapter = ArrayAdapter.createFromResource(this, R.array.day_array, android.R.layout.simple_spinner_item);
+
+        // Specify the layout to use when the list of choices appears
+        Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Apply the adapter to the spinner
+        dropdown.setAdapter(Adapter);
+
 
         homebutton=findViewById(R.id.homeButton);
         homebutton.setOnClickListener(new View.OnClickListener() {
