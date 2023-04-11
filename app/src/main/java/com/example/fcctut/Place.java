@@ -3,10 +3,20 @@ package com.example.fcctut;
 import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.maps.DirectionsApi;
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.errors.ApiException;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.DirectionsRoute;
+import com.google.maps.model.GeocodingResult;
+import com.google.maps.model.TravelMode;
+import com.google.maps.model.Unit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,12 +45,6 @@ public class Place implements Comparable<Place> {
     @SerializedName("placeOpeningHour")
     private HashMap<String, String> placeOpeningHour;
 
-    @SerializedName("latitude")
-    private Double latitude;
-
-    @SerializedName("longitude")
-    private Double longitude;
-
     @SerializedName("distanceFromPoint")
     private int distanceFromPoint;
 
@@ -53,6 +57,49 @@ public class Place implements Comparable<Place> {
     // Serialized field for the place geometry (contains location data)
     @SerializedName("geometry")
     private Geometry geometry;
+
+    @SerializedName("latitude")
+    private Double latitude;
+
+    @SerializedName("longitude")
+    private Double longitude;
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+
+
+    public int getDistanceFromPoint() {
+        return distanceFromPoint;
+    }
+
+    public void setDistanceFromPoint(String origin) {
+        calc_Dist_two_places(origin);
+
+    }
+
+    public int getDurationFromPoint() {
+        return durationFromPoint;
+    }
+
+    public void setDurationFromPoint(int durationFromPoint) {
+        this.durationFromPoint = durationFromPoint;
+    }
+
+
 
 
     // Getter method for place_id
@@ -79,6 +126,8 @@ public class Place implements Comparable<Place> {
 
     // Setter method for the distance field
     public void setDistance(double distance) {
+
+
         this.distance = distance;
     }
 
@@ -146,10 +195,62 @@ public class Place implements Comparable<Place> {
         this.address = address;
     }
 
+    public Place(String addr) {
+    try {
+        GeoApiContext context = new GeoApiContext.Builder()
+                .apiKey(BuildConfig.WEB_API_KEY)
+                .build();
+        //GeocodingResult[] results = GeocodingApi.reverseGeocode(context, new LatLng(place.lat, place.lng)).await();
+        GeocodingResult[] results = GeocodingApi.geocode(context, addr).await();
+        if (results.length > 0) {
+            this.placeId = results[0].placeId;
+            this.address = results[0].formattedAddress;
+            this.latitude = results[0].geometry.location.lat;
+            this.longitude = results[0].geometry.location.lng;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        }
+    }
+
 
 
     public String getAddress() {
         return address;
+    }
+
+
+
+    public void calc_Dist_two_places(String origin) {
+        try {
+            System.out.println("origin to this address: " + origin + " to " + this.address);
+            GeoApiContext context = new GeoApiContext.Builder()
+                    .apiKey(BuildConfig.WEB_API_KEY)
+                    .build();
+            DirectionsResult result =
+                    DirectionsApi.newRequest(context)
+                            .mode(TravelMode.TRANSIT)
+                            .units(Unit.METRIC)
+                            .origin(origin)
+                            .destination(this.address)
+                            .await();
+
+            DirectionsRoute route = result.routes[0];
+            System.out.println("inside calc dist " + route);
+            long durationInSecs = route.legs[0].duration.inSeconds;
+            long distanceInMeters = route.legs[0].distance.inMeters;
+            this.durationFromPoint = Math.toIntExact(durationInSecs);
+            this.distanceFromPoint = Math.toIntExact(distanceInMeters);
+            System.out.println("calc_dist_two_places origin: " + origin
+                    + " origin to address " + this.address+ " dist " + this.distanceFromPoint + " duration " + this.durationFromPoint);
+            context.shutdown();
+        } catch (ApiException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

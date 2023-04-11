@@ -162,7 +162,7 @@ public class PlacesApiHelper {
                 .addQueryParameter("key", apiKey)
                 .addQueryParameter("fields", "place_id,name,geometry,rating,opening_hours") //fields parameter
                 .build();
-        Log.d("PlacesApiHelper", "Request URL: " + url.toString());
+        Log.d("PlacesApiHelper", "==============Request URL: " + url.toString());
 
         // Create and enqueue the API request.
         Request request = new Request.Builder()
