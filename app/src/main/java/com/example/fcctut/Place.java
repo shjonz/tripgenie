@@ -123,45 +123,39 @@ public class Place implements Comparable<Place> {
 
     // Nested class to represent the opening and closing hours of a place
     public static class OpeningHours {
-        // Serialized field for the weekday hours
         @SerializedName("weekday_text")
         private List<String> weekdayText;
 
-        // Getter method for the weekday hours
         public List<String> getWeekdayText() {
             return weekdayText;
         }
 
-        // Method to get opening and closing hours for each day of the week
-        public Map<String, String[]> getOpeningClosingHours() {
-            // Create a map to store the opening and closing hours for each day of the week
-            Map<String, String[]> openingClosingHours = new HashMap<>();
+        public Map<String, String> getOpeningHours() {
+            return extractHours(0);
+        }
 
-            // Loop through the weekdayText list which contains the opening hours string for each day
+        public Map<String, String> getClosingHours() {
+            return extractHours(1);
+        }
+
+        private Map<String, String> extractHours(int index) {
+            Map<String, String> hoursMap = new HashMap<>();
+
             for (String dayHours : weekdayText) {
-                // Split the dayHours string into two parts at the first occurrence of ": "
-                // The first part will be the day of the week, and the second part will be the hours
                 String[] parts = dayHours.split(": ", 2);
                 String dayOfWeek = parts[0];
                 String hours = parts[1];
 
-                // If the hours string is "Closed", the place is closed for the entire day
                 if (hours.equalsIgnoreCase("Closed")) {
-                    // Store "Closed" for both opening and closing hours in the map
-                    openingClosingHours.put(dayOfWeek, new String[] { "Closed", "Closed" });
+                    hoursMap.put(dayOfWeek, "Closed");
                 } else {
-                    // Otherwise, split the hours string at " – " to get the opening and closing hours
                     String[] timeRange = hours.split(" – ");
-                    // Store the opening and closing hours in the map with the dayOfWeek as the key
-                    openingClosingHours.put(dayOfWeek, timeRange);
+                    hoursMap.put(dayOfWeek, timeRange[index]);
                 }
             }
 
-            // Return the map containing the opening and closing hours for each day of the week
-            return openingClosingHours;
+            return hoursMap;
         }
     }
-    //Result is the a map where the key is the day of the week and the value is an array containing the opening and closing hours
-
 
 }
