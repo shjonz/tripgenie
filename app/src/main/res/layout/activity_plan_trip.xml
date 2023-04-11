@@ -14,12 +14,14 @@
         android:gravity="center"
         android:text="Plan a New Trip"
         android:textColor="#DF6666"
-        android:textSize="45sp" />
+        android:textSize="45sp"
+        android:textStyle="bold"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="300sp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:hint="Input country"
         android:layout_marginTop="15sp">
 
         <AutoCompleteTextView
@@ -81,7 +83,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/startplanningbutton"
         android:layout_width="270sp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

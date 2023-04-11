@@ -16,6 +16,16 @@
         android:backgroundTint="#Df6666"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <TextView
+        android:id="@+id/profilephototext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:layout_gravity="center"
+        android:text="@string/changeprofilephoto"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -30,16 +40,16 @@
             android:shape="ring" />
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/changeprofilebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:text="@string/changeprofilephoto"
-        android:textSize="16sp"
-        android:padding="15dp"
-        android:background="@drawable/roundcornerprofile"/>
+<!--    <Button-->
+<!--        android:id="@+id/changeprofilebutton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:text="@string/changeprofilephoto"-->
+<!--        android:textSize="16sp"-->
+<!--        android:padding="15dp"-->
+<!--        android:background="@drawable/roundcornerprofile"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="46dp"
-            android:text="@string/changeusername"
+            android:text="Change Username"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -59,23 +69,23 @@
             android:id="@+id/editTextChangeUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="46dp"
             android:ems="10"
             android:hint="@string/changeusername"
             android:inputType="textPersonName" />
+    </LinearLayout>
 
 
     <Button
         android:id="@+id/savebutton"
         android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/plus"
-        android:textSize="34sp"
-        android:backgroundTint="@color/white"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Done"
+        android:textSize="20sp"
+        android:background="@drawable/rounded_corners"
+    />
 
-    </LinearLayout>
 
 </LinearLayout>
 

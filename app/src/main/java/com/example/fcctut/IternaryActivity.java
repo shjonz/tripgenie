@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.toSet;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Point;
 import android.net.Uri;
@@ -120,6 +121,8 @@ public class IternaryActivity extends AppCompatActivity {
 
 
 
+
+    private Button homebutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1692,10 +1695,10 @@ public class IternaryActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
+//                    case R.id.home:
+//                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
                     case R.id.maps:
                         startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                         overridePendingTransition(0, 0);

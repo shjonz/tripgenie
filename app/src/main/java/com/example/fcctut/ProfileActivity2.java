@@ -1,13 +1,10 @@
 package com.example.fcctut;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -24,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,8 +32,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.example.fcctut.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.jar.Attributes;
 
 public class ProfileActivity2 extends AppCompatActivity {
     SharedPreferences sharedPreferences;
@@ -54,10 +53,59 @@ public class ProfileActivity2 extends AppCompatActivity {
 
     DatabaseReference databaseReference;
 
+    private ActivityMainBinding binding; //for bottom navar, to interact with views
+    private BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);//setting to activity main file this java class related to activity main layout file.
+
+        //code for bottom NavBar
+//        bottomNavigationView =findViewById(R.id.bottomNavigationView);
+//        bottomNavigationView.setSelectedItemId(R.id.home);
+//
+//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                //get id of item in navbar to switch to
+//                int itemId = item.getItemId();
+////                System.out.println("Id of item clicked: "+itemId);
+////                System.out.println(R.id.maps+" is the maps R.id");
+//                if (itemId==0){
+//                    Toast.makeText(ProfileActivity2.this, "Please add inputs", Toast.LENGTH_LONG).show();
+//                }
+//                switch (item.getItemId()) {
+//                    case R.id.home:
+//                        return true;
+//                    case R.id.maps:
+////                        Toast.makeText(MainActivity.this,"Loading Maps",Toast.LENGTH_LONG).show();
+//                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//
+//                    case R.id.addLocation:
+//                        startActivity(new Intent(getApplicationContext(), newLocations.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                    case R.id.itinerary:
+//                        startActivity(new Intent(getApplicationContext(), showItinerary.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+//                    case R.id.savedLocations:
+//                        startActivity(new Intent(getApplicationContext(), SavedLocations.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
+////                    case R.id.addPlacesWorking:
+////                        startActivity(new Intent(getApplicationContext(), AddPlacesWorking.class));
+////                        overridePendingTransition(0, 0);
+////                        return true;
+//
+//
+//                }
+//                return false;
+//            }
+//        }); // end of code for bottom NavBar
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userUID = user.getUid();
@@ -72,32 +120,10 @@ public class ProfileActivity2 extends AppCompatActivity {
                 }
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
-
-
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                String name = snapshot.getValue(String.class);
-//                TextView username=findViewById(R.id.name);
-//                username.setText(name);
-//            }
-
-
-
         sharedPreferences=getSharedPreferences("MyPreferences",MODE_PRIVATE);
         editor=sharedPreferences.edit();
-
-
-        //storing username into database
-//        name=findViewById(R.id.name);
-//        //get instance of firebase database
-//        databaseReference=firebaseDatabase.getReference("User");
-//        //Initialize class variable
-//        user= new User();
 
         //to access plan trip page
         addtripbutton = findViewById(R.id.addtripbutton);
@@ -123,6 +149,8 @@ public class ProfileActivity2 extends AppCompatActivity {
 //        sharedPreferences=getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
         profilephoto = findViewById(R.id.profilephoto);
         logoutbutton = findViewById(R.id.logoutbutton);
+        profilephoto = findViewById(R.id.profilephoto);
+        logoutbutton = findViewById(R.id.logoutbutton);
         //getting username from google
         name=findViewById(R.id.name);
         profilephoto=findViewById(R.id.profilephoto);
@@ -133,11 +161,8 @@ public class ProfileActivity2 extends AppCompatActivity {
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
-        GoogleSignInAccount account=GoogleSignIn.getLastSignedInAccount(this);
-//        if (account!=null){
-//            name.setText(account.getDisplayName());
-//            profilephoto.setImageURI(account.getPhotoUrl());
-//        }//end of getting username from google
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
 
         //to logout to login activity
         logoutbutton=findViewById(R.id.logoutbutton);
@@ -149,17 +174,24 @@ public class ProfileActivity2 extends AppCompatActivity {
                 Signout();
             }
         });//end of logout button
-
-
     } //end of onCreate function
-
-    public void showUserData() {
-        Intent intent = getIntent();
-
-        String nameUser = intent.getStringExtra("name");
-
-        name.setText(nameUser);
+    private void Signout() {
+        googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+            }
+        });
     }
+
+//    public void showUserData() {
+//        Intent intent = getIntent();
+//
+//        String nameUser = intent.getStringExtra("name");
+//
+//        name.setText(nameUser);
+//    }
 
 //    private void addDatatoFirebase(String name){
 //        user.setName(name);
@@ -175,16 +207,6 @@ public class ProfileActivity2 extends AppCompatActivity {
 //        });
 //    }
 
-    private void Signout() {
-        googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
-
-            }
-        });
-    }
 
     //            String username = name.getText().toString();
 //
@@ -198,6 +220,8 @@ public class ProfileActivity2 extends AppCompatActivity {
 //                            }
 //                        }
 //                    });
+
+
 
 
 } //end of ProfileActivity class
@@ -247,30 +271,6 @@ public class ProfileActivity2 extends AppCompatActivity {
 //        txtLastName.setText("Last Name: "+edtLastName.getText().toString());
 //        txtEmail.setText("Email: "+editEmail.getText().toString());
 //    }
-
-//            String username = name.getText().toString();
-//
-//            User user = new User(username);
-//            FirebaseDatabase.getInstance().getReference("Users")
-//                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            if (task.isSuccessful()) {
-//                                finish();
-//                            }
-//                        }
-//                    });
-
-//    private void addDatatoFirebase(String name){
-//        user.setName(name);
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                databaseReference.setValue(user);
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
+//        if (account!=null){
+//            name.setText(account.getDisplayName());
+//            profilephoto.setImageURI(account.getPhotoUrl());
