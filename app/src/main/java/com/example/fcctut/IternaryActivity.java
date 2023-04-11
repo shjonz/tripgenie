@@ -862,6 +862,7 @@ public class IternaryActivity extends AppCompatActivity {
                     });
 
                     ArrayList<ArrayList<Place>> return_array_of_clusers = new ArrayList<ArrayList<Place>>();
+                    ArrayList<Place> saved_Places = new ArrayList<Place>();
 
                     System.out.println("array_array_of_clusters" + array_array_of_clusters.size() );
                     for (int i = 0; i < array_array_of_clusters.size(); i++) {
@@ -903,6 +904,12 @@ public class IternaryActivity extends AppCompatActivity {
                             System.out.println(new_place.getAddress() + " " + new_place.getLongitude() + " lat " + new_place.getLatitude());
                             new_place.calc_Dist_two_places(origin);
                             locations_data.add(new_place);
+                            if (!saved_Places.contains(new_place)) {
+                                saved_Places.add(new_place);
+                                System.out.println(new_place.getAddress() + " has been added to the ArrayList.");
+                            } else {
+                                System.out.println(new_place.getAddress() + " is already present in the ArrayList.");
+                            }
                             System.out.println(" =========== check place: " + new_place.getPlaceId() + " " +
                                     new_place.getAddress() + " " + new_place.getDurationFromPoint() + " " +
                                     new_place.getLongitude() + " " + new_place.getDistanceFromPoint() );
@@ -967,13 +974,18 @@ public class IternaryActivity extends AppCompatActivity {
                     }
 
                     for (int i = 0; i < return_array_of_clusers.size(); i++) {
-
                         System.out.println(return_array_of_clusers.get(i).toString() + "iteration: " + i);
-                        //for (int j = 0; j < return_array_of_clusers.get(i).size(); j++) {
-                        //System.out.println(return_array_of_clusers.get(i).get(j).address);
-                        //}
-
                     }
+
+                    System.out.println("saved_places array " + saved_Places.size() + " everything " + saved_Places.toString());
+
+
+                    Trip trip = FileManager.getTrip(IternaryActivity.this, "final.json");
+                    trip.days = return_array_of_clusers;
+                    trip.savedPlaces = saved_Places;
+                    FileManager.saveTrip(IternaryActivity.this, "final.json", trip);
+
+
 
 
 

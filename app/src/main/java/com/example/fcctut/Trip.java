@@ -26,6 +26,7 @@ public class Trip {
     Double latitude;
     @SerializedName("longitude")
     Double longitude;
+
     @SerializedName("days")
     public ArrayList<ArrayList<Place>> days;
     @SerializedName("savedPlaces")
