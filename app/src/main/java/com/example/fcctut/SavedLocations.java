@@ -3,6 +3,9 @@ package com.example.fcctut;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +22,7 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
     private RecyclerView savedLocationsRecyclerView; // RecyclerView to display the saved locations
     private SavedPlacesAdapter savedPlacesAdapter; // Custom adapter to display saved locations
     private List<Place> savedPlaces; // List of Place objects representing saved locations
+    private Button homebutton;
 
     // Called when the activity is starting
     @Override
@@ -26,6 +30,15 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
         super.onCreate(savedInstanceState);
         // Set the layout for this activity
         setContentView(R.layout.saved_locations);
+
+        homebutton = findViewById(R.id.homepagebutton);
+        homebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SavedLocations.this, ProfileActivity2.class);
+                startActivity(intent);
+            }
+        });
 
         // Fetch saved places from SharedPreferences
         savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
@@ -53,12 +66,12 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 // Handle navigation item selection
                 switch (item.getItemId()) {
-                    case R.id.home:
-                        // Navigate to MainActivity
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        // Apply transition animation
-                        overridePendingTransition(0, 0);
-                        return true;
+////                    case R.id.home:
+////                        // Navigate to MainActivity
+////                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                        // Apply transition animation
+//                        overridePendingTransition(0, 0);
+//                        return true;
                     case R.id.maps:
                         // Navigate to MapsActivity
                         startActivity(new Intent(getApplicationContext(), MapsActivity.class));
@@ -69,6 +82,10 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
                         // Navigate to showItinerary activity
                         startActivity(new Intent(getApplicationContext(), showItinerary.class));
                         // Apply transition animation
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.addLocation:
+                        startActivity(new Intent(getApplicationContext(), newLocations.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.savedLocations:
