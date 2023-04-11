@@ -1,151 +1,354 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ProfileActivity2">
-
-    <Button
-        android:id="@+id/logoutbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:backgroundTint="@color/white"
-        android:text="@string/Logout" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="350dp"
-        android:layout_height="90dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:baselineAligned="false"
-        android:text="@string/your_trips"
-        android:textColor="#Df6666"
-        android:textSize="70sp"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:shape="ring"
-                app:cardCornerRadius="75dp">
-
-                <ImageView
-                    android:id="@+id/profilephoto"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:shape="ring"
-                    android:background="@drawable/blankprofilepic" />
-
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:orientation="vertical"
+   tools:context=".ProfileActivity2">
 
 
+   <Button
+       android:id="@+id/logoutbutton"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:backgroundTint="@color/white"
+       android:layout_gravity="end"
+       android:text="@string/Logout" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+   <TextView
+       android:id="@+id/textView2"
+       android:layout_width="350dp"
+       android:layout_height="90dp"
+       android:text="@string/your_trips"
+       android:layout_gravity="center"
+       android:textAlignment="center"
+       android:textColor="#Df6666"
+       android:textSize="70sp"
+       android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="0dp"
-                android:baselineAligned="false"
-                android:text="john_doe"
-                android:textAlignment="center"
-                android:layout_gravity="center"
-                android:paddingTop="4sp"
-                android:textColor="@android:color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:gravity="center"
+       android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/edituserButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/editicon" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center"
+           android:orientation="vertical">
 
-        </LinearLayout>
+           <androidx.cardview.widget.CardView
+               android:layout_width="150dp"
+               android:layout_height="150dp"
+               android:shape="ring"
+               app:cardCornerRadius="75dp">
 
-    </LinearLayout>
+               <ImageView
+                   android:id="@+id/profilephoto"
+                   android:layout_width="150dp"
+                   android:layout_height="150dp"
+                   android:background="@drawable/profilepic"
+                   android:shape="ring" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="275dp">
+           </androidx.cardview.widget.CardView>
+       </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-            <LinearLayout
-                android:id="@+id/firstLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="10dp"
+           android:gravity="center"
+           android:orientation="horizontal">
 
-                <FrameLayout
-                    android:layout_width="320dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent">
+           <TextView
+               android:id="@+id/name"
+               android:layout_width="100dp"
+               android:layout_height="30dp"
+               android:baselineAligned="false"
+               android:paddingTop="5sp"
+               android:text="@string/SetUsername"
+               android:textAlignment="center"
+               android:textColor="@android:color/black"
+               android:textSize="15sp"
+               android:textStyle="bold" />
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="0dp"
-                        android:background="@drawable/countrybutton"/>
+           <ImageButton
+               android:id="@+id/edituserButton"
+               android:layout_width="25dp"
+               android:layout_height="25dp"
+               android:background="@drawable/editlogo" />
 
-                    <TextView
-                        android:id="@+id/countries"
-                        android:layout_width="197dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="90dp"
-                        android:text="Hokkaido"
-                        android:textColor="@android:color/black"
-                        android:textSize="40dp"
-                        android:textStyle="bold" />
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/koreacircle"/>
+       </LinearLayout>
+
+   </LinearLayout>
+
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_marginTop="5dp"
+       android:layout_height="350dp">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+
+           <LinearLayout
+               android:id="@+id/firstLayout"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+               <FrameLayout
+                   android:layout_width="320dp"
+                   android:layout_height="70dp"
+                   android:layout_gravity="center"
+                   android:background="@android:color/transparent">
+
+                   <Button
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_margin="0dp"
+                       android:background="@drawable/countrybutton" />
+
+                   <TextView
+                       android:id="@+id/countries"
+                       android:layout_width="197dp"
+                       android:layout_marginTop="7dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="90dp"
+                       android:text="Hokkaido"
+                       android:textColor="@android:color/black"
+                       android:textSize="40dp"
+                       android:textStyle="bold" />
 
 
-                </FrameLayout>
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="90dp"
+                       android:layout_marginTop="45dp"
+                       android:text="with Mary Jane and 2 others"
+                       android:textColor="@android:color/black" />
 
-            </LinearLayout>
+                   <ImageView
+                       android:layout_width="50dp"
+                       android:layout_height="match_parent"
+                       android:src="@drawable/profileimage" />
 
-        </LinearLayout>
+
+               </FrameLayout>
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/thirdLayout"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+               <FrameLayout
+                   android:layout_width="320dp"
+                   android:layout_height="70dp"
+                   android:layout_gravity="center"
+                   android:background="@android:color/transparent">
+
+                   <Button
+                       android:id="@+id/secondcountry"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_margin="0dp"
+                       android:background="@drawable/countrybutton" />
+
+                   <TextView
+                       android:id="@+id/countries3"
+                       android:layout_width="197dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="90dp"
+                       android:layout_marginTop="0dp"
+                       android:text="Paris"
+                       android:textColor="@android:color/black"
+                       android:textSize="40dp"
+                       android:textStyle="bold" />
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="90dp"
+                       android:layout_marginTop="45dp"
+                       android:text="with Mary Jane and 2 others"
+                       android:textColor="@android:color/black" />
+
+                   <ImageView
+                       android:layout_width="50dp"
+                       android:layout_height="match_parent"
+                       android:src="@drawable/profileimage" />
 
 
-    </ScrollView>
+               </FrameLayout>
 
-    <Button
-        android:id="@+id/addtripbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/addbutton"
-        android:onClick="addtripbutton"
-        android:text="+"
-        android:textSize="34sp" />
+           </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/fourthLayout"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+               <FrameLayout
+                   android:layout_width="320dp"
+                   android:layout_height="80dp"
+                   android:layout_gravity="center"
+                   android:background="@android:color/transparent">
+
+                   <Button
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_margin="0dp"
+                       android:background="@drawable/countrybutton" />
+
+                   <TextView
+                       android:id="@+id/countries4"
+                       android:layout_width="197dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="90dp"
+                       android:layout_marginTop="0dp"
+                       android:text="Countries"
+                       android:textColor="@android:color/black"
+                       android:textSize="40dp"
+                       android:textStyle="bold" />
+
+                   <ImageView
+                       android:layout_width="50dp"
+                       android:layout_height="match_parent"
+                       android:src="@drawable/profileimage" />
+
+
+               </FrameLayout>
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/fifthLayout"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+               <FrameLayout
+                   android:layout_width="320dp"
+                   android:layout_height="80dp"
+                   android:layout_gravity="center"
+                   android:background="@android:color/transparent">
+
+                   <Button
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_margin="0dp"
+                       android:backgroundTint="@android:color/transparent"
+                       tools:ignore="VisualLintOverlap" />
+
+                   <TextView
+                       android:id="@+id/countries5"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_marginStart="90dp"
+                       android:layout_marginTop="0dp"
+                       android:text="Countries"
+                       android:textColor="@android:color/black"
+                       android:textSize="40dp"
+                       android:textStyle="bold" />
+
+                   <ImageView
+                       android:layout_width="50dp"
+                       android:layout_height="match_parent"
+                       android:src="@drawable/profileimage" />
+
+
+               </FrameLayout>
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/secondLayout"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+               <FrameLayout
+                   android:layout_width="320dp"
+                   android:layout_height="80dp"
+                   android:layout_gravity="center"
+                   android:background="@android:color/transparent">
+
+                   <Button
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_margin="0dp"
+                       android:backgroundTint="@android:color/transparent" />
+
+                   <TextView
+                       android:id="@+id/countries2"
+                       android:layout_width="197dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="90dp"
+                       android:layout_marginTop="0dp"
+                       android:text="Countries"
+                       android:textColor="@android:color/black"
+                       android:textSize="40dp"
+                       android:textStyle="bold" />
+
+                   <ImageView
+                       android:layout_width="49dp"
+                       android:layout_height="164dp"
+                       android:src="@drawable/profileimage" />
+
+                   <ImageView
+                       android:layout_width="50dp"
+                       android:layout_height="match_parent"
+                       android:src="@drawable/koreacircle"/>
+
+
+
+               </FrameLayout>
+
+           </LinearLayout>
+
+       </LinearLayout>
+
+   </ScrollView>
+
+
+   <Button
+       android:id="@+id/addtripbutton"
+       android:layout_width="150dp"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="50dp"
+       android:layout_gravity="center"
+       android:background="@drawable/addbutton"
+       android:onClick="addtripbutton"
+       android:text="Add Trip"
+       android:textSize="20sp" />
+
+
+
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottomNavigationView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:menu="@menu/bottom_nav_menu"-->
+<!--        app:itemBackground="@color/white"-->
+<!--        app:itemIconTint="@color/bnv_tab_item_foreground"-->
+<!--        app:itemTextColor="@color/bnv_tab_item_foreground">-->
+<!--    </com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
 </LinearLayout>
+
+
+
+
+

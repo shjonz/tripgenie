@@ -77,10 +77,12 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.5.0' //added for bottom navbar
 
+
     //to use google developers tools such as directionsapi
     implementation 'com.google.maps:google-maps-services:2.1.2'
     implementation 'org.slf4j:slf4j-simple:1.7.25'
     implementation 'com.google.appengine:appengine-api-1.0-sdk:2.0.12'
+
 
 
 }
