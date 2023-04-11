@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +29,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class newLocations extends AppCompatActivity {
+public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAddPlaceClickListener{
 
     // Declare variables
     private RecyclerView recyclerView;
@@ -38,12 +40,25 @@ public class newLocations extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private SearchSuggestionAdapter searchSuggestionAdapter;
 
+    Button addButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_locations);
+        addButton = findViewById(R.id.addButton);
+        edtSearch = findViewById(R.id.edtSearch);
 
-        // Initialize Places API client
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // This is where you'll handle the button click event
+                addLocation();
+            }
+        });
+
+    // Initialize Places API client
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), BuildConfig.WEB_API_KEY);
         }
@@ -125,6 +140,7 @@ public class newLocations extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO Get coordinates of city from Plan Trip Page and override this hardcoded coordinates
 
+
                 // Set city coordinates and fetch places using Places API helper class
                 double cityLatitude = 40.7128;
                 double cityLongitude = -74.0060;
@@ -136,7 +152,7 @@ public class newLocations extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                placeAdapter = new PlaceAdapter(places);
+                                placeAdapter = new PlaceAdapter(newLocations.this, places, newLocations.this);
                                 recyclerView.setAdapter(placeAdapter);
                                 Log.d("newLocations", "Places fetched: " + places.size());
                             }
@@ -151,6 +167,47 @@ public class newLocations extends AppCompatActivity {
             }
         });
     }
+    private void addLocation() {
+        String locationName = edtSearch.getText().toString().trim();
+
+        if (!locationName.isEmpty()) {
+            // Find the place object matching the locationName in the search suggestions
+            Place selectedPlace = null;
+            for (Place place : searchSuggestionAdapter.getPlaces()) {
+                if (place.getName().equalsIgnoreCase(locationName)) {
+                    selectedPlace = place;
+                    break;
+                }
+            }
+
+            if (selectedPlace != null) {
+                // Save the selected place to shared preferences
+                List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
+                savedPlaces.add(selectedPlace);
+                SharedPreferenceUtil.savePlaces(this, savedPlaces);
+
+                // Clear the text in the edtSearch field
+                edtSearch.getText().clear();
+            } else {
+                // Show a message to the user if the input is not in the search suggestions
+                Toast.makeText(newLocations.this, "Please select a valid location from the suggestions", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            // Show a message to the user if the input is empty
+            Toast.makeText(newLocations.this, "Please enter a location", Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    public void onAddPlaceClick(int position) {
+        // Get the current place
+        Place place = placeAdapter.places.get(position);
+        // Save the place to shared preferences
+        List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
+        savedPlaces.add(place);
+        SharedPreferenceUtil.savePlaces(this, savedPlaces);
+    }
+
+
 
     // Method to get autocomplete predictions for a query
     private void getAutocompletePredictions(String query) {

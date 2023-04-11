@@ -57,7 +57,9 @@ public class SearchSuggestionAdapter extends ArrayAdapter<Place> implements Filt
         // Return the view to be displayed.
         return convertView;
     }
-
+    public List<Place> getPlaces() {
+        return placesFiltered;
+    }
     // Overridden method that specifies the filter used to display search suggestions.
     @NonNull
     @Override
@@ -89,6 +91,8 @@ public class SearchSuggestionAdapter extends ArrayAdapter<Place> implements Filt
                 // Return the filter results.
                 return filterResults;
             }
+
+
 
             // This method is called in the UI thread and updates the view with the filtered data.
             @SuppressWarnings("unchecked")
