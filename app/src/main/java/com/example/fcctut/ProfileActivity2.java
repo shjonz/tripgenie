@@ -2,7 +2,6 @@ package com.example.fcctut;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,8 +31,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.example.fcctut.databinding.ActivityMainBinding;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 
@@ -43,25 +40,19 @@ public class ProfileActivity2 extends AppCompatActivity {
     ImageButton androidImageButton;
     ImageView profilephoto;
     Button logoutbutton;
-
-    Uri url;
     GoogleSignInOptions googleSignInOptions;
     GoogleSignInClient googleSignInClient;
     Button addtripbutton;
-
-    //for storing into database
     TextView name;
-
     DatabaseReference databaseReference;
-
-    private ActivityMainBinding binding; //for bottom navar, to interact with views
-    private BottomNavigationView bottomNavigationView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);//setting to activity main file this java class related to activity main layout file.
+
+        sharedPreferences = getSharedPreferences("MyPreferences", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userUID = user.getUid();
@@ -76,11 +67,9 @@ public class ProfileActivity2 extends AppCompatActivity {
                 }
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
-        sharedPreferences=getSharedPreferences("MyPreferences",MODE_PRIVATE);
-        editor=sharedPreferences.edit();
-
         //to access plan trip page
         addtripbutton = findViewById(R.id.addtripbutton);
         addtripbutton.setOnClickListener(new View.OnClickListener() {
@@ -102,28 +91,20 @@ public class ProfileActivity2 extends AppCompatActivity {
         });//end of edit user icon
 
         name = findViewById(R.id.name);
-//        sharedPreferences=getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-        profilephoto = findViewById(R.id.profilephoto);
-        logoutbutton = findViewById(R.id.logoutbutton);
-        profilephoto = findViewById(R.id.profilephoto);
-        logoutbutton = findViewById(R.id.logoutbutton);
         profilephoto = findViewById(R.id.profilephoto);
         logoutbutton = findViewById(R.id.logoutbutton);
         //getting username from google
-        name=findViewById(R.id.name);
-        profilephoto=findViewById(R.id.profilephoto);
+        name = findViewById(R.id.name);
+        profilephoto = findViewById(R.id.profilephoto);
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
-
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-
-
         //to logout to login activity
-        logoutbutton=findViewById(R.id.logoutbutton);
+        logoutbutton = findViewById(R.id.logoutbutton);
         logoutbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,6 +114,7 @@ public class ProfileActivity2 extends AppCompatActivity {
             }
         });//end of logout button
     } //end of onCreate function
+
     private void Signout() {
         googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -142,93 +124,5 @@ public class ProfileActivity2 extends AppCompatActivity {
             }
         });
     }
+}
 
-//    public void showUserData() {
-//        Intent intent = getIntent();
-//
-//        String nameUser = intent.getStringExtra("name");
-//
-//        name.setText(nameUser);
-//    }
-
-//    private void addDatatoFirebase(String name){
-//        user.setName(name);
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                databaseReference.setValue(user);
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
-
-
-    //            String username = name.getText().toString();
-//
-//            User user = new User(username);
-//            FirebaseDatabase.getInstance().getReference("Users")
-//                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            if (task.isSuccessful()) {
-//                                finish();
-//                            }
-//                        }
-//                    });
-
-
-
-} //end of ProfileActivity class
-
-
-
- //end of ProfileActivity class
-
-
-//    private void uploadData(String username){
-//        FirebaseAuth auth = FirebaseAuth.getInstance();
-//        User user = new User(username);
-//        FirebaseDatabase.getInstance().getReference("Users")
-//                .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()){
-//                            String uid = user.getUid();
-//                            String name = user.getDisplayName();
-//                            String email = user.getEmail();
-//
-//                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-//                            DatabaseReference usersRef = database.getReference("users");
-//
-//                            DatabaseReference newUserRef = usersRef.child(uid);
-//                            newUserRef.child("name").setValue(name);
-//                            newUserRef.child("email").setValue(email);
-//                            finish();
-//                        }
-//                    }
-//                });
-//
-
-
-
-//    public void onBtnClick (View view) {
-//        //class obj_name
-//        TextView txtFirstName = findViewById(R.id.firstname); //this is to find diff views/diff UIs elements from yr layout files
-//        //R stands for resources (our static files in our project) txtMessage is the id in our layout xml file.
-//        TextView txtLastName = findViewById(R.id.lastname);
-//        TextView txtEmail = findViewById(R.id.email);
-//
-//        EditText editEmail = findViewById(R.id.editemail);
-//        EditText edtLastName = findViewById(R.id.editlastname);
-//        EditText edtFirstName = findViewById(R.id.editFirstName);
-//
-//        txtFirstName.setText("First Name: "+edtFirstName.getText().toString() );
-//        txtLastName.setText("Last Name: "+edtLastName.getText().toString());
-//        txtEmail.setText("Email: "+editEmail.getText().toString());
-//    }
-//        if (account!=null){
-//            name.setText(account.getDisplayName());
-//            profilephoto.setImageURI(account.getPhotoUrl());
