@@ -160,7 +160,7 @@ public class PlacesApiHelper {
                 .addQueryParameter("placeid", placeId)
                 .addQueryParameter("key", apiKey)
                 .build();
-        Log.d("PlacesApiHelper", "Request URL: " + url.toString());
+        Log.d("PlacesApiHelper", "==============Request URL: " + url.toString());
 
         // Create and enqueue the API request.
         Request request = new Request.Builder()

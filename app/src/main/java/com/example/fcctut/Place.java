@@ -64,6 +64,8 @@ public class Place implements Comparable<Place> {
         }
     }
 
+
+
     // Nested class to represent the geometry of a place
     public static class Geometry {
         // Serialized field for the location data (latitude and longitude)

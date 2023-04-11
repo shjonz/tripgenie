@@ -35,7 +35,7 @@ public class RecommendationsActivity extends AppCompatActivity {
         Log.d("RecommendationsActivity", "Longitude: " + currentLongitude);
 
         // Get the API key from the resources.
-        String apiKey = BuildConfig.MAPS_API_KEY;
+        String apiKey = BuildConfig.WEB_API_KEY;
         Log.d("RecommendationsActivity", apiKey);
 
         // Fetch and display recommendations based on the user's location.
