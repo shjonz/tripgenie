@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fcctut.databinding.ActivityMainBinding;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.maps.model.LatLng;
@@ -37,6 +38,8 @@ import java.util.List;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import java.util.List;
 
 public class newLocations extends AppCompatActivity {
@@ -50,10 +53,21 @@ public class newLocations extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private SearchSuggestionAdapter searchSuggestionAdapter;
 
+    private Button homebutton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_locations);
+
+        homebutton=findViewById(R.id.homepagebutton);
+        homebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(newLocations.this,ProfileActivity2.class);
+                startActivity(intent);
+            }
+        });
 
         // Initialize Places API client
         if (!Places.isInitialized()) {
@@ -100,10 +114,10 @@ public class newLocations extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
+//                    case R.id.home:
+//                        startActivity(new Intent(getApplicationContext(), ProfileActivity2.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
                     case R.id.maps:
                         startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                         overridePendingTransition(0, 0);
@@ -117,8 +131,8 @@ public class newLocations extends AppCompatActivity {
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.addLocation:
-                        startActivity(new Intent(getApplicationContext(), newLocations.class));
-                        overridePendingTransition(0, 0);
+//                        startActivity(new Intent(getApplicationContext(), newLocations.class));
+//                        overridePendingTransition(0, 0);
                         return true;
                 }
                 return false;

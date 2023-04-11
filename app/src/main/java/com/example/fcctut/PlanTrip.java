@@ -3,6 +3,7 @@ package com.example.fcctut;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,7 +25,7 @@ import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
-public class PlanTrip extends AppCompatActivity {
+public class  PlanTrip extends AppCompatActivity {
     private DatePickerDialog startDatePickerDialog; // A DatePickerDialog object for selecting the start date of the trip
     private DatePickerDialog endDatePickerDialog; // A DatePickerDialog object for selecting the end date of the trip
     private Button startDateButton; // The button that displays the selected start date
@@ -32,6 +33,7 @@ public class PlanTrip extends AppCompatActivity {
     private PlacesClient placesClient; // A PlacesClient object to make calls to the Places API
     private AutocompleteSessionToken sessionToken; // A session token to be used when making requests to the Places API
     private AutoCompleteTextView edtCitySearch; // An AutoCompleteTextView for searching cities
+    private Button startplanningbutton; //button to go to add new locations page
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,15 @@ public class PlanTrip extends AppCompatActivity {
         endDateButton = findViewById(R.id.endDateButton); // Get a reference to the button for selecting the end date
         startDateButton.setText(getTodaysDate()); // Set the text of the start date button to today's date
         endDateButton.setText(getTodaysDate()); // Set the text of the end date button to today's date
+        startplanningbutton=findViewById(R.id.startplanningbutton); //Get a reference to the button for
+
+        startplanningbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PlanTrip.this, newLocations.class);
+                startActivity(intent);
+            }
+        });
 
         // Initialize the Places API client
         if (!Places.isInitialized()) {

@@ -85,7 +85,6 @@ public class EditUserPage extends AppCompatActivity {
                             Intent data = result.getData();
                             Uri photoUri = data.getData();
                             uploadImage.setImageURI(photoUri);
-
 //                            try {
 //                                bitmap = MediaStore.Images.Media.getBitmap(
 //                                        EditUserPage.this.getContentResolver(),
@@ -93,7 +92,6 @@ public class EditUserPage extends AppCompatActivity {
 //                                );
 //
 //                            }
-
                         } else {
                             Toast.makeText(EditUserPage.this, "No Image Selected", Toast.LENGTH_SHORT).show();
                         }

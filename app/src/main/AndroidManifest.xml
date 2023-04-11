@@ -29,12 +29,6 @@
             android:parentActivityName=".ProfileActivity2" />
         <activity
             android:name=".GoogleLoginActivity"
-            android:exported="true"/>
-        <activity
-            android:name=".GoogleLoginActivity"
-
-
-            android:name=".showItinerary"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
@@ -43,15 +37,11 @@
             android:name=".RecommendationsActivity"
             android:exported="true" />
 
-
-
-
         <activity
             android:name=".AddPlaces"
             android:exported="true">
-
-
         </activity>
+
         <activity
             android:name=".CustomIternaryView"
             android:exported="true" />
@@ -60,12 +50,10 @@
             android:exported="true" />
         <activity
 
-            android:name=".LoginActivity"
+            android:name=".SavedLocations"
             android:exported="true" />
+        <activity
             android:name=".newLocations"
-
-
-
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -94,31 +82,19 @@
             android:name=".ProfileActivity2"
             android:exported="false" />
 
-
-            android:exported="true" />
         <activity
-            android:name=".newLocations"
-
             android:name=".LoginActivity"
-            android:exported="true">
-
-        </activity>
-
-        <activity
-            android:name=".SavedLocations"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 <!--        <activity
             android:name=".AddPlacesWorking"
             android:exported="false">
 
         </activity>-->
-
         <activity
             android:name=".showItinerary"
             android:exported="true">

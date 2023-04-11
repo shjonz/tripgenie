@@ -46,24 +46,23 @@ public class SavedLocations extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
+//                    case R.id.home:
+//                        startActivity(new Intent(getApplicationContext(), ProfileActivity2.class));
+//                        overridePendingTransition(0, 0);
+//                        return true;
                     case R.id.maps:
                         startActivity(new Intent(getApplicationContext(), MapsActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
-//                    case R.id.addLocation:
-//                        startActivity(new Intent(getApplicationContext(), newLocations.class));
-//                        overridePendingTransition(0, 0);
-//                        return true;
+                    case R.id.addLocation:
+                        startActivity(new Intent(getApplicationContext(), newLocations.class));
+                        overridePendingTransition(0, 0);
+                        return true;
                     case R.id.itinerary:
                         startActivity(new Intent(getApplicationContext(), showItinerary.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.savedLocations:
-
                         return true;
                 }
                 return false;

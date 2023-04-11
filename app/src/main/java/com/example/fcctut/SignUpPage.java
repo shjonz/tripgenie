@@ -35,7 +35,6 @@ public class SignUpPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up_page);
 
-
         logintext = findViewById(R.id.logintext);
         inputEmail = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPassword);
@@ -59,8 +58,6 @@ public class SignUpPage extends AppCompatActivity {
             }
         });
     }
-
-
     private void PerforAuth() {
         String email=inputEmail.getText().toString();
         String password=inputPassword.getText().toString();
