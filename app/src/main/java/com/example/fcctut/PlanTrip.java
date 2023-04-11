@@ -1,7 +1,5 @@
 package com.example.fcctut;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +12,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
@@ -24,6 +20,10 @@ import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class  PlanTrip extends AppCompatActivity {
     private DatePickerDialog startDatePickerDialog; // A DatePickerDialog object for selecting the start date of the trip
@@ -34,6 +34,10 @@ public class  PlanTrip extends AppCompatActivity {
     private AutocompleteSessionToken sessionToken; // A session token to be used when making requests to the Places API
     private AutoCompleteTextView edtCitySearch; // An AutoCompleteTextView for searching cities
     private Button startplanningbutton; //button to go to add new locations page
+
+    int startDay;
+    int endDay;
+    int k;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +106,9 @@ public class  PlanTrip extends AppCompatActivity {
         DatePickerDialog.OnDateSetListener startDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                startDay = day;
+                System.out.println(startDay);
+                Log.d("startDay", String.valueOf(startDay));
                 month = month + 1;
                 String date = makeDateString(day, month, year);
                 startDateButton.setText(date);
@@ -112,6 +119,8 @@ public class  PlanTrip extends AppCompatActivity {
         DatePickerDialog.OnDateSetListener endDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                endDay = day;
+                System.out.println("ENDDDDDD DAAYYYYYYYYYY"+endDay);
                 month = month + 1;
                 String date = makeDateString(day, month, year);
                 endDateButton.setText(date);
@@ -127,6 +136,9 @@ public class  PlanTrip extends AppCompatActivity {
         // Create the start and end date picker dialogs
         startDatePickerDialog = new DatePickerDialog(this, startDateSetListener, year, month, day);
         endDatePickerDialog = new DatePickerDialog(this, endDateSetListener, year, month, day);
+
+        k = endDay - startDay;
+        System.out.println(k);
     }
 
     private String makeDateString(int day, int month, int year) {
@@ -162,17 +174,23 @@ public class  PlanTrip extends AppCompatActivity {
                 return "Dec";
             default:
                 return "Jan";
+
+
+
+
         }
     }
 
     public void openStartDatePicker(View view) {
         // Display the start date picker dialog
         startDatePickerDialog.show();
+        System.out.println(startDay);
     }
 
     public void openEndDatePicker(View view) {
         // Display the end date picker dialog
         endDatePickerDialog.show();
+        System.out.println(endDay);
     }
 
     private void getAutocompletePredictions(String query) {

@@ -66,7 +66,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Trip to Hokkaido"
+            android:text="Trip to Seoul"
             android:textColor="@color/white"
             android:textSize="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -100,6 +100,8 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <!--    day picker-->
     <androidx.recyclerview.widget.RecyclerView
