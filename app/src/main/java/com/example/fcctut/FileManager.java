@@ -3,6 +3,8 @@ package com.example.fcctut;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -99,6 +101,18 @@ public class FileManager {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public static void saveTrip(Context ctx, String filename, Trip trip) {
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(trip);
+        FileManager.writeToFile(ctx, filename, jsonString);
+    }
+
+    public static Trip getTrip(Context ctx, String filename) {
+        String jsonString = FileManager.readFromFile(ctx,filename);
+        Gson gson = new Gson();
+        return gson.fromJson(jsonString, Trip.class);
     }
 
 }

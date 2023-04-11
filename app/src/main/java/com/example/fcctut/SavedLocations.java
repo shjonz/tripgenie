@@ -74,12 +74,6 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 // Handle navigation item selection
                 switch (item.getItemId()) {
-////                    case R.id.home:
-////                        // Navigate to MainActivity
-////                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                        // Apply transition animation
-//                        overridePendingTransition(0, 0);
-//                        return true;
                     case R.id.maps:
                         // Navigate to MapsActivity
                         startActivity(new Intent(getApplicationContext(), MapsActivity.class));
@@ -133,13 +127,13 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 
 }
 
-        for (String day : openingHoursMap.keySet()) {
-            Log.d("OpeningHours", day + ": Opening - " + openingHoursMap.get(day) + ", Closing - " + closingHoursMap.get(day));
-            Log.d("Opening Time",openingHoursMap.get(day));
-            Log.d("Closing Time",closingHoursMap.get(day));
-        }
+//        for (String day : openingHoursMap.keySet()) {
+//            Log.d("OpeningHours", day + ": Opening - " + openingHoursMap.get(day) + ", Closing - " + closingHoursMap.get(day));
+//            Log.d("Opening Time",openingHoursMap.get(day));
+//            Log.d("Closing Time",closingHoursMap.get(day));
+//        }
     }
-}
+
 
 
 
