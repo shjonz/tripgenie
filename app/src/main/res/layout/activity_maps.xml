@@ -20,12 +20,12 @@
     <!-- SearchView for searching locations on the map -->
     <SearchView
         android:id="@+id/search_view_location"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:queryHint="Search..."
         android:iconifiedByDefault="false"
         android:textColor="#FFFFFF"
-        android:layout_margin="16dp"
+        android:layout_margin="12dp"
         android:textStyle="bold"
         android:elevation="5dp" />
 

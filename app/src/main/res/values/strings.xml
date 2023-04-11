@@ -34,22 +34,6 @@
     </string-array>
 
 
-    <string-array name="places_details_addresses">
-        <item>Address1</item>
-        <item>Address2</item>
-        <item>Address3</item>
-        <item>Address4</item>
-
-    </string-array>
-
-    <string-array name="places_details_opening_hours">
-        <item>Opening Hours 1</item>
-        <item>Opening Hours 2</item>
-        <item>Opening Hours 3</item>
-        <item>Opening Hours 4</item>
-
-
-    </string-array>
 
 
     <!-- Strings used for login page -->

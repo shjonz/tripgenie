@@ -65,7 +65,7 @@
             <TextView
                 android:id="@+id/name"
                 android:layout_width="100dp"
-                android:layout_height="28dp"
+                android:layout_height="30dp"
                 android:baselineAligned="false"
                 android:paddingTop="5sp"
                 android:text="@string/SetUsername"
