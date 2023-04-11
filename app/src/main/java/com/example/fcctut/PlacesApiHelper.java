@@ -53,8 +53,9 @@ public class PlacesApiHelper {
                 .addQueryParameter("location", String.format("%f,%f", latitude, longitude))
                 .addQueryParameter("radius", String.valueOf(radius))
                 .addQueryParameter("type", placetype)
-                .addQueryParameter("rankby", rankBy) // Add rankBy parameter
+                .addQueryParameter("rankby", rankBy) // rankBy parameter
                 .addQueryParameter("key", apiKey)
+                .addQueryParameter("fields", "place_id,name,geometry,rating,opening_hours") // fields parameter
                 .build();
 
         Log.d("PlacesApiHelper", "Request URL: " + url.toString());
@@ -159,6 +160,7 @@ public class PlacesApiHelper {
         HttpUrl url = HttpUrl.parse(API_BASE_URL).newBuilder()
                 .addQueryParameter("placeid", placeId)
                 .addQueryParameter("key", apiKey)
+                .addQueryParameter("fields", "place_id,name,geometry,rating,opening_hours") //fields parameter
                 .build();
         Log.d("PlacesApiHelper", "==============Request URL: " + url.toString());
 
