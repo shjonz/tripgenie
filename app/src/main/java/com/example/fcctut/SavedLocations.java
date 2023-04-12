@@ -56,6 +56,22 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
                 startActivity(intent);
             }
         });
+//
+//        Trip tt = new Trip(5, "Hokkaido", "26 Mar", "30 Mar");
+//        tt.days.get(0).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
+//        tt.days.get(0).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
+//
+//        tt.days.get(1).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
+//        tt.days.get(1).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
+//        tt.days.get(1).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
+//
+//        tt.days.get(2).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
+//
+//        tt.days.get(3).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
+//
+//        tt.days.get(4).add(new Place("id1", "placename", "addr", 0.1, 1.1, 1.2, 1, 4));
+//
+//        FileManager.saveTrip(SavedLocations.this, "final.json", tt);
 
         optimise.setOnClickListener(new View.OnClickListener() {
             @Override

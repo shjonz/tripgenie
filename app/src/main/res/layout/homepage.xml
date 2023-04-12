@@ -48,8 +48,8 @@
                 <ImageView
                     android:id="@+id/profilephoto"
                     android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:background="@drawable/profilepic"
+                    android:layout_height="160dp"
+                    android:background="@drawable/alas"
                     android:shape="ring" />
 
             </androidx.cardview.widget.CardView>

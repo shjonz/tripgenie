@@ -76,14 +76,14 @@ public class showItinerary extends AppCompatActivity {
        // TODO: dynamically update filename
        SharedPreferences sharedPref = getSharedPreferences("fileNameSaver", Context.MODE_PRIVATE);
        String filename = sharedPref.getString("currentFile", "");
-       Trip t = FileManager.getTrip(showItinerary.this, filename);
+      // Trip t = FileManager.getTrip(showItinerary.this, filename);
 //        t.saveToTripFile(showItinerary.this, "testing.json");
 //        FileManager.saveTrip();
 
         txtViewStartDate.setText(t.startDate);
         txtViewEndDate.setText(t.endDate);
 
-        Log.d("testing Trip", t.days.get(0).toString());
+        //Log.d("testing Trip", t.days.get(0).toString());
 
         // Lookup the recyclerview in activity layout
         RecyclerView rvPlaces = (RecyclerView) findViewById(R.id.itineraryList);
