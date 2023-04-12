@@ -33,9 +33,6 @@
 
     </string-array>
 
-
-
-
     <!-- Strings used for login page -->
     <string name="Tripgenie">TripGenie</string>
     <string name="Username">Username</string>
@@ -65,6 +62,14 @@
     <string name="Donthaveanaccountt">Don\'t have an account?</string>
     <string name="Loggin">Log in</string>
     <string name="SetUsername">Set Username</string>
+
+
+    <string-array name="day_array">
+        <item>Day 1</item>
+        <item>Day 2</item>
+        <item>Day 3</item>
+        <item>Day 4</item>
+    </string-array>
 
 
 
