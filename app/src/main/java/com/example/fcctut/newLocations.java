@@ -41,12 +41,23 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
     private Place selectedPlace;
 
     Button addButton;
+    private Button homebutton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_locations);
+
+
+        homebutton = findViewById(R.id.homepagebutton);
+        homebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(newLocations.this, ProfileActivity2.class);
+                startActivity(intent);
+            }
+        });
         addButton = findViewById(R.id.addButton);
         edtSearch = findViewById(R.id.edtSearch);
 
