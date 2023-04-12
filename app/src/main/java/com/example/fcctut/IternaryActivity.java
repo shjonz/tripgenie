@@ -852,6 +852,157 @@ public class IternaryActivity extends AppCompatActivity {
                     // System.out.println("number of clusters: "+redistributedClusters.size());
 
 
+//                    //=========algo used in the app, followed by run k-nearest neighbours for scheduling
+//                    //ArrayList<Centroid> centroidkeys = new ArrayList<Centroid>();
+//                    ArrayList<ArrayList<Record>> array_array_of_clusters = new ArrayList<ArrayList<Record>>();
+//                    clusters.forEach((key, value) -> {
+//                        System.out.println(" centroidKeys " + value + " size: "  + value.size());
+//                        //centroidkeys.add(key);
+//                        array_array_of_clusters.add((ArrayList<Record>) value );
+//
+//                    });
+//
+//                    ArrayList<ArrayList<Place>> return_array_of_clusers = new ArrayList<ArrayList<Place>>();
+//                    ArrayList<Place> saved_Places = new ArrayList<Place>();
+//
+//                    System.out.println("array_array_of_clusters" + array_array_of_clusters.size() );
+//                    for (int i = 0; i < array_array_of_clusters.size(); i++) {
+//                        System.out.println(" ========== array array of clusters each array " + array_array_of_clusters.get(i).toString());
+//
+//
+//                        // ==============================
+//
+//                        ArrayList<Record> cluster1 = array_array_of_clusters.get(i);
+//
+//                        for (int a = 0; a < cluster1.size(); a++) {
+//                            System.out.println("inside cluster1 arraylist " + cluster1.get(a).address + cluster1.size());
+//                        }
+//
+//
+//                        GeoApiContext context = new GeoApiContext.Builder()
+//                                .apiKey(BuildConfig.WEB_API_KEY)
+//                                .build();
+//                        //ArrayList<String> locations = new ArrayList<String>();
+//
+//
+//                        LocalTime startTime = LocalTime.parse("09:00");
+//                        LocalTime endTime = LocalTime.parse("22:00");
+//                        LocalTime lunchTimestart = LocalTime.parse("11:00");
+//                        LocalTime lunchTimeend = LocalTime.parse("14:00");
+//                        LocalTime dinnerTimestart = LocalTime.parse("17:30");
+//                        LocalTime dinnerTimeend = LocalTime.parse("20:00");
+//
+//                        String origin = "16 Myeongdong 9-gil, Jung-gu, Seoul, South Korea";
+//                        String destination = "16 Myeongdong 9-gil, Jung-gu, Seoul, South Korea";
+//
+//                        ArrayList<Place> locations_data = new ArrayList<Place>();
+//
+//
+//                        //add all places and get address, latitude and longitude
+//                        for (int d = 0; d < cluster1.size(); d++) {
+//                            System.out.println("check if places can be added " + cluster1.get(d).address);
+//                            Place new_place = new Place(cluster1.get(d).address);
+//                            System.out.println(new_place.getAddress() + " " + new_place.getLongitude() + " lat " + new_place.getLatitude());
+//                            new_place.calc_Dist_two_places(origin);
+//                            locations_data.add(new_place);
+//                            if (!saved_Places.contains(new_place)) {
+//                                saved_Places.add(new_place);
+//                                System.out.println(new_place.getAddress() + " has been added to the ArrayList.");
+//                            } else {
+//                                System.out.println(new_place.getAddress() + " is already present in the ArrayList.");
+//                            }
+//                            System.out.println(" =========== check place: " + new_place.getPlaceId() + " " +
+//                                    new_place.getAddress() + " " + new_place.getDurationFromPoint() + " " +
+//                                    new_place.getLongitude() + " " + new_place.getDistanceFromPoint() );
+//
+//                        }
+//
+//
+//                        ArrayList<Place> iternarySchedule = new ArrayList<Place>();
+//                        iternarySchedule.add( new Place(origin) );
+//                        LocalTime currentTime = startTime;
+//                        int locations_data_pointer = 0;
+//                        int iternarySchedule_pointer = 0;
+//
+//
+//                        while (currentTime.isBefore(endTime)) {
+//
+//                            if (locations_data.size() > 0) {
+//
+//                                System.out.println("inside locations current time " + currentTime + " locations data size "
+//                                        + locations_data.size());
+//
+//                                if (iternarySchedule_pointer < iternarySchedule.size()) {
+//                                    for (int x = 0; x < locations_data.size(); x++) {
+//                                        locations_data.get(x).calc_Dist_two_places(iternarySchedule.get(iternarySchedule_pointer).getAddress());
+//                                    }
+//                                }
+//                                locations_data.sort(new Comparator<Place>() {
+//                                    @Override
+//                                    public int compare(Place o1, Place o2) {
+//                                        return Integer.compare(o1.getDistanceFromPoint(), o2.getDistanceFromPoint());
+//                                    }
+//                                });
+//                                iternarySchedule.add(locations_data.get(locations_data_pointer));
+//                                Duration duration_to_add = Duration.ofSeconds(locations_data.get(locations_data_pointer).getDurationFromPoint());
+//                                currentTime = currentTime.plus(duration_to_add);
+//                                //TODO: add how long people typically spend here and check opening hours
+//
+//                                System.out.println("location added " + locations_data.get(locations_data_pointer).getAddress() + " " + duration_to_add + " " + currentTime);
+//                                locations_data.remove(locations_data.get(locations_data_pointer));
+//
+//                                System.out.println("remove locations data " + locations_data.size());
+//                                iternarySchedule_pointer += 1;
+//                            } else {
+//                                System.out.println("Break ");
+//                                break;
+//                            }
+//
+//
+//                            for (int z = 0; z < iternarySchedule.size(); z++) {
+//                                System.out.println("iternary schedule: " + iternarySchedule.get(z).getAddress());
+//                            }
+//
+//
+//                            context.shutdown();
+//                            //return_array_of_clusers.add(iternarySchedule);
+//
+//
+//                        }
+//
+//                        return_array_of_clusers.add(iternarySchedule);
+//
+//                    }
+//
+//                    for (int i = 0; i < return_array_of_clusers.size(); i++) {
+//                        System.out.println(return_array_of_clusers.get(i).toString() + "iteration: " + i);
+//                    }
+//
+//                    System.out.println("saved_places array " + saved_Places.size() + " everything " + saved_Places.toString());
+//
+//
+//                    Trip trip = FileManager.getTrip(IternaryActivity.this, "final.json");
+//                    trip.days = return_array_of_clusers;
+//                    trip.savedPlaces = saved_Places;
+//                    FileManager.saveTrip(IternaryActivity.this, "final.json", trip);
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    //try algo for scheduling based on swap basis
+                    // 1. position earliest closing time < lunch time
+                    // 2. position latest closing time > dinner time
+                    // 3. choose lunch and dinner place
+                    // 4. come up with a schedule
                     //ArrayList<Centroid> centroidkeys = new ArrayList<Centroid>();
                     ArrayList<ArrayList<Record>> array_array_of_clusters = new ArrayList<ArrayList<Record>>();
                     clusters.forEach((key, value) -> {
