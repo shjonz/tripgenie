@@ -17,6 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,10 @@ public class Place implements Comparable<Place> {
     // Serialized field for the place ID
     @SerializedName("place_id")
     private String placeId;
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     // Serialized field for the place name
     @SerializedName("name")
@@ -63,6 +69,76 @@ public class Place implements Comparable<Place> {
 
     @SerializedName("longitude")
     private Double longitude;
+
+    //created these 3 variables for shj to hardcode opening hours first dont touch
+    private LocalTime opening_hours_test;
+
+    private LocalTime closing_hours_test;
+
+    private Duration Time_spent;
+
+    private LocalTime arrival_time;
+    private LocalTime departure_time;
+
+
+    private boolean eating_place_test;
+
+    public boolean isEating_place_test() {
+        return eating_place_test;
+    }
+
+    public void setEating_place_test(boolean eating_place_test) {
+        this.eating_place_test = eating_place_test;
+    }
+
+
+    public LocalTime getArrival_time() {
+        return arrival_time;
+    }
+
+    public void setArrival_time(LocalTime arrival_time) {
+        this.arrival_time = arrival_time;
+    }
+
+    public LocalTime getDeparture_time() {
+        return departure_time;
+    }
+
+    public void setDeparture_time(LocalTime departure_time) {
+        this.departure_time = departure_time;
+    }
+
+    public boolean isEatingPlace() {
+        return eatingPlace;
+    }
+
+    public void setEatingPlace(boolean eatingPlace) {
+        this.eatingPlace = eatingPlace;
+    }
+
+    public Duration getTime_spent() {
+        return Time_spent;
+    }
+
+    public void setTime_spent(Duration time_spent) {
+        Time_spent = time_spent;
+    }
+
+    public LocalTime getOpening_hours_test() {
+        return opening_hours_test;
+    }
+
+    public void setOpening_hours_test(LocalTime opening_hours_test) {
+        this.opening_hours_test = opening_hours_test;
+    }
+
+    public LocalTime getClosing_hours_test() {
+        return closing_hours_test;
+    }
+
+    public void setClosing_hours_test( LocalTime closing_hours_test) {
+        this.closing_hours_test = closing_hours_test;
+    }
 
     public Double getLatitude() {
         return latitude;
@@ -207,6 +283,7 @@ public class Place implements Comparable<Place> {
             this.address = results[0].formattedAddress;
             this.latitude = results[0].geometry.location.lat;
             this.longitude = results[0].geometry.location.lng;
+            //this.reverse
         }
     } catch (Exception e) {
         e.printStackTrace();
@@ -317,6 +394,7 @@ public class Place implements Comparable<Place> {
         public Map<String, String> getOpeningHours() {
             return extractHours(0);
         }
+        //
 
         public Map<String, String> getClosingHours() {
             return extractHours(1);
