@@ -28,19 +28,18 @@
         android:id="@+id/savedLocationsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:background="@drawable/blue_rounded_corners"
+        android:paddingHorizontal="40dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="60dp"
         android:text="Saved Places"
         android:textColor="@color/white"
-        android:textSize="34dp"
+        android:textSize="42dp"
         android:textStyle="bold"
-        android:background="@drawable/blue_rounded_corners"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp"
+        android:layout_marginTop="110dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/savedLocationsRecyclerView"
@@ -51,28 +50,32 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/savedLocationsText" />
+        app:layout_constraintTop_toBottomOf="@+id/savedLocationsText"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu"
         app:itemBackground="@color/white"
         app:itemIconTint="@color/bnv_tab_item_foreground"
         app:itemTextColor="@color/bnv_tab_item_foreground"
-        app:labelVisibilityMode="labeled">
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_nav_menu"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <Button
         android:id="@+id/optimisebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
         android:text="Optimise"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="749dp" />
+        android:layout_marginTop="-55dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/savedLocationsText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
