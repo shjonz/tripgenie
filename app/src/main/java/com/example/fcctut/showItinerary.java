@@ -56,8 +56,6 @@ public class showItinerary extends AppCompatActivity {
         dropdown.setAdapter(Adapter);
 
 
-
-
         homebutton=findViewById(R.id.homeButton);
         homebutton.setOnClickListener(new View.OnClickListener() {
             @Override
