@@ -29,6 +29,10 @@ public class Place implements Comparable<Place> {
     @SerializedName("place_id")
     private String placeId;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     // Serialized field for the place name
     @SerializedName("name")
     private String name;
@@ -72,6 +76,37 @@ public class Place implements Comparable<Place> {
     private LocalTime closing_hours_test;
 
     private Duration Time_spent;
+
+    private LocalTime arrival_time;
+    private LocalTime departure_time;
+
+
+    private boolean eating_place_test;
+
+    public boolean isEating_place_test() {
+        return eating_place_test;
+    }
+
+    public void setEating_place_test(boolean eating_place_test) {
+        this.eating_place_test = eating_place_test;
+    }
+
+
+    public LocalTime getArrival_time() {
+        return arrival_time;
+    }
+
+    public void setArrival_time(LocalTime arrival_time) {
+        this.arrival_time = arrival_time;
+    }
+
+    public LocalTime getDeparture_time() {
+        return departure_time;
+    }
+
+    public void setDeparture_time(LocalTime departure_time) {
+        this.departure_time = departure_time;
+    }
 
     public boolean isEatingPlace() {
         return eatingPlace;
@@ -248,6 +283,7 @@ public class Place implements Comparable<Place> {
             this.address = results[0].formattedAddress;
             this.latitude = results[0].geometry.location.lat;
             this.longitude = results[0].geometry.location.lng;
+            //this.reverse
         }
     } catch (Exception e) {
         e.printStackTrace();
@@ -358,6 +394,7 @@ public class Place implements Comparable<Place> {
         public Map<String, String> getOpeningHours() {
             return extractHours(0);
         }
+        //
 
         public Map<String, String> getClosingHours() {
             return extractHours(1);

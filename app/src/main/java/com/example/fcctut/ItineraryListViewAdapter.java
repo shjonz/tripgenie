@@ -43,7 +43,7 @@ public class ItineraryListViewAdapter extends
 
         // Set item views based on your views and data model
         TextView txtViewNameOfPlace = holder.txtViewNameOfPlace;
-        txtViewNameOfPlace.setText(place.getPlaceId());
+        txtViewNameOfPlace.setText(place.getName());
         TextView txtViewTime = holder.txtViewTime;
         //TODO: change this to time obtained
         txtViewTime.setText(String.valueOf(place.getPopularity()));
