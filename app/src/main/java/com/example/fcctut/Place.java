@@ -17,6 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +65,45 @@ public class Place implements Comparable<Place> {
 
     @SerializedName("longitude")
     private Double longitude;
+
+    //created these 3 variables for shj to hardcode opening hours first dont touch
+    private LocalTime opening_hours_test;
+
+    private LocalTime closing_hours_test;
+
+    private Duration Time_spent;
+
+    public boolean isEatingPlace() {
+        return eatingPlace;
+    }
+
+    public void setEatingPlace(boolean eatingPlace) {
+        this.eatingPlace = eatingPlace;
+    }
+
+    public Duration getTime_spent() {
+        return Time_spent;
+    }
+
+    public void setTime_spent(Duration time_spent) {
+        Time_spent = time_spent;
+    }
+
+    public LocalTime getOpening_hours_test() {
+        return opening_hours_test;
+    }
+
+    public void setOpening_hours_test(LocalTime opening_hours_test) {
+        this.opening_hours_test = opening_hours_test;
+    }
+
+    public LocalTime getClosing_hours_test() {
+        return closing_hours_test;
+    }
+
+    public void setClosing_hours_test( LocalTime closing_hours_test) {
+        this.closing_hours_test = closing_hours_test;
+    }
 
     public Double getLatitude() {
         return latitude;

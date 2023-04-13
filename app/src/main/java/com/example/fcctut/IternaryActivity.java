@@ -1004,29 +1004,34 @@ public class IternaryActivity extends AppCompatActivity {
                     // 2. position latest closing time > dinner time
                     // 3. choose lunch and dinner place
                     // 4. come up with a schedule
-                    //ArrayList<Centroid> centroidkeys = new ArrayList<Centroid>();
+
+                    //this is an arraylist of arraylist of records
                     ArrayList<ArrayList<Record>> array_array_of_clusters = new ArrayList<ArrayList<Record>>();
+
+                    //clusters is a hash map with a key: cluster and value: arraylist of records
                     clusters.forEach((key, value) -> {
                         System.out.println(" centroidKeys " + value + " size: "  + value.size());
-                        //centroidkeys.add(key);
                         array_array_of_clusters.add((ArrayList<Record>) value );
-
                     });
 
+                    //we need to convert an arraylist of records into place objects. same format
                     ArrayList<ArrayList<Place>> return_array_of_clusers = new ArrayList<ArrayList<Place>>();
+
+                    //saved places is for savedplaces page.
                     ArrayList<Place> saved_Places = new ArrayList<Place>();
 
                     System.out.println("array_array_of_clusters" + array_array_of_clusters.size() );
+
+                    //loop through list of arraylist of clusters
                     for (int i = 0; i < array_array_of_clusters.size(); i++) {
-                        System.out.println(" ========== array array of clusters each array " + array_array_of_clusters.get(i).toString());
+                        System.out.println(" ========== array array of clusters each array per day " + array_array_of_clusters.get(i).toString());
 
 
-                        // ==============================
 
                         ArrayList<Record> cluster1 = array_array_of_clusters.get(i);
 
                         for (int a = 0; a < cluster1.size(); a++) {
-                            System.out.println("inside cluster1 arraylist " + cluster1.get(a).address + cluster1.size());
+                            System.out.println("XXXXXXXXXXXXXXX inside cluster1 arraylist " + cluster1.get(a).address + cluster1.size());
                         }
 
 
@@ -1036,8 +1041,6 @@ public class IternaryActivity extends AppCompatActivity {
                         //ArrayList<String> locations = new ArrayList<String>();
 
 
-                        LocalTime startTime = LocalTime.parse("09:00");
-                        LocalTime endTime = LocalTime.parse("22:00");
                         LocalTime lunchTimestart = LocalTime.parse("11:00");
                         LocalTime lunchTimeend = LocalTime.parse("14:00");
                         LocalTime dinnerTimestart = LocalTime.parse("17:30");
@@ -1047,6 +1050,7 @@ public class IternaryActivity extends AppCompatActivity {
                         String destination = "16 Myeongdong 9-gil, Jung-gu, Seoul, South Korea";
 
                         ArrayList<Place> locations_data = new ArrayList<Place>();
+                        ArrayList<Place> eating_locations_data = new ArrayList<Place>();
 
 
                         //add all places and get address, latitude and longitude
@@ -1055,7 +1059,13 @@ public class IternaryActivity extends AppCompatActivity {
                             Place new_place = new Place(cluster1.get(d).address);
                             System.out.println(new_place.getAddress() + " " + new_place.getLongitude() + " lat " + new_place.getLatitude());
                             new_place.calc_Dist_two_places(origin);
-                            locations_data.add(new_place);
+
+                            if (new_place.getAddress() == "") {
+                                eating_locations_data.add(new_place);
+                            } else {
+                                locations_data.add(new_place);
+                            }
+
                             if (!saved_Places.contains(new_place)) {
                                 saved_Places.add(new_place);
                                 System.out.println(new_place.getAddress() + " has been added to the ArrayList.");
@@ -1071,43 +1081,97 @@ public class IternaryActivity extends AppCompatActivity {
 
                         ArrayList<Place> iternarySchedule = new ArrayList<Place>();
                         iternarySchedule.add( new Place(origin) );
-                        LocalTime currentTime = startTime;
                         int locations_data_pointer = 0;
+                        int eating_locations_data_pointer = 0;
                         int iternarySchedule_pointer = 0;
 
 
-                        while (currentTime.isBefore(endTime)) {
+                        //set all opening and closing hours
+                        //1. find earliest opening place
+                        //2. find latest closing place and nearest eating place that is open
 
-                            if (locations_data.size() > 0) {
+                        //assume one place in the morning then lunch after
+                        //assume one place at night user wanna go after
 
-                                System.out.println("inside locations current time " + currentTime + " locations data size "
-                                        + locations_data.size());
+                        //find the earliest opening place put it inside
+                        //rmb to remove from locations
 
-                                if (iternarySchedule_pointer < iternarySchedule.size()) {
-                                    for (int x = 0; x < locations_data.size(); x++) {
-                                        locations_data.get(x).calc_Dist_two_places(iternarySchedule.get(iternarySchedule_pointer).getAddress());
-                                    }
+
+
+
+
+                        //greedy algorithm
+                        ArrayList<Place> eligible_Places = new ArrayList<Place>();
+                        LocalTime earliest_closing_time = LocalTime.parse("12:00");
+                        LocalTime latest_closing_time = LocalTime.parse("12:00");
+                        LocalTime currentTime = earliest_closing_time.minus(Duration.ofSeconds(2700));
+
+                        int lunch_count = 0;
+
+                        while (currentTime.isBefore(latest_closing_time)) {
+
+
+
+
+
+                            System.out.println("inside locations current time " + currentTime + " locations data size "
+                                    + locations_data.size());
+
+                            if (iternarySchedule_pointer < iternarySchedule.size()) {
+                                for (int x = 0; x < locations_data.size(); x++) {
+                                    locations_data.get(x).calc_Dist_two_places(iternarySchedule.get(iternarySchedule_pointer).getAddress());
                                 }
-                                locations_data.sort(new Comparator<Place>() {
+                            }
+
+                                //check if got earliest place inserted yet
+                            if (iternarySchedule_pointer == 0 && iternarySchedule.size() == 2) {
+                                    //this means earliest place added, so calc
+                                iternarySchedule_pointer += 1;
+                                iternarySchedule.get(iternarySchedule_pointer).setDistanceFromPoint(iternarySchedule.get(iternarySchedule_pointer - 1).getAddress());
+                                currentTime = currentTime.plus( Duration.ofSeconds( iternarySchedule.get(iternarySchedule_pointer).getDurationFromPoint() ) );
+                                currentTime = currentTime.plus( iternarySchedule.get(iternarySchedule_pointer).getTime_spent()  );
+                            }
+
+                            //greedy algo find open place that is open within next 45 mins + 1 hour
+                            if ( currentTime.plus( Duration.ofSeconds(2700)).isAfter(LocalTime.parse("11:00")) && (lunch_count ==0) ){
+                                //prioritise lunch places
+                                //first find eligible eating places.
+                                for (i = 0; i < eating_locations_data.size(); i++) {
+
+                                    //find eligible places and check u take 45 mins to travel there and 1 hour to spend there
+                                    if ( eating_locations_data.get(i).getOpening_hours_test().isBefore( currentTime.plus(Duration.ofSeconds(2701)) ) && eating_locations_data.get(i).getClosing_hours_test().isAfter( currentTime.plus( Duration.ofSeconds(6300) ) ) ) {
+                                        eligible_Places.add( eating_locations_data.get(i) );
+                                        eating_locations_data.get(i).setDistanceFromPoint( iternarySchedule.get(iternarySchedule_pointer).getAddress() );
+                                    }
+
+
+                                }
+
+                                //since now all eating places are open and can spend 1 hour there, we take closest distance.
+                                eligible_Places.sort(new Comparator<Place>() {
                                     @Override
                                     public int compare(Place o1, Place o2) {
                                         return Integer.compare(o1.getDistanceFromPoint(), o2.getDistanceFromPoint());
                                     }
                                 });
-                                iternarySchedule.add(locations_data.get(locations_data_pointer));
-                                Duration duration_to_add = Duration.ofSeconds(locations_data.get(locations_data_pointer).getDurationFromPoint());
+
+
+                                iternarySchedule.add(eligible_Places.get(0));
+                                Duration duration_to_add = Duration.ofSeconds(eligible_Places.get(locations_data_pointer).getDurationFromPoint());
+                                duration_to_add = duration_to_add.plus(eligible_Places.get(i).getTime_spent() );
                                 currentTime = currentTime.plus(duration_to_add);
                                 //TODO: add how long people typically spend here and check opening hours
-
                                 System.out.println("location added " + locations_data.get(locations_data_pointer).getAddress() + " " + duration_to_add + " " + currentTime);
-                                locations_data.remove(locations_data.get(locations_data_pointer));
+                                eligible_Places.clear();
 
-                                System.out.println("remove locations data " + locations_data.size());
+                                System.out.println("remove locations data check if eligible places cleared " + eligible_Places.size());
                                 iternarySchedule_pointer += 1;
-                            } else {
-                                System.out.println("Break ");
-                                break;
                             }
+
+
+
+
+
 
 
                             for (int z = 0; z < iternarySchedule.size(); z++) {
