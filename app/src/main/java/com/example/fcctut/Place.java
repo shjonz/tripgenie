@@ -77,8 +77,8 @@ public class Place implements Comparable<Place> {
 
     private Duration Time_spent;
 
-    private LocalTime arrival_time;
-    private LocalTime departure_time;
+    private String arrival_time;
+    private String departure_time;
 
 
     private boolean eating_place_test;
@@ -92,20 +92,21 @@ public class Place implements Comparable<Place> {
     }
 
 
-    public LocalTime getArrival_time() {
+    public String getArrival_time() {
         return arrival_time;
     }
 
     public void setArrival_time(LocalTime arrival_time) {
-        this.arrival_time = arrival_time;
+
+        this.arrival_time = arrival_time.toString();
     }
 
-    public LocalTime getDeparture_time() {
+    public String getDeparture_time() {
         return departure_time;
     }
 
     public void setDeparture_time(LocalTime departure_time) {
-        this.departure_time = departure_time;
+        this.departure_time = departure_time.toString();
     }
 
     public boolean isEatingPlace() {

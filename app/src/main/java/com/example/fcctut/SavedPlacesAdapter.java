@@ -42,6 +42,7 @@ public class SavedPlacesAdapter extends RecyclerView.Adapter<SavedPlacesAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // Get the Place object at the current position
         Place place = savedPlaces.get(position);
+       // TextView txtViewAddressOfPlace = holder.txtViewNameOfPlace;
         // Set the place name in the corresponding TextView
         holder.placeName.setText(place.getName());
 

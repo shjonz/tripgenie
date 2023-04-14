@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface Distance {
-    double calculate(Map<String, List<Double>> f1, Map<String, List<Double>> f2);
+    double calculate(Place f1, Centroid f2);
 }
 
 
