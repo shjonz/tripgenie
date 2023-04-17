@@ -77,6 +77,7 @@ public class  PlanTrip extends AppCompatActivity {
                     k = ChronoUnit.DAYS.between(startDateObj, endDateObj);
                 }
 
+                // TODO: set dynamic filename
                 String filename = "final.json";
                 Trip trip = new Trip((int) k, cityName, startDate, endDate);
                 FileManager.saveTrip(PlanTrip.this, filename, trip);

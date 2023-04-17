@@ -145,8 +145,6 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
             @Override
             public void onClick(View v) {
                 //TODO Get coordinates of city from Plan Trip Page and override this hardcoded coordinates
-
-
                 // Set city coordinates and fetch places using Places API helper class
                 double cityLatitude = 37.5519;
                 double cityLongitude = 126.9918;
@@ -175,12 +173,16 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
     }
 
     private void addLocation() {
+        // called when we use add button (not suggestions)
         String locationName = edtSearch.getText().toString().trim();
 
         if (!locationName.isEmpty()) {
             if (selectedPlace != null) {
                 // Get the current saved places from shared preferences
-                List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
+//                List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
+                Trip t = FileManager.getTrip(newLocations.this, "final.json");
+                final List<Place> savedPlaces = t.savedPlaces;
+
 
                 // Check if the place is already saved
                 boolean placeAlreadySaved = false;
@@ -193,8 +195,31 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
 
                 if (!placeAlreadySaved) {
                     // Save the selected place to shared preferences
-                    savedPlaces.add(selectedPlace);
-                    SharedPreferenceUtil.savePlaces(this, savedPlaces);
+//                    savedPlaces.add(selectedPlace);
+//                    SharedPreferenceUtil.savePlaces(this, savedPlaces);
+                    // TODO: make filename dynamic
+
+                    PlacesApiHelper.getPlaceDetails(selectedPlace.getPlaceId(), BuildConfig.WEB_API_KEY, new PlacesApiHelper.PlaceDetailsCallback() {
+                        @Override
+                        public void onPlaceDetailsFetched(Place place) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    savedPlaces.add(place);
+                                    FileManager.saveTrip(newLocations.this, "final.json", t);
+                                    Log.d("testing Trip", "queried place: " + place.toString());
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFailure() {
+                            Log.e("testing Trip", "Failed to fetch places");
+                        }
+                    });
+//                    t.savedPlaces = new ArrayList<>(savedPlaces);
+                    Log.d("testing Trip", "new locations addLocation: " + savedPlaces.toString());
+
 
                     // Clear the text in the edtSearch field and reset the selectedPlace
                     edtSearch.getText().clear();
@@ -216,12 +241,19 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
 
     @Override
     public void onAddPlaceClick(int position) {
+        // called when we add suggestions
         // Get the current place
         Place place = placeAdapter.places.get(position);
         // Save the place to shared preferences
-        List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
+//        List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(this);
+//        savedPlaces.add(place);
+//        SharedPreferenceUtil.savePlaces(this, savedPlaces);
+        // TODO: make filename dynamic
+        Trip t = FileManager.getTrip(newLocations.this, "final.json");
+        List<Place> savedPlaces = t.savedPlaces;
         savedPlaces.add(place);
-        SharedPreferenceUtil.savePlaces(this, savedPlaces);
+        Log.d("testing Trip", "new locations onAddPlaceClick: " + savedPlaces.toString());
+        FileManager.saveTrip(newLocations.this, "final.json", t);
     }
 
 
