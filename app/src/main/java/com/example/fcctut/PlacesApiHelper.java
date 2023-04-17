@@ -56,6 +56,7 @@ public class PlacesApiHelper {
                 .addQueryParameter("rankby", rankBy) // rankBy parameter
                 .addQueryParameter("key", apiKey)
                 .addQueryParameter("fields", "place_id,name,geometry,rating,opening_hours") // fields parameter
+                //.addQueryParameter("latitude", latitude)
                 .build();
 
         Log.d("PlacesApiHelper", "Request URL: " + url.toString());

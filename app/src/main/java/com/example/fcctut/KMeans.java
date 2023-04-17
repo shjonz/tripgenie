@@ -312,7 +312,7 @@ public class KMeans {
         List<Centroid> centroids = new ArrayList<>();  // Centroid List
 
         // Choose first Centroid randomly from the Records List
-        System.out.println(records.get(random.nextInt(records.size())));
+        System.out.println("choosing first random centroid: "+records.get( random.nextInt(records.size())));
         //Centroid currentCentroid = new Centroid(records.get(random.nextInt(records.size())).getFeatures());
         Centroid currentCentroid = new Centroid( records.get(random.nextInt(records.size())).getAddress(),
                 records.get(random.nextInt(records.size())).getLatitude(),

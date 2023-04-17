@@ -745,7 +745,7 @@ public class IternaryActivity extends AppCompatActivity {
 //                    }
 
 
-//                    List<Place> records = new ArrayList<Place>();
+//                    List<Record> records = new ArrayList<Record>();
 //                    //Start adding Records
 //                    List<Double> coord1 = new ArrayList<>();
 //                    coord1.add(37.56819053958451);

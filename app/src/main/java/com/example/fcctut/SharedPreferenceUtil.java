@@ -11,6 +11,11 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,16 +31,69 @@ public class SharedPreferenceUtil {
      * @param places The list of Place objects to save.
      */
     public static void savePlaces(Context context, List<Place> places) {
+//        // Get the default SharedPreferences object
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+//        // Create an editor to modify the SharedPreferences object
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        // Convert the list of Place objects to a JSON string using Gson
+//        Gson gson = new Gson();
+//        String json = gson.toJson(places);
+//        // Store the JSON string in the SharedPreferences object with the key "saved_places"
+//        editor.putString(SAVED_PLACES_KEY, json);
+//        editor.apply();
+
+
+
+
+        //new update 16 april 2023
         // Get the default SharedPreferences object
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         // Create an editor to modify the SharedPreferences object
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        // Convert the list of Place objects to a JSON string using Gson
-        Gson gson = new Gson();
-        String json = gson.toJson(places);
-        // Store the JSON string in the SharedPreferences object with the key "saved_places"
+        // Create a JSONArray to store the Place objects
+        JSONArray jsonArray = new JSONArray();
+        // Loop through the list of Place objects
+        for (Place place : places) {
+            try {
+                // Create a JSONObject to store the Place object
+                JSONObject jsonPlace = new JSONObject();
+                System.out.println("inside shared preferences util .java file " +
+                        place.getPlaceId() + " name " + place.getName() + " address " +
+                        place.getAddress() + " lat " + place.getLatitude() + " lon "
+                + place.getLongitude() + " opening_hours " + place.getOpeningHours() );
+
+                // Add the existing fields to the JSONObject
+                jsonPlace.put("place_id", place.getPlaceId());
+                jsonPlace.put("name", place.getName());
+                jsonPlace.put("address", place.getAddress());
+                jsonPlace.put("rating", place.getPopularity());
+                jsonPlace.put("distance", place.getDistance());
+                // Add the new fields to the JSONObject
+                jsonPlace.put("latitude", place.getLatitude());
+                jsonPlace.put("longitude", place.getLongitude());
+                // Use Gson to convert the OpeningHours object to a JSON string and add it to the JSONObject
+                Gson gson = new Gson();
+                Place.OpeningHours openingHours = place.getOpeningHours();
+                if (openingHours != null) {
+                    String openingHoursJson = gson.toJson(openingHours);
+                    jsonPlace.put("opening_hours", new JSONObject(openingHoursJson));
+                } else {
+                    jsonPlace.put("opening_hours", JSONObject.NULL);
+                }
+                //jsonPlace.put("opening_hours", new JSONObject(openingHoursJson));
+                // Add the JSONObject to the JSONArray
+                jsonArray.put(jsonPlace);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        // Convert the JSONArray to a JSON string and save it in the SharedPreferences object
+        String json = jsonArray.toString();
         editor.putString(SAVED_PLACES_KEY, json);
-        editor.apply();
+        editor.apply(); // use apply() instead of commit() for better performance
+
+
+
     }
 
     /*

@@ -74,8 +74,8 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 //        FileManager.saveTrip(SavedLocations.this, "final.json", tt);
 
         optimise.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
 //                Thread getPlacesapi = new Thread(new Runnable() {
 //                    @Override
 //                    public void run() {
@@ -370,10 +370,10 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 //        });
 
 
-                                            Thread getPlacesapi = new Thread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    try {
+                Thread getPlacesapi = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
 
 
 
