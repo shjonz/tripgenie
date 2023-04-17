@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.PlaceViewHolder> {
@@ -61,8 +62,10 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.PlaceViewHol
                     // Call the listener's onAddPlaceClick method
                     mOnAddPlaceClickListener.onAddPlaceClick(currentPosition);
 
+                    Trip t = FileManager.getTrip(view.getContext(), "final.json");
+                    List<Place> savedPlaces = t.savedPlaces;
                     // Update the saved places in SharedPreferences
-                    List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(view.getContext());
+//                    List<Place> savedPlaces = SharedPreferenceUtil.getSavedPlaces(view.getContext());
 
                     // Check if the place already exists in the savedPlaces list
                     boolean placeExists = false;
@@ -75,8 +78,15 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.PlaceViewHol
 
                     // If the place doesn't already exist, add it to the savedPlaces list and save it
                     if (!placeExists) {
+//                        savedPlaces.add(places.get(currentPosition));
+//                        SharedPreferenceUtil.savePlaces(view.getContext(), savedPlaces);
+
+                        // TODO: make filename dynamic
                         savedPlaces.add(places.get(currentPosition));
-                        SharedPreferenceUtil.savePlaces(view.getContext(), savedPlaces);
+//                        t.savedPlaces = new ArrayList<>(savedPlaces);
+                        Log.d("testing Trip", "place adapter onClick: " + savedPlaces.toString());
+                        FileManager.saveTrip(view.getContext(), "final.json", t);
+
                     }
 
                     // Remove the item from the list

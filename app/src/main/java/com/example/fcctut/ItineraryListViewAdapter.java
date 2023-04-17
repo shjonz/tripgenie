@@ -45,7 +45,6 @@ public class ItineraryListViewAdapter extends
         TextView txtViewNameOfPlace = holder.txtViewNameOfPlace;
         txtViewNameOfPlace.setText(place.getName());
         TextView txtViewTime = holder.txtViewTime;
-
         //TODO: change this to time obtained
         txtViewTime.setText(String.valueOf(place.getArrival_time()));
     }
