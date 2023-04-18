@@ -74,6 +74,7 @@ public class AddPlaces extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 if (adapter.getCount() > 0) {
                     detailPlace(adapter.predictions.get(position).getPlaceId());
+                    //detailPlace(adapter.predictions.get(position).getDistanceMeters());
                 }
             }
         }); //setonitemclicklistener function

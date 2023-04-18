@@ -1,6 +1,7 @@
 package com.example.fcctut;
 
 import androidx.annotation.NonNull;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.google.gson.annotations.SerializedName;
 import com.google.maps.DirectionsApi;
@@ -19,8 +20,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 // Class to represent a place fetched from the Places API
@@ -37,7 +42,7 @@ public class Place implements Comparable<Place> {
     @SerializedName("name")
     private String name;
 
-    @SerializedName("address")
+    @SerializedName("formatted_address")
     private String address;
 
     // Serialized field for the place popularity (rating)
@@ -57,8 +62,28 @@ public class Place implements Comparable<Place> {
     @SerializedName("durationFromPoint")
     private int durationFromPoint;
 
-    @SerializedName("eatingPlace")
+
     private boolean eatingPlace;
+
+    public boolean getEatingPlace() {
+        return eatingPlace;
+    }
+
+    public void setEatingPlace() {
+        if (this.types != null) {
+            Object[] array = Arrays.stream(this.types).toArray();
+            for (int i =0; i < this.types.length; i++) {
+                 if (array[i] == "food") {
+                     this.eatingPlace = true;
+                 }
+            }
+        } else {
+            this.eatingPlace = false;
+        }
+    }
+
+    @SerializedName("types")
+    private String[] types;
 
     // Serialized field for the place geometry (contains location data)
     @SerializedName("geometry")
@@ -77,8 +102,8 @@ public class Place implements Comparable<Place> {
 
     private Duration Time_spent;
 
-    private LocalTime arrival_time;
-    private LocalTime departure_time;
+    private String arrival_time;
+    private String departure_time;
 
 
     private boolean eating_place_test;
@@ -92,20 +117,26 @@ public class Place implements Comparable<Place> {
     }
 
 
-    public LocalTime getArrival_time() {
+    public String getArrival_time() {
+        //if (this.arrival_time.length() > 5) {
+        //    String sub= this.arrival_time.substring(0, 4);
+        //    return sub;
+        //} else {
         return arrival_time;
+        //}
     }
 
     public void setArrival_time(LocalTime arrival_time) {
-        this.arrival_time = arrival_time;
+
+        this.arrival_time = arrival_time.toString();
     }
 
-    public LocalTime getDeparture_time() {
+    public String getDeparture_time() {
         return departure_time;
     }
 
     public void setDeparture_time(LocalTime departure_time) {
-        this.departure_time = departure_time;
+        this.departure_time = departure_time.toString();
     }
 
     public boolean isEatingPlace() {
@@ -354,7 +385,7 @@ public class Place implements Comparable<Place> {
         this.distanceFromPoint = 20;
         this.durationFromPoint = 10;
         this.placeOpeningHour = new HashMap<String, String>();
-        this.eatingPlace = false;
+        //this.eatingPlace = false;
     }
 
     // returns all attributes in Place object as a JSONObject
@@ -379,54 +410,154 @@ public class Place implements Comparable<Place> {
 
     // Getter method for opening_hours
     public OpeningHours getOpeningHours() {
+
         return openingHours;
+
+
     }
+
+
 
     // Nested class to represent the opening and closing hours of a place
     public static class OpeningHours {
         @SerializedName("weekday_text")
         private List<String> weekdayText;
 
+
+
+        //public OpeningHours(List<String> array) {
+        //    this.weekdayText = array;
+        //}
+
+        //public void setWeekdayText(List<String> array) {
+        //    this.weekdayText = array;
+        //}
+
+        public void setOpeningHours() {
+            if (this.weekdayText != null) {
+                String[] openingHoursArray = this.weekdayText.toArray(new String[0]);
+                String openingHours = openingHoursArray[0];
+                System.out.println( openingHours + " check whats inside");
+
+
+            }
+        }
+
         public List<String> getWeekdayText() {
             return weekdayText;
         }
 
-        public Map<String, String> getOpeningHours() {
-            return extractHours(0);
-        }
-        //
+        public String getOpeningHours() {
+//            if (!weekdayText.isEmpty()) {
+//                return extractHours(0);
+//            } else {
+//               Map<String, String> newmap = new HashMap<String, String>();
+//               newmap.put("weekday_text", "no_data");
+//               return newmap;
+//            }
+            Map<String, String> map = extractHours(0);
+            //for (Map.Entry<String, String> entry : map.entrySet()) {
+            //    System.out.println(" inside opening hours " + entry.getKey() + ": " + entry.getValue());
+            //}
 
-        public Map<String, String> getClosingHours() {
-            return extractHours(1);
+            String[] openingHoursArray = map.values().toArray(new String[0]);
+            String openingHours = openingHoursArray[0];
+            String[] parts = openingHours.split("–");
+            //String input = "8:00 AM – 10:00 PM";
+            String output = parts[0].replaceAll("\\s", "");
+            System.out.println(" output inside opening horus " + output);
+            if ( output.contains("Open24hours") ) {
+                return "08:00";
+            }
+            if (!output.contains("AM") && !output.contains("PM")) {
+                String output2 = parts[1].replaceAll("\\s", "");
+                if (output2.contains("PM")) {
+                    output+= "PM";
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma", Locale.US);
+                    LocalTime startTime = LocalTime.parse(output.trim(), formatter);
+                    System.out.println(" inside opening hours check format of start time " + startTime.toString());
+                    return startTime.toString();
+                } else {
+                    output+= "AM";
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma", Locale.US);
+                    LocalTime startTime = LocalTime.parse(output.trim(), formatter);
+                    System.out.println(" inside opening hours check format of start time " + startTime.toString());
+                    return startTime.toString();
+                }
+
+
+
+            }
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma", Locale.US);
+            LocalTime startTime = LocalTime.parse(output.trim(), formatter);
+            System.out.println(" inside opening hours check format of start time " + startTime.toString());
+
+            return startTime.toString();
+
+        }
+
+
+        public String getClosingHours() {
+
+            Map<String, String> map = extractHours(0);
+            String[] openingHoursArray = map.values().toArray(new String[0]);
+            String openingHours = openingHoursArray[0];
+            String[] parts = openingHours.split("–");
+            System.out.println("inside opening hours print openingHours " + openingHours );
+            //String input = "8:00 AM – 10:00 PM";
+            if (parts.length == 1) {
+                String output = parts[0].replaceAll("\\s", "");
+                return "23:00";
+            }
+            else {
+                String output = parts[1].replaceAll("\\s", "");
+                System.out.println(" output inside opening horus " + output);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mma", Locale.US);
+                LocalTime startTime = LocalTime.parse(output.trim(), formatter);
+                System.out.println(" closing check format of start time " + startTime.toString());
+                return startTime.toString();
+            }
+
+
+
+
+
         }
 
         private Map<String, String> extractHours(int index) {
             Map<String, String> hoursMap = new HashMap<>();
+            if (!weekdayText.isEmpty()) {
 
-            for (String dayHours : weekdayText) {
-                String[] parts = dayHours.split(": ", 2);
-                String dayOfWeek = parts[0];
-                String hours = parts[1];
 
-                if (hours.equalsIgnoreCase("Closed")) {
-                    hoursMap.put(dayOfWeek, "Closed");
-                } else {
-                    String[] timeRange = hours.split(" – ");
-                    hoursMap.put(dayOfWeek, timeRange[index]);
+                for (String dayHours : weekdayText) {
+                    String[] parts = dayHours.split(": ", 2);
+                    String dayOfWeek = parts[0];
+                    String hours = parts[1];
+
+                    if (hours.equalsIgnoreCase("Closed")) {
+                        hoursMap.put(dayOfWeek, "Closed");
+                    } else {
+                        String[] timeRange = hours.split(" – ");
+                        hoursMap.put(dayOfWeek, timeRange[index]);
+                    }
                 }
+
+                return hoursMap;
+            } else {
+                return null;
             }
 
-            return hoursMap;
         }
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        if (getGeometry() == null) {
-            return "placeId: " + placeId + ", name: " + name + ", address: " + address + ", popularity: " + popularity;
-        } else {
-            return "placeId: " + placeId + ", name: " + name + ", address: " + address + ", popularity: " + popularity + ", (lat,long): (" + getGeometry().getLocation().getLatitude() + "," + getGeometry().getLocation().getLongitude() + ")";
+        @NonNull
+        @Override
+        public String toString() {
+            if (getGeometry() == null) {
+                return "placeId: " + placeId + ", name: " + name + ", address: " + address + ", popularity: " + popularity;
+            } else {
+                return "placeId: " + placeId + ", name: " + name + ", address: " + address + ", popularity: " + popularity + ", (lat,long): (" + getGeometry().getLocation().getLatitude() + "," + getGeometry().getLocation().getLongitude() + ")";
+            }
         }
     }
-}

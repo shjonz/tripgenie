@@ -207,7 +207,10 @@ public class newLocations extends AppCompatActivity implements PlaceAdapter.OnAd
                                 public void run() {
                                     savedPlaces.add(place);
                                     FileManager.saveTrip(newLocations.this, "final.json", t);
-                                    Log.d("testing Trip", "queried place: " + place.toString());
+                                    Log.d("testing Trip", "newLocations.java queried place: " + place.toString()
+                                            + " check if place object got open hours " + " lat " +
+                                            place.getLatitude() + " lng " + place.getLongitude() + " addr " + place.getAddress());
+
                                 }
                             });
                         }
