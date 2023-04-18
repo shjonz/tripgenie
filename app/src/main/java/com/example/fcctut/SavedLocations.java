@@ -526,7 +526,7 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
                                                             // Sorting the coordinates to see the most significant tags first.
                                                             System.out.println(key);
 //                        System.out.println(value);
-                                                            String members = String.join(", ", value.stream().map(Place::getAddress).collect(toSet()));
+                                                            String members = String.join(", ", value.stream().map(Place::getName).collect(toSet()));
                                                             System.out.print("members: " + members + "\n");
                                                         });
                                                         System.out.println("\n");
@@ -690,6 +690,7 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
                                                         //clusters is a hash map with a key: cluster and value: arraylist of records
                                                         clusters.forEach((key, value) -> {
                                                             System.out.println(" centroidKeys " + value + " size: " + value.size());
+
                                                             array_array_of_clusters.add((ArrayList<Place>) value);
 
                                                         });
@@ -712,8 +713,8 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
                                                             ArrayList<Place> cluster1 = array_array_of_clusters.get(i);
 
                                                             for (int a = 0; a < cluster1.size(); a++) {
-                                                                System.out.println("XXXXXXXXXXXXXXX inside cluster1 arraylist " + cluster1.get(a).getAddress() + cluster1.size()
-                                                                + " lat lng " + cluster1.get(a).getLatitude() + cluster1.get(a).getLongitude() + cluster1.get(a).getOpeningHours());
+                                                                System.out.println("XXXXXXXXXXXXXXX inside cluster1 arraylist " + cluster1.get(a).getName() + cluster1.size() );
+                                                                //+ " lat lng " + cluster1.get(a).getGeometry().getLocation().getLatitude() + cluster1.get(a).getGeometry().getLocation().getLongitude() + cluster1.get(a).getOpeningHours().getOpeningHours().values());
 
                                                             }
 
@@ -739,6 +740,34 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 
 
                                                             //add all places and get address, latitude and longitude
+                                                            for (int d = 0; d < cluster1.size(); d++) {
+                                                                cluster1.get(d).setEatingPlace();
+                                                                if (cluster1.get(d).getEatingPlace() == true ) {
+                                                                    eating_locations_data.add(cluster1.get(d));
+                                                                    cluster1.get(d).setTime_spent(Duration.ofSeconds(1800));
+                                                                    if (cluster1.get(d).getOpeningHours() == null) {
+                                                                        cluster1.get(d).setOpening_hours_test(LocalTime.parse("09:00"));
+                                                                        cluster1.get(d).setClosing_hours_test(LocalTime.parse("17:00"));
+                                                                        System.out.println(" eating closing hours null so set in opening_hours_test " + cluster1.get(d).getName());
+                                                                    }
+
+
+                                                                } else {
+                                                                    locations_data.add(cluster1.get(d));
+                                                                    cluster1.get(d).setTime_spent(Duration.ofSeconds(2700));
+                                                                    if (cluster1.get(d).getOpeningHours() == null) {
+                                                                        cluster1.get(d).setOpening_hours_test(LocalTime.parse("09:00"));
+                                                                        cluster1.get(d).setClosing_hours_test(LocalTime.parse("17:00"));
+                                                                        System.out.println(" normal locations closing hours null so set in opening_hours_test " + cluster1.get(d).getName());
+                                                                    }
+                                                                }
+
+
+                                                            }
+
+                                                            System.out.println("check size of locations_data and eating_locations_data "+ locations_data.size() + " eating size " + eating_locations_data.size());
+
+                                                            //add all places
                                                             //for (int d = 0; d < cluster1.size(); d++) {
                                                                 //System.out.println("check if places can be added " + cluster1.get(d).getAddress());
                                                                 //if ( saved_places_list.contains(cluster1.get(d).getAddress()) {
@@ -901,34 +930,50 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 
 
                                                             for (int k = 0; k < eating_locations_data.size(); k++) {
-                                                                if (eating_locations_data.get(k).getOpening_hours_test().isBefore(earliest_opening_time)) {
+                                                                if (eating_locations_data.get(k).getOpeningHours() != null && LocalTime.parse(eating_locations_data.get(k).getOpeningHours().getOpeningHours()).isBefore(earliest_opening_time) ) {
+                                                                    earliest_opening_time = LocalTime.parse(eating_locations_data.get(k).getOpeningHours().getOpeningHours());
+                                                                    first_place_to_visit = eating_locations_data.get(k);
+                                                                } else if ( eating_locations_data.get(k).getOpeningHours() == null && eating_locations_data.get(k).getOpening_hours_test().isBefore(earliest_opening_time)) {
                                                                     earliest_opening_time = eating_locations_data.get(k).getOpening_hours_test();
                                                                     first_place_to_visit = eating_locations_data.get(k);
                                                                 }
 
-                                                                if (eating_locations_data.get(k).getClosing_hours_test().isAfter(latest_closing_time)) {
+                                                                if (eating_locations_data.get(k).getOpeningHours() != null && LocalTime.parse(eating_locations_data.get(k).getOpeningHours().getClosingHours()).isAfter(latest_closing_time) ) {
+                                                                    latest_closing_time = LocalTime.parse(eating_locations_data.get(k).getOpeningHours().getClosingHours() );
+                                                                    earliest_closing_place = eating_locations_data.get(k);
+                                                                } else if ( eating_locations_data.get(k).getOpeningHours() == null && eating_locations_data.get(k).getClosing_hours_test().isAfter(latest_closing_time)) {
                                                                     latest_closing_time = eating_locations_data.get(k).getClosing_hours_test();
-                                                                    earliest_closing_place = locations_data.get(k);
+                                                                    earliest_closing_place = eating_locations_data.get(k);
                                                                 }
 
-                                                                if (eating_locations_data.get(k).getClosing_hours_test().isBefore(earliest_closing_time)) {
+                                                                if ( eating_locations_data.get(k).getOpeningHours() != null && LocalTime.parse(eating_locations_data.get(k).getOpeningHours().getClosingHours()).isBefore(earliest_closing_time)) {
+                                                                    earliest_closing_time = eating_locations_data.get(k).getClosing_hours_test();
+                                                                } else if ( eating_locations_data.get(k).getOpeningHours() == null && eating_locations_data.get(k).getClosing_hours_test().isBefore(earliest_closing_time)) {
                                                                     earliest_closing_time = eating_locations_data.get(k).getClosing_hours_test();
                                                                 }
                                                             }
 
 
                                                             for (int z = 0; z < locations_data.size(); z++) {
-                                                                if (locations_data.get(z).getOpening_hours_test().isBefore(earliest_opening_time)) {
+                                                                if (locations_data.get(z).getOpeningHours() != null && LocalTime.parse(locations_data.get(z).getOpeningHours().getOpeningHours()).isBefore(earliest_opening_time) ) {
+                                                                    earliest_opening_time = LocalTime.parse(locations_data.get(z).getOpeningHours().getOpeningHours());
+                                                                    first_place_to_visit = locations_data.get(z);
+                                                                } else if ( locations_data.get(z).getOpeningHours() == null && locations_data.get(z).getOpening_hours_test().isBefore(earliest_opening_time)) {
                                                                     earliest_opening_time = locations_data.get(z).getOpening_hours_test();
                                                                     first_place_to_visit = locations_data.get(z);
                                                                 }
 
-                                                                if (locations_data.get(z).getClosing_hours_test().isAfter(latest_closing_time)) {
+                                                                if (locations_data.get(z).getOpeningHours() != null && LocalTime.parse(locations_data.get(z).getOpeningHours().getClosingHours()).isAfter(latest_closing_time) ) {
+                                                                    latest_closing_time = LocalTime.parse(locations_data.get(z).getOpeningHours().getClosingHours() );
+                                                                    earliest_closing_place = locations_data.get(z);
+                                                                } else if (locations_data.get(z).getOpeningHours() == null && locations_data.get(z).getClosing_hours_test().isAfter(latest_closing_time)) {
                                                                     latest_closing_time = locations_data.get(z).getClosing_hours_test();
                                                                     earliest_closing_place = locations_data.get(z);
                                                                 }
 
-                                                                if (locations_data.get(z).getClosing_hours_test().isBefore(earliest_closing_time)) {
+                                                                if ( locations_data.get(z).getOpeningHours() != null && LocalTime.parse(locations_data.get(z).getOpeningHours().getClosingHours()).isBefore(earliest_closing_time)) {
+                                                                    earliest_closing_time = LocalTime.parse(locations_data.get(z).getOpeningHours().getClosingHours());
+                                                                } else if ( locations_data.get(z).getOpeningHours() == null && locations_data.get(z).getClosing_hours_test().isBefore(earliest_closing_time)) {
                                                                     earliest_closing_time = locations_data.get(z).getClosing_hours_test();
                                                                 }
                                                             }
@@ -973,7 +1018,10 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
                                                                     for (int h = 0; h < eating_locations_data.size(); h++) {
 
                                                                         //find eligible places and check u take 45 mins to travel there and 1 hour to spend there
-                                                                        if (eating_locations_data.get(h).getOpening_hours_test().isBefore(currentTime.plus(Duration.ofSeconds(2701))) && eating_locations_data.get(h).getClosing_hours_test().isAfter(currentTime.plus(Duration.ofSeconds(6300)))) {
+                                                                        if (eating_locations_data.get(h).getOpeningHours() != null && LocalTime.parse(eating_locations_data.get(h).getOpeningHours().getOpeningHours()).isBefore(currentTime.plus(Duration.ofSeconds(2701))) && LocalTime.parse(eating_locations_data.get(h).getOpeningHours().getClosingHours()).isAfter(currentTime.plus(Duration.ofSeconds(6300)))) {
+                                                                            eligible_Places.add(eating_locations_data.get(h));
+                                                                            eating_locations_data.get(h).setDistanceFromPoint(iternarySchedule.get(iternarySchedule_pointer).getAddress());
+                                                                        } else if (eating_locations_data.get(h).getOpeningHours() == null && eating_locations_data.get(h).getOpening_hours_test().isBefore(currentTime.plus(Duration.ofSeconds(2701))) && eating_locations_data.get(h).getClosing_hours_test().isAfter(currentTime.plus(Duration.ofSeconds(6300)))) {
                                                                             eligible_Places.add(eating_locations_data.get(h));
                                                                             eating_locations_data.get(h).setDistanceFromPoint(iternarySchedule.get(iternarySchedule_pointer).getAddress());
 
@@ -992,14 +1040,23 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 
                                                                     if (eligible_Places.size() > 0) {
 
+
+
                                                                         Duration duration_to_add = Duration.ofSeconds(eligible_Places.get(eating_locations_data_pointer).getDurationFromPoint());
+
+                                                                        if (origin_place.getArrival_time() == null) {
+                                                                            origin_place.setArrival_time(currentTime);
+                                                                        }
+
                                                                         currentTime = currentTime.plus(duration_to_add);
                                                                         eligible_Places.get(0).setArrival_time(currentTime);
-                                                                        System.out.println("-------------------------- set arrival time " + eligible_Places.get(0).getArrival_time());
+                                                                        System.out.println("eating locations -------------------------- set arrival time " + eligible_Places.get(0).getArrival_time());
+
 
 
                                                                         duration_to_add = eligible_Places.get(0).getTime_spent();
                                                                         currentTime = currentTime.plus(duration_to_add);
+                                                                        System.out.println("inside lunch set time spent " + currentTime);
                                                                         eligible_Places.get(0).setDeparture_time(currentTime);
                                                                         //TODO: add how long people typically spend here and check opening hours
                                                                         System.out.println("location added " + eating_locations_data.get(eating_locations_data_pointer).getAddress() + " " + duration_to_add + " " + currentTime);
@@ -1013,7 +1070,11 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
                                                                     } else {
                                                                         LocalTime next_nearest_time = currentTime;
                                                                         for (int k = 0; k < eating_locations_data.size(); k++) {
-                                                                            if (eating_locations_data.get(k).getOpening_hours_test().isAfter(next_nearest_time)) {
+
+                                                                            if (eating_locations_data.get(k).getOpeningHours() != null && LocalTime.parse(eating_locations_data.get(k).getOpeningHours().getOpeningHours()).isAfter(next_nearest_time)) {
+                                                                                System.out.println("new nearest time " + next_nearest_time);
+                                                                                next_nearest_time = LocalTime.parse(eating_locations_data.get(k).getOpeningHours().getOpeningHours());
+                                                                            } else if ( eating_locations_data.get(k).getOpeningHours() == null && eating_locations_data.get(k).getOpening_hours_test().isAfter(next_nearest_time)) {
                                                                                 System.out.println("new nearest time " + next_nearest_time);
                                                                                 next_nearest_time = eating_locations_data.get(k).getOpening_hours_test();
                                                                             }
@@ -1022,7 +1083,12 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 
 
                                                                         for (int z = 0; z < locations_data.size(); z++) {
-                                                                            if (locations_data.get(z).getOpening_hours_test().isAfter(next_nearest_time)) {
+                                                                            if ( locations_data.get(z).getOpeningHours() != null && LocalTime.parse(locations_data.get(z).getOpeningHours().getOpeningHours()).isAfter(next_nearest_time)) {
+                                                                                System.out.println("new locations nearest time " + next_nearest_time);
+                                                                                next_nearest_time = LocalTime.parse(locations_data.get(z).getOpeningHours().getOpeningHours());
+                                                                                //first_place_to_visit = locations_data.get(z);
+                                                                            }
+                                                                            else if (locations_data.get(z).getOpeningHours() == null && locations_data.get(z).getOpening_hours_test().isAfter(next_nearest_time)) {
                                                                                 System.out.println("new locations nearest time " + next_nearest_time);
                                                                                 next_nearest_time = locations_data.get(z).getOpening_hours_test();
                                                                                 //first_place_to_visit = locations_data.get(z);
@@ -1053,7 +1119,11 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
                                                                     //first find eligible places.
                                                                     for (int h = 0; h < locations_data.size(); h++) {
                                                                         //find eligible places and check u take 45 mins to travel there and 1 hour to spend there
-                                                                        if (locations_data.get(h).getOpening_hours_test().isBefore(currentTime.plus(Duration.ofSeconds(2701))) && locations_data.get(h).getClosing_hours_test().isAfter(currentTime.plus(Duration.ofSeconds(6300)))) {
+
+                                                                        if ( locations_data.get(h).getOpeningHours() != null && LocalTime.parse(locations_data.get(h).getOpeningHours().getOpeningHours()).isBefore(currentTime.plus(Duration.ofSeconds(2701))) && LocalTime.parse(locations_data.get(h).getOpeningHours().getClosingHours()).isAfter(currentTime.plus(Duration.ofSeconds(6300)))) {
+                                                                            eligible_Places.add(locations_data.get(h));
+                                                                            locations_data.get(h).setDistanceFromPoint(iternarySchedule.get(iternarySchedule_pointer).getAddress());
+                                                                        } else if ( locations_data.get(h).getOpeningHours() == null && locations_data.get(h).getOpening_hours_test().isBefore(currentTime.plus(Duration.ofSeconds(2701))) && locations_data.get(h).getClosing_hours_test().isAfter(currentTime.plus(Duration.ofSeconds(6300)))) {
                                                                             eligible_Places.add(locations_data.get(h));
                                                                             locations_data.get(h).setDistanceFromPoint(iternarySchedule.get(iternarySchedule_pointer).getAddress());
                                                                         }
@@ -1072,12 +1142,19 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 
                                                                         iternarySchedule.add(eligible_Places.get(0));
                                                                         Duration duration_to_add = Duration.ofSeconds(eligible_Places.get(locations_data_pointer).getDurationFromPoint());
+
+                                                                        if (origin_place.getArrival_time() == null) {
+                                                                            origin_place.setArrival_time(currentTime);
+                                                                        }
+
                                                                         currentTime = currentTime.plus(duration_to_add);
                                                                         eligible_Places.get(0).setArrival_time(currentTime);
+                                                                        System.out.println("inside locations time set arrival time " + currentTime);
 
 
                                                                         duration_to_add = eligible_Places.get(0).getTime_spent();
                                                                         currentTime = currentTime.plus(duration_to_add);
+                                                                        System.out.println("inside locations  set time spent " + currentTime + " check how long " + eligible_Places.get(0).getTime_spent());
                                                                         eligible_Places.get(0).setDeparture_time(currentTime);
                                                                         //TODO: add how long people typically spend here and check opening hours
                                                                         System.out.println("location added " + locations_data.get(locations_data_pointer).getAddress() + " " + duration_to_add + " " + currentTime);
@@ -1091,7 +1168,11 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
                                                                         //means gotta skip time
                                                                         LocalTime next_nearest_time = currentTime;
                                                                         for (int k = 0; k < eating_locations_data.size(); k++) {
-                                                                            if (eating_locations_data.get(k).getOpening_hours_test().isAfter(next_nearest_time)) {
+
+                                                                            if (eating_locations_data.get(k).getOpeningHours() != null && LocalTime.parse(eating_locations_data.get(k).getOpeningHours().getOpeningHours()).isAfter(next_nearest_time)) {
+                                                                                System.out.println("new nearest time " + next_nearest_time);
+                                                                                next_nearest_time = LocalTime.parse(eating_locations_data.get(k).getOpeningHours().getOpeningHours());
+                                                                            } else if ( eating_locations_data.get(k).getOpeningHours() == null && eating_locations_data.get(k).getOpening_hours_test().isAfter(next_nearest_time)) {
                                                                                 System.out.println("new nearest time " + next_nearest_time + " current time " + currentTime);
                                                                                 next_nearest_time = eating_locations_data.get(k).getOpening_hours_test();
                                                                             }
@@ -1100,7 +1181,12 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 
 
                                                                         for (int z = 0; z < locations_data.size(); z++) {
-                                                                            if (locations_data.get(z).getOpening_hours_test().isAfter(next_nearest_time)) {
+
+                                                                            if ( locations_data.get(z).getOpeningHours() != null && LocalTime.parse(locations_data.get(z).getOpeningHours().getOpeningHours()).isAfter(next_nearest_time)) {
+                                                                                System.out.println("new locations nearest time " + next_nearest_time);
+                                                                                next_nearest_time = LocalTime.parse(locations_data.get(z).getOpeningHours().getOpeningHours());
+                                                                                //first_place_to_visit = locations_data.get(z);
+                                                                            } else if ( locations_data.get(z).getOpeningHours() == null && locations_data.get(z).getOpening_hours_test().isAfter(next_nearest_time)) {
                                                                                 System.out.println("new locations nearest time " + next_nearest_time + " current time " + currentTime);
                                                                                 next_nearest_time = locations_data.get(z).getOpening_hours_test();
                                                                                 //first_place_to_visit = locations_data.get(z);
@@ -1132,7 +1218,10 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
                                                                     for (int h = 0; h < eating_locations_data.size(); h++) {
 
                                                                         //find eligible places and check u take 45 mins to travel there and 1 hour to spend there
-                                                                        if (eating_locations_data.get(h).getOpening_hours_test().isBefore(currentTime.plus(Duration.ofSeconds(2701))) && eating_locations_data.get(h).getClosing_hours_test().isAfter(currentTime.plus(Duration.ofSeconds(6300)))) {
+                                                                        if (eating_locations_data.get(h).getOpeningHours() != null && LocalTime.parse(eating_locations_data.get(h).getOpeningHours().getOpeningHours()).isBefore(currentTime.plus(Duration.ofSeconds(2701))) && LocalTime.parse(eating_locations_data.get(h).getOpeningHours().getClosingHours()).isAfter(currentTime.plus(Duration.ofSeconds(6300)))) {
+                                                                            eligible_Places.add(eating_locations_data.get(h));
+                                                                            eating_locations_data.get(h).setDistanceFromPoint(iternarySchedule.get(iternarySchedule_pointer).getAddress());
+                                                                        } else if (eating_locations_data.get(h).getOpeningHours() == null && eating_locations_data.get(h).getOpening_hours_test().isBefore(currentTime.plus(Duration.ofSeconds(2701))) && eating_locations_data.get(h).getClosing_hours_test().isAfter(currentTime.plus(Duration.ofSeconds(6300)))) {
                                                                             eligible_Places.add(eating_locations_data.get(h));
                                                                             eating_locations_data.get(h).setDistanceFromPoint(iternarySchedule.get(iternarySchedule_pointer).getAddress());
                                                                         }
@@ -1153,13 +1242,20 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 
                                                                         if (eligible_Places.size() > 0) {
                                                                             iternarySchedule.add(eligible_Places.get(0));
+
+                                                                            if (origin_place.getArrival_time() == null) {
+                                                                                origin_place.setArrival_time(currentTime);
+                                                                            }
+
                                                                             Duration duration_to_add = Duration.ofSeconds(eligible_Places.get(eating_locations_data_pointer).getDurationFromPoint());
                                                                             currentTime = currentTime.plus(duration_to_add);
                                                                             eligible_Places.get(0).setArrival_time(currentTime);
+                                                                            System.out.println("inside dinner time set arrival time " + currentTime);
 
 
                                                                             duration_to_add = eligible_Places.get(0).getTime_spent();
                                                                             currentTime = currentTime.plus(duration_to_add);
+                                                                            System.out.println("inside dinner set time spent " + currentTime);
                                                                             eligible_Places.get(0).setDeparture_time(currentTime);
                                                                             //TODO: add how long people typically spend here and check opening hours
                                                                             System.out.println("location added " + eating_locations_data.get(eating_locations_data_pointer).getAddress() + " " + duration_to_add + " " + currentTime);
@@ -1169,11 +1265,16 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
                                                                             System.out.println("remove locations data check if eligible places cleared " + eligible_Places.size());
                                                                             iternarySchedule_pointer += 1;
                                                                             dinner_count += 1;
+
                                                                         } else if (eligible_Places.size() == 0) {
                                                                             //means gotta skip time
                                                                             LocalTime next_nearest_time = currentTime;
                                                                             for (int k = 0; k < eating_locations_data.size(); k++) {
-                                                                                if (eating_locations_data.get(k).getOpening_hours_test().isAfter(next_nearest_time)) {
+
+                                                                                if (eating_locations_data.get(k).getOpeningHours() != null && LocalTime.parse(eating_locations_data.get(k).getOpeningHours().getOpeningHours()).isAfter(next_nearest_time)) {
+                                                                                    System.out.println("new nearest time " + next_nearest_time);
+                                                                                    next_nearest_time = LocalTime.parse(eating_locations_data.get(k).getOpeningHours().getOpeningHours());
+                                                                                } else if ( eating_locations_data.get(k).getOpeningHours() == null && eating_locations_data.get(k).getOpening_hours_test().isAfter(next_nearest_time)) {
                                                                                     System.out.println("new nearest time " + next_nearest_time);
                                                                                     next_nearest_time = eating_locations_data.get(k).getOpening_hours_test();
                                                                                 }
@@ -1182,7 +1283,12 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
 
 
                                                                             for (int z = 0; z < locations_data.size(); z++) {
-                                                                                if (locations_data.get(z).getOpening_hours_test().isAfter(next_nearest_time)) {
+
+                                                                                if ( locations_data.get(z).getOpeningHours() != null && LocalTime.parse(locations_data.get(z).getOpeningHours().getOpeningHours()).isAfter(next_nearest_time)) {
+                                                                                    System.out.println("new locations nearest time " + next_nearest_time);
+                                                                                    next_nearest_time = LocalTime.parse(locations_data.get(z).getOpeningHours().getOpeningHours());
+                                                                                    //first_place_to_visit = locations_data.get(z);
+                                                                                } else if ( locations_data.get(z).getOpeningHours() == null && locations_data.get(z).getOpening_hours_test().isAfter(next_nearest_time)) {
                                                                                     System.out.println("new locations nearest time " + next_nearest_time);
                                                                                     next_nearest_time = locations_data.get(z).getOpening_hours_test();
                                                                                     //first_place_to_visit = locations_data.get(z);
@@ -1280,7 +1386,7 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
         // TODO: make filename dynamic
         Trip t = FileManager.getTrip(SavedLocations.this, "final.json");
         savedPlaces = t.savedPlaces;
-        Log.d("testing Trip", savedPlaces.toString());
+        Log.d("inside saved locations.java testing Trip ", " inside saved locations.java testing Trippppp" + savedPlaces.toString());
 
         testOpeningHours();
 
@@ -1354,8 +1460,8 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
         Gson gson = new Gson();
         Place.OpeningHours openingHours = gson.fromJson(sampleJson, Place.OpeningHours.class);
 
-        Map<String, String> openingHoursMap = openingHours.getOpeningHours();
-        Map<String, String> closingHoursMap = openingHours.getClosingHours();
+       // Map<String, String> openingHoursMap = openingHours.getOpeningHours();
+        //Map<String, String> closingHoursMap = openingHours.getClosingHours();
 
 
 }

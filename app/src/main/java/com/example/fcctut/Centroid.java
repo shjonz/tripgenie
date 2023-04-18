@@ -13,8 +13,6 @@ public class Centroid {
 
     private double latitude;
 
-
-
     private double longitude;
 
     private String id;

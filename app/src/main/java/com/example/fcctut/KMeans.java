@@ -295,8 +295,8 @@ public class KMeans {
             //System.out.println(max_distance_from_curr);
         }
 
-        max_distance_from_curr = new Centroid( place_max_record.getAddress(), place_max_record.getLatitude(),
-                place_max_record.getLongitude() ); //new centroid with furthest coordinates from current created
+        max_distance_from_curr = new Centroid( place_max_record.getName(), place_max_record.getGeometry().getLocation().getLatitude(),
+                place_max_record.getGeometry().getLocation().getLongitude() ); //new centroid with furthest coordinates from current created
 
         // Add the created into the Centroids List
         centroids.add(max_distance_from_curr);
@@ -314,9 +314,9 @@ public class KMeans {
         // Choose first Centroid randomly from the Records List
         System.out.println("choosing first random centroid: "+records.get( random.nextInt(records.size())));
         //Centroid currentCentroid = new Centroid(records.get(random.nextInt(records.size())).getFeatures());
-        Centroid currentCentroid = new Centroid( records.get(random.nextInt(records.size())).getAddress(),
-                records.get(random.nextInt(records.size())).getLatitude(),
-                records.get(random.nextInt(records.size())).getLongitude() );
+        Centroid currentCentroid = new Centroid( records.get(random.nextInt(records.size())).getName(),
+                records.get(random.nextInt(records.size())).getGeometry().getLocation().getLatitude(),
+                records.get(random.nextInt(records.size())).getGeometry().getLocation().getLongitude() );
 
         // Add the first Centroid into the Centroid List
         centroids.add(currentCentroid);
@@ -490,8 +490,8 @@ public class KMeans {
 
         // Calculate the sum of latitudes and longitudes of all places
         for (Place place : places) {
-            sumLatitude += place.getLatitude();
-            sumLongitude += place.getLongitude();
+            sumLatitude += place.getGeometry().getLocation().getLatitude();
+            sumLongitude += place.getGeometry().getLocation().getLongitude();
         }
 
         // Calculate the average latitude and longitude

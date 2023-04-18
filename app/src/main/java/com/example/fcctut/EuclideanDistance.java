@@ -34,8 +34,8 @@ public class EuclideanDistance implements Distance {
 //        lat2 = Math.toRadians(f2.get("Location").get(0));
 //        lon2 = Math.toRadians(f2.get("Location").get(1));
 
-        lat1 = Math.toRadians(f1.getLatitude());
-        lon1 = Math.toRadians(f1.getLongitude());
+        lat1 = Math.toRadians(f1.getGeometry().getLocation().getLatitude());
+        lon1 = Math.toRadians(f1.getGeometry().getLocation().getLongitude());
         lat2 = Math.toRadians(f2.getLatitude());
         lon2 = Math.toRadians(f2.getLatitude());
 

@@ -61,7 +61,7 @@ public class PlacesApiHelper {
                 //.addQueryParameter("latitude", latitude)
                 .build();
 
-        Log.d("PlacesApiHelper", "Request URL: " + url.toString());
+        Log.d("PlacesApiHelper", "fetch places Request URL: " + url.toString());
 
         // Create and enqueue the API request.
         Request request = new Request.Builder()
@@ -163,9 +163,13 @@ public class PlacesApiHelper {
         HttpUrl url = HttpUrl.parse("https://maps.googleapis.com/maps/api/place/details/json").newBuilder()
                 .addQueryParameter("placeid", placeId)
                 .addQueryParameter("key", apiKey)
-                .addQueryParameter("fields", "place_id,name,geometry,rating,opening_hours") //fields parameter
+                //.addQueryParameter("location", String.format("%f,%f", latitude, longitude))
+                .addQueryParameter("latitude", "latitude")
+                .addQueryParameter("fields", "place_id,name,geometry,rating,opening_hours,formatted_address,type") //fields parameter
+                //.addQueryParameter("formatted_address", "formatted_address")
+                //.addQueryParameter("type", "type")
                 .build();
-        Log.d("PlacesApiHelper", "==============Request URL: " + url.toString());
+        Log.d("PlacesApiHelper", "fetchplace details ==============Request URL: " + url.toString());
 
         // Create and enqueue the API request.
         Request request = new Request.Builder()
@@ -188,12 +192,23 @@ public class PlacesApiHelper {
                 // If the response is successful, parse the JSON response
                 if (response.isSuccessful()) {
                     String jsonResponse = response.body().string();
-                    Log.d("PlacesApiHelper", "API response: " + jsonResponse);
+                    Log.d("PlacesApiHelper", "fetchplacedetails onresponse ====== API response: " + jsonResponse);
                     // Deserialize the JSON response using Gson into a PlaceDetailsApiResponse object
                     PlaceDetailsApiResponse placeDetailsApiResponse = gson.fromJson(jsonResponse, PlaceDetailsApiResponse.class);
                     // Get the place details from the deserialized response
                     Place place = placeDetailsApiResponse.getResult();
-                    // Pass the fetched place to the callback method wrapped in a singleton list
+                    //fetchplacedetails check opening hours [8:00 AM – 10:00 PM, 8:00 AM – 10:00 PM, 8:00 AM – 10:00 PM, 10:00 AM – 10:00 PM, 8:00 AM – 10:00 PM, 8:00 AM – 10:00 PM, 10:00 AM – 10:00 PM]
+
+                    if ( place.getOpeningHours() != null ) {
+                        //place.getOpeningHours().setOpeningHours();
+                        System.out.println(place.getOpeningHours().getOpeningHours() + " placedetails get opening hours ");
+                        //String[] openingHoursArray = place.getOpeningHours().getOpeningHours().values().toArray(new String[0]);
+                        //String openingHours = openingHoursArray[0];
+                        //System.out.println("inside fetchplacedetails Opening hours of the first index: " + openingHours);
+                    } else if (place.getOpeningHours() == null) {
+                        System.out.println(" inside fetchplacedetails opening hours is null " + place.getName());
+                    }
+                        // Pass the fetched place to the callback method wrapped in a singleton list
                     callback.onPlacesFetched(Collections.singletonList(place));
                 } else {
                     // If the response is not successful, log the error and call the onFailure() method of the callback
