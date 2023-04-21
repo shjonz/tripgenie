@@ -31,20 +31,6 @@ public class SharedPreferenceUtil {
      * @param places The list of Place objects to save.
      */
     public static void savePlaces(Context context, List<Place> places) {
-//        // Get the default SharedPreferences object
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-//        // Create an editor to modify the SharedPreferences object
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        // Convert the list of Place objects to a JSON string using Gson
-//        Gson gson = new Gson();
-//        String json = gson.toJson(places);
-//        // Store the JSON string in the SharedPreferences object with the key "saved_places"
-//        editor.putString(SAVED_PLACES_KEY, json);
-//        editor.apply();
-
-
-
-
         //new update 16 april 2023
         // Get the default SharedPreferences object
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);

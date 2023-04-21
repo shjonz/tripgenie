@@ -45,9 +45,7 @@
            android:exported="true">
        </activity>
 
-       <activity
-           android:name=".CustomIternaryView"
-           android:exported="true" />
+
        <activity
            android:name=".PlanTrip"
            android:exported="true" />

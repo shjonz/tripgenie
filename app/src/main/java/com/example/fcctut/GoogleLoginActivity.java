@@ -127,40 +127,7 @@ public class GoogleLoginActivity extends LoginActivity {
        startActivity(intent);
    }
 
-//        private void googlelogin() {
-//        FirebaseAuth auth = FirebaseAuth.getInstance();
-//        boolean isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false);
-//
-//        if (isLoggedIn) {
-//            googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
-//
-//            GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//            if (account != null) {
-//                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-//                auth.signInWithCredential(credential)
-//                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<AuthResult> task) {
-//                                if (task.isSuccessful()) {
-//                                    Toast.makeText(GoogleLoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-//                                }else {
-//                                    Toast.makeText(GoogleLoginActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        });
-//            }
-//        }
-//    }
 }
 
-//                            if (user != null) {
-//                                String uid = user.getUid();
-//                                String name = user.getDisplayName();
-//                                String email = user.getEmail();
-//
-//                                FirebaseDatabase database = FirebaseDatabase.getInstance();
-//                                DatabaseReference usersRef = database.getReference("users");
-//
-//                                DatabaseReference newUserRef = usersRef.child(uid);
-//                                newUserRef.child("name").setValue(name);
+
 

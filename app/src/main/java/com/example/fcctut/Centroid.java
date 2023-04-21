@@ -5,10 +5,6 @@ import java.util.Map;
 
 public class Centroid {
 
-    //private final Map<String, List<Double>> coordinates; //addressName, latlng
-
-    //private Place place;
-
     private String addressName;
 
     private double latitude;
@@ -48,9 +44,6 @@ public class Centroid {
         this.longitude = longitude;
     }
 
-//    public Map<String, List<Double>> getCoordinates() {
-//        return this.coordinates;
-//    }
 
 
 }
