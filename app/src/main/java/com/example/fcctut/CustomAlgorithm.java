@@ -13,7 +13,7 @@ public class CustomAlgorithm extends Algorithm{
 
     @Override
     Map<Centroid, List<Place>> Clustering(ArrayList<Place> savedPlaces) {
-        Map<Centroid, List<Place>> clusters = KMeans.fit(savedPlaces, 2, new EuclideanDistance(), 10);
+        Map<Centroid, List<Place>> clusters = KMeans.fit(savedPlaces, 4, new EuclideanDistance(), 10);
         return clusters;
     }
 
