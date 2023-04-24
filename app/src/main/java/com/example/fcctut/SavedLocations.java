@@ -107,7 +107,6 @@ public class SavedLocations extends AppCompatActivity implements SavedPlacesAdap
                             //added new algo
                             ArrayList<ArrayList<Place>> return_array_of_clusers = customAlgorithm.GreedyAlgorithm( array_array_of_clusters);
 
-
                             Trip trip = FileManager.getTrip(SavedLocations.this, "final.json");
                             trip.days = return_array_of_clusers;
                             //trip.savedPlaces = saved_Places;
