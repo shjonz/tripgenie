@@ -91,39 +91,6 @@ public class AddPlaces extends AppCompatActivity {
         }); //end of setoneditoractionlistener
 
 
-//        bottomNavigationView =findViewById(R.id.bottomNavigationView);
-//        bottomNavigationView.setSelectedItemId(R.id.addLocation);
-//
-//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                //get id of item in navbar to switch to
-//                int itemId = item.getItemId();
-//                if (itemId==0){
-//                    Toast.makeText(AddPlaces.this, "Please add inputs", Toast.LENGTH_LONG).show();
-//                }
-//                switch (item.getItemId()) {
-//                    case R.id.home:
-//                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                        overridePendingTransition(0, 0);
-//                        return true;
-//                    case R.id.maps:
-//                        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
-//                        overridePendingTransition(0, 0);
-//                        return true;
-//
-//                    case R.id.addLocation:
-//                        return true;
-//
-//                    case R.id.itinerary:
-//                        startActivity(new Intent(getApplicationContext(), showItinerary.class));
-//                        overridePendingTransition(0, 0);
-//                        return true;
-//
-//                }
-//                return false;
-//            }
-//        });
     } //end of oncreate function
 
     //start of searchplaces function

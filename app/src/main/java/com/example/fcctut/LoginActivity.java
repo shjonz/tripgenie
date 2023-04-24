@@ -166,30 +166,6 @@ public class LoginActivity extends AppCompatActivity {
        });
    }
 
-//    private void googlelogin() {
-//
-//        if (isLoggedIn) {
-//            googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
-//
-//            GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-//            if (account != null) {
-//                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-//                auth.signInWithCredential(credential)
-//                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<AuthResult> task) {
-//                                if (task.isSuccessful()) {
-//                                    Intent intent = new Intent(LoginActivity.this,ProfileActivity2.class);
-//                                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-//                                }else {
-//                                    Toast.makeText(LoginActivity.this, "" + task.getException(), Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        });
-//            }
-//        }
-//    }
-
    private void perforLogin() {
        String email=inputEmail.getText().toString();
        String password=inputPassword.getText().toString();
@@ -230,27 +206,3 @@ public class LoginActivity extends AppCompatActivity {
        startActivity(intent);
    }
 }//end of login activity class
-
-
-
-
-
-//    private void SignIn() {
-//        Intent signInIntent = googleSignInClient.getSignInIntent();
-//        startActivityForResult(signInIntent,RC_SIGN_IN);
-//    }
-
-//        if(mUser!=null){
-//            Intent intent = new Intent(LoginActivity.this,ProfileActivity2.class);
-//            startActivity(intent);
-//        }
-
-
-
-
-//end of login activity class
-//end of login activity class
-
-
-
-
