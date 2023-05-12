@@ -2,6 +2,9 @@
 
 50.001 Information Systems & Programming Project
 
+## Poster
+<img src="https://github.com/shjonz/tripgenie/assets/81726240/ad176ce5-428e-4510-bd7a-4d5f4306c8f3" width="421" height="596">
+
 ## Description
 TripGenie is a user-friendly mobile app designed to simplify and optimise your travel planning experience. By leveraging the power of Google Places API and powerful algorithms, TripGenie provides personalised suggestions for popular destinations, be it restaurants, sightseeing sights or attractions, based on your preferences and current location.
  
