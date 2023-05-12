@@ -2,6 +2,14 @@
 
 50.001 Information Systems & Programming Project
 
+## Description
+TripGenie is a user-friendly mobile app designed to simplify and optimise your travel planning experience. By leveraging the power of Google Places API and powerful algorithms, TripGenie provides personalised suggestions for popular destinations, be it restaurants, sightseeing sights or attractions, based on your preferences and current location.
+ 
+With an intuitive interface, users can effortlessly browse through a list of recommendations, save their favourite places, and then with a simple click of a button obtain an optimised itinerary for their trip. The algorithm organises destinations into clusters using an augmented K++ means algorithm based on proximity between destinations. An optimal route is then computed using a modified greedy Dijkstra algorithm which takes into account proximity between locations, opening hours of places, time spent at these places, and prioritises eating places during meal hours. This is so users spend minimal time between locations and more time at them.
+
+Designed with robust and maintainable software principles such as favouring composition over inheritance, encapsulation and polymorphism, TripGenie ensures a maintainable code base. Whether you're planning a weekend getaway, a well-organised business trip, or discovering hidden gems in your hometown, TripGenie is your ultimate travel companion.
+
+
 ## Features 
 
 Optimised scheduling itinerary which consists of
