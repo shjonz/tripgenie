@@ -1,9 +1,13 @@
 # Tripgenie
+[ios_scan_2036033283.pdf](https://github.com/shjonz/tripgenie/files/11497056/ios_scan_2036033283.pdf)
 <img src="https://github.com/shjonz/tripgenie/files/11489996/ios_scan_2036033283.pdf" width="421" height="596">
 
 50.001 Information Systems & Programming Project
 
 ## Video
+
+
+https://github.com/shjonz/tripgenie/assets/81726240/10414a3f-51c2-41f1-b19a-42bf933cb07e
 
 <img src="https://github.com/shjonz/tripgenie/assets/81726240/3da7aa84-1fa0-416a-aaa9-c1e7c503793f" width="421" height="596">
 
