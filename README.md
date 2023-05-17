@@ -1,5 +1,5 @@
 # Tripgenie
-<img src="https://github.com/shjonz/tripgenie/assets/81726240/8f061139-c949-4392-a7ff-eb0873cc6117" width="1944" height="564">
+![ios_scan_2036033283](https://github.com/shjonz/tripgenie/assets/81726240/59e35189-285e-4ab6-9b57-a0334fee4f69)
 
 50.001 Information Systems & Programming Project
 
