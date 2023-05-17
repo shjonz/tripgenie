@@ -1,11 +1,11 @@
 # Tripgenie
-<img src="https://github.com/shjonz/tripgenie/assets/81726240/8f061139-c949-4392-a7ff-eb0873cc6117" width="421" height="596">
+<img src="https://github.com/shjonz/tripgenie/assets/81726240/8f061139-c949-4392-a7ff-eb0873cc6117" width="1944" height="564">
 
 50.001 Information Systems & Programming Project
 
 ## Video
 
-<img src="https://github.com/shjonz/tripgenie/assets/81726240/1a8ace6d-2b3d-4e2b-b881-14d2d20a8878" width="421" height="596">
+https://github.com/shjonz/tripgenie/assets/81726240/870b02fd-2193-4378-a64b-d6a9f4c34092
 
 ## Poster
 <img src="https://github.com/shjonz/tripgenie/assets/81726240/ad176ce5-428e-4510-bd7a-4d5f4306c8f3" width="421" height="596">
